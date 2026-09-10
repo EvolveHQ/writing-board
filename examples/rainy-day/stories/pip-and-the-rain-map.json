@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "id": "pip-and-the-rain-map",
+  "title": "Pip and the Rainy-Day Map",
+  "language": "en",
+  "status": "draft",
+  "revision": 1,
+  "source_story_id": null,
+  "source_refs": [
+    "bible.json"
+  ],
+  "premise": {
+    "protagonist_id": "pip",
+    "want": "Pip wants Bea to find his hidden paper star using a map.",
+    "why_now": "Rain has moved their treasure hunt indoors.",
+    "stakes": "The game will stop being fun if Bea cannot understand the clues.",
+    "obstacle": "Pip draws the route he remembers without any landmarks Bea can recognize.",
+    "turn": "Pip notices a raindrop passing recognizable things and tests a revised map from Bea’s starting place.",
+    "ending": "Bea finds the star and begins a new map for Pip.",
+    "theme": "An idea becomes shareable when we make room for another person’s view."
+  },
+  "cast": [
+    {
+      "character_id": "pip",
+      "role": "protagonist",
+      "want": "Pip wants Bea to find his hidden paper star using a map.",
+      "need": "To test his directions from Bea’s starting place.",
+      "starting_state": "Certain his drawing says everything he knows.",
+      "ending_state": "Proud of a map Bea can follow and ready to try her game.",
+      "age_years": null
+    },
+    {
+      "character_id": "bea",
+      "role": "companion",
+      "want": "To play the treasure hunt.",
+      "need": "Clues she can connect to the room.",
+      "starting_state": "Eager, then puzzled.",
+      "ending_state": "Successful and eager to invent the next map.",
+      "age_years": null
+    }
+  ],
+  "locations": [
+    {
+      "id": "home",
+      "name": "Window Room",
+      "source_status": "proposed",
+      "source_ref": null
+    }
+  ],
+  "beats": [
+    {
+      "id": "beat-01",
+      "chronology": 1,
+      "act": "setup",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Pip hides a paper star in a spare boot and gives Bea a map drawn as one curly line.",
+      "consequence": "Bea starts from the door, eager to follow the line.",
+      "emotion": "Pip feels excited; Bea is curious.",
+      "visual_reveal": "The reader sees the star tucked inside the left spare blue boot, but Bea is facing the map.",
+      "cause_from": [],
+      "text": "Rain tapped the window. Pip had a plan. He tucked a paper star into a boot and drew Bea a treasure map. One long, curly line. “Follow this!”",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "Follow this!"
+        }
+      ]
+    },
+    {
+      "id": "beat-02",
+      "chronology": 2,
+      "act": "development",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Bea follows the curly line as far as the table, then cannot tell which way to turn.",
+      "consequence": "Pip learns that his remembered route is not visible to Bea.",
+      "emotion": "Bea is puzzled; Pip is surprised.",
+      "visual_reveal": "The same curl could lead around either side of the round table.",
+      "cause_from": [
+        "beat-01"
+      ],
+      "text": "Bea reached the table. Then where? Pip tapped the curl. “I know where it goes.” Bea turned the map sideways. “I don’t.”",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "I know where it goes."
+        },
+        {
+          "speaker_id": "bea",
+          "kind": "speech",
+          "text": "I don’t."
+        }
+      ]
+    },
+    {
+      "id": "beat-03",
+      "chronology": 3,
+      "act": "development",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Pip covers the line with arrows without adding room landmarks. Bea follows an arrow toward the umbrella stand.",
+      "consequence": "The arrows still do not tell Bea where she is; the hunt stops.",
+      "emotion": "Pip feels disappointed and folds his ears down; Bea waits without blaming him.",
+      "visual_reveal": "An umbrella tip pokes above Bea like a question mark; the star remains hidden in the boot.",
+      "cause_from": [
+        "beat-02"
+      ],
+      "text": "“More arrows!” said Pip. Bea tried again. She reached an umbrella. No star. Pip’s ears drooped. He had made the map bigger. Why wasn’t the game better?",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "More arrows!"
+        }
+      ]
+    },
+    {
+      "id": "beat-04",
+      "chronology": 4,
+      "act": "development",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Pip pauses at the window and watches a raindrop pass a stuck leaf and a small snail outside.",
+      "consequence": "He notices that recognizable things make a route easier to describe.",
+      "emotion": "Pip feels quiet first, then interested enough to try again.",
+      "visual_reveal": "A single raindrop passes two clear reference points; the snail has its own slow journey along the outside ledge.",
+      "cause_from": [
+        "beat-03"
+      ],
+      "text": "Pip sat quietly. A raindrop slipped down the glass: past a leaf, past a snail. Pip looked from the window to the room. “My map needs things to look for.”",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "My map needs things to look for."
+        }
+      ]
+    },
+    {
+      "id": "beat-05",
+      "chronology": 5,
+      "act": "development",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Pip draws the table, umbrella stand and two boots, then walks the route from Bea’s starting place while checking each picture.",
+      "consequence": "The revised route works from the doorway. He gives Bea the tested map.",
+      "emotion": "Pip feels hopeful; Bea is ready for another turn.",
+      "visual_reveal": "Map and room align in an overhead view. A star symbol points into the left spare blue boot.",
+      "cause_from": [
+        "beat-04"
+      ],
+      "text": "He drew the table. The umbrella. Two boots. Landmarks! Pip tried the map from Bea’s starting place. Now each picture matched. “Your turn.” Can you spot the last landmark?",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "Your turn."
+        }
+      ]
+    },
+    {
+      "id": "beat-06",
+      "chronology": 6,
+      "act": "resolution",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "location_id": "home",
+      "action": "Bea follows the landmarks and lifts the paper star from the left boot, then asks for a fresh sheet to make a map for Pip.",
+      "consequence": "The treasure hunt succeeds, and the friends swap roles for another game.",
+      "emotion": "Both feel delighted and included.",
+      "visual_reveal": "Bea holds the star, both boots are visible, and the snail has finally reached the end of the outside ledge.",
+      "cause_from": [
+        "beat-05"
+      ],
+      "text": "Past the table. Past the umbrella. There were the boots! Bea reached inside. A star! “Another map?” asked Pip. “Yes,” said Bea. “This time, you follow me.” Rain tapped. Pencils scratched.",
+      "dialogue": [
+        {
+          "speaker_id": "pip",
+          "kind": "speech",
+          "text": "Another map?"
+        },
+        {
+          "speaker_id": "bea",
+          "kind": "speech",
+          "text": "Yes. This time, you follow me."
+        }
+      ]
+    }
+  ],
+  "page_plan": {
+    "status": "draft",
+    "interior_pages": 16,
+    "front_matter_pages": [
+      1,
+      2,
+      3
+    ],
+    "story_spreads": [
+      {
+        "id": "spread-01",
+        "left_page": 4,
+        "right_page": 5,
+        "beat_ids": [
+          "beat-01"
+        ],
+        "page_turn": "Will Bea reach the star?",
+        "reveal": "The reader sees the star tucked inside the left spare blue boot, but Bea is facing the map.",
+        "composition": {
+          "focus": "Pip hides a paper star in a spare boot and gives Bea a map drawn as one curly line.",
+          "framing": "Wide view from the doorway.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "The reader sees the star tucked inside the left spare blue boot, but Bea is facing the map.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      },
+      {
+        "id": "spread-02",
+        "left_page": 6,
+        "right_page": 7,
+        "beat_ids": [
+          "beat-02"
+        ],
+        "page_turn": "Will extra arrows help?",
+        "reveal": "The same curl could lead around either side of the round table.",
+        "composition": {
+          "focus": "Bea follows the curly line as far as the table, then cannot tell which way to turn.",
+          "framing": "Close view of the map and Bea’s puzzled face.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "The same curl could lead around either side of the round table.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      },
+      {
+        "id": "spread-03",
+        "left_page": 8,
+        "right_page": 9,
+        "beat_ids": [
+          "beat-03"
+        ],
+        "page_turn": "Let the disappointed pause land before the next idea.",
+        "reveal": "An umbrella tip pokes above Bea like a question mark; the star remains hidden in the boot.",
+        "composition": {
+          "focus": "Pip covers the line with arrows without adding room landmarks. Bea follows an arrow toward the umbrella stand.",
+          "framing": "Low medium view beside the umbrella stand.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "An umbrella tip pokes above Bea like a question mark; the star remains hidden in the boot.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      },
+      {
+        "id": "spread-04",
+        "left_page": 10,
+        "right_page": 11,
+        "beat_ids": [
+          "beat-04"
+        ],
+        "page_turn": "What will Pip draw this time?",
+        "reveal": "A single raindrop passes two clear reference points; the snail has its own slow journey along the outside ledge.",
+        "composition": {
+          "focus": "Pip pauses at the window and watches a raindrop pass a stuck leaf and a small snail outside.",
+          "framing": "Quiet close view at Pip’s eye level beside the window.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "A single raindrop passes two clear reference points; the snail has its own slow journey along the outside ledge.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      },
+      {
+        "id": "spread-05",
+        "left_page": 12,
+        "right_page": 13,
+        "beat_ids": [
+          "beat-05"
+        ],
+        "page_turn": "Invite the reader to name the final landmark, then turn.",
+        "reveal": "Map and room align in an overhead view. A star symbol points into the left spare blue boot.",
+        "composition": {
+          "focus": "Pip draws the table, umbrella stand and two boots, then walks the route from Bea’s starting place while checking each picture.",
+          "framing": "Overhead room plan with the paper map nearby.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "Map and room align in an overhead view. A star symbol points into the left spare blue boot.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      },
+      {
+        "id": "spread-06",
+        "left_page": 14,
+        "right_page": 15,
+        "beat_ids": [
+          "beat-06"
+        ],
+        "page_turn": "Warm callback: another game begins.",
+        "reveal": "Bea holds the star, both boots are visible, and the snail has finally reached the end of the outside ledge.",
+        "composition": {
+          "focus": "Bea follows the landmarks and lifts the paper star from the left boot, then asks for a fresh sheet to make a map for Pip.",
+          "framing": "Wide, calm view that includes both friends and the window.",
+          "word_contribution": "Carry the character’s intention and the spoken exchange; do not list every room detail.",
+          "art_contribution": "Bea holds the star, both boots are visible, and the snail has finally reached the end of the outside ledge.",
+          "text_zone": "Reserve a quiet light area above the characters; check contrast in the actual art.",
+          "gutter_notes": "Keep faces, the paper map, star and final clue away from the central fold."
+        }
+      }
+    ],
+    "back_matter_pages": [
+      16
+    ]
+  },
+  "props": [
+    {
+      "id": "paper-star",
+      "name": "Paper star",
+      "initial_state": {
+        "location_id": "home",
+        "holder_id": "pip",
+        "condition": "Ready to hide."
+      },
+      "changes": [
+        {
+          "beat_id": "beat-01",
+          "before": {
+            "location_id": "home",
+            "holder_id": "pip",
+            "condition": "Ready to hide."
+          },
+          "after": {
+            "location_id": "home",
+            "holder_id": null,
+            "condition": "Inside the left spare blue boot by the door."
+          },
+          "reason": "Pip hides it before Bea starts reading the map."
+        },
+        {
+          "beat_id": "beat-06",
+          "before": {
+            "location_id": "home",
+            "holder_id": null,
+            "condition": "Inside the left spare blue boot by the door."
+          },
+          "after": {
+            "location_id": "home",
+            "holder_id": "bea",
+            "condition": "Lifted from the left spare blue boot."
+          },
+          "reason": "Bea reaches the final landmark and looks inside."
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "map-needs-landmarks",
+      "character_id": "pip",
+      "topic": "What makes a route readable to someone else",
+      "initial_state": "Assumes a line is enough because he knows its destination.",
+      "changes": [
+        {
+          "beat_id": "beat-02",
+          "before": "Assumes a line is enough because he knows its destination.",
+          "after": "Knows Bea cannot choose a turn from the line alone.",
+          "source_beat_id": "beat-02",
+          "reason": "Bea stops and asks."
+        },
+        {
+          "beat_id": "beat-04",
+          "before": "Knows Bea cannot choose a turn from the line alone.",
+          "after": "Has an idea to mark familiar things along the route.",
+          "source_beat_id": "beat-04",
+          "reason": "Watches a raindrop pass recognizable objects."
+        },
+        {
+          "beat_id": "beat-05",
+          "before": "Has an idea to mark familiar things along the route.",
+          "after": "Has checked that the map matches the route from Bea’s starting place.",
+          "source_beat_id": "beat-05",
+          "reason": "Walks and compares each landmark."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "game-partners",
+      "from_id": "pip",
+      "to_id": "bea",
+      "initial_state": "Friends; Pip invents this game and Bea tries it.",
+      "changes": [
+        {
+          "beat_id": "beat-06",
+          "before": "Friends; Pip invents this game and Bea tries it.",
+          "after": "Friends ready to swap inventor and player roles.",
+          "reason": "The successful shared game makes Bea want to create another."
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "map-game-invention",
+      "statement": "In this proposed story, Pip invents and revises a rainy-day treasure hunt.",
+      "status": "proposed",
+      "source_ref": null,
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "beat_ids": [
+        "beat-01",
+        "beat-05",
+        "beat-06"
+      ]
+    }
+  ],
+  "open_threads": [
+    {
+      "id": "find-the-star",
+      "question": "Can Bea find Pip’s paper star using his map?",
+      "introduced_beat_id": "beat-01",
+      "resolved_beat_id": "beat-06",
+      "status": "resolved"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "editorial-review",
+      "kind": "editorial",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Demonstration draft; conduct and record this review before claiming it passed."
+    },
+    {
+      "id": "continuity-review",
+      "kind": "continuity",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Demonstration draft; conduct and record this review before claiming it passed."
+    },
+    {
+      "id": "read-aloud-review",
+      "kind": "read_aloud",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Demonstration draft; conduct and record this review before claiming it passed."
+    },
+    {
+      "id": "layout-review",
+      "kind": "layout",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Demonstration draft; conduct and record this review before claiming it passed."
+    },
+    {
+      "id": "art-review",
+      "kind": "art",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Demonstration draft; conduct and record this review before claiming it passed."
+    },
+    {
+      "id": "translation-review",
+      "kind": "translation",
+      "status": "pending",
+      "reviewer": null,
+      "packet_revision": null,
+      "notes": "Apply to a translated edition when the project adds a target language; no translation exists in this English-only sample."
+    }
+  ],
+  "proofs": [],
+  "localization_notes": [
+    {
+      "language": "en",
+      "notes": "Source draft. Landmark is the stretch word. Keep the repeated “Past the…” pattern and the reader invitation natural in any later translation."
+    }
+  ],
+  "notes": "Original six-spread working example. The 16-page interior is a planning choice, not a printer specification. All reviews are pending; no art or final book files exist.",
+  "extensions": {},
+  "purpose": {
+    "intent": "Turn a small misunderstanding between friends into a satisfying, playful discovery.",
+    "teaching_goal": "Recognize that familiar landmarks make a map easier to follow.",
+    "lesson": "When a friend is puzzled, try changing the explanation and testing it together.",
+    "delivery": "The curly line fails in beat-02; extra arrows still fail in beat-03. After feeling disappointed, Pip notices visible reference points in beat-04. He draws and tests landmarks in beat-05. Bea uses them independently in beat-06. The narrator does not state a rule or claim a measured learning outcome."
+  }
+}

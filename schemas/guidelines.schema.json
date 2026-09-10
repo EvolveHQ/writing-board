@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:writing-board:guidelines:1",
+  "title": "Writing Board guidelines",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile",
+    "voice",
+    "teaching",
+    "content_boundaries",
+    "composition",
+    "word_budget",
+    "required_reviews",
+    "extensions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "profile": {
+      "type": "string"
+    },
+    "voice": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "teaching": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "content_boundaries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "composition": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "word_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "required_reviews": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "editorial",
+          "continuity",
+          "read_aloud",
+          "translation",
+          "layout",
+          "art"
+        ]
+      }
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

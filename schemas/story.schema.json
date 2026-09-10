@@ -1,0 +1,878 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:writing-board:story-packet:1",
+  "title": "Writing Board story development packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "language",
+    "status",
+    "revision",
+    "source_story_id",
+    "source_refs",
+    "premise",
+    "cast",
+    "locations",
+    "beats",
+    "page_plan",
+    "props",
+    "knowledge",
+    "relationships",
+    "facts",
+    "open_threads",
+    "reviews",
+    "proofs",
+    "localization_notes",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "proposed",
+        "review"
+      ]
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_story_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "premise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protagonist_id",
+        "want",
+        "why_now",
+        "stakes",
+        "obstacle",
+        "turn",
+        "ending",
+        "theme"
+      ],
+      "properties": {
+        "protagonist_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "want": {
+          "type": "string"
+        },
+        "why_now": {
+          "type": "string"
+        },
+        "stakes": {
+          "type": "string"
+        },
+        "obstacle": {
+          "type": "string"
+        },
+        "turn": {
+          "type": "string"
+        },
+        "ending": {
+          "type": "string"
+        },
+        "theme": {
+          "type": "string"
+        }
+      }
+    },
+    "cast": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "character_id",
+          "role",
+          "want",
+          "need",
+          "starting_state",
+          "ending_state",
+          "age_years"
+        ],
+        "properties": {
+          "character_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "role": {
+            "type": "string"
+          },
+          "want": {
+            "type": "string"
+          },
+          "need": {
+            "type": "string"
+          },
+          "starting_state": {
+            "type": "string"
+          },
+          "ending_state": {
+            "type": "string"
+          },
+          "age_years": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "source_status",
+          "source_ref"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "source_status": {
+            "type": "string",
+            "enum": [
+              "canonical",
+              "proposed"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/beat"
+      },
+      "minItems": 1
+    },
+    "page_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "interior_pages",
+        "front_matter_pages",
+        "story_spreads",
+        "back_matter_pages"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "needs_review",
+            "reviewed"
+          ]
+        },
+        "interior_pages": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "front_matter_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 0
+        },
+        "story_spreads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spread"
+          },
+          "minItems": 1
+        },
+        "back_matter_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 0
+        }
+      },
+      "description": "Physical interior pages only. Covers are separate. Beats appear once, in reading order across spreads sorted by left_page."
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "initial_state": {
+            "$ref": "#/$defs/prop_state"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "beat_id",
+                "before",
+                "after",
+                "reason"
+              ],
+              "properties": {
+                "beat_id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "before": {
+                  "$ref": "#/$defs/prop_state"
+                },
+                "after": {
+                  "$ref": "#/$defs/prop_state"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "character_id",
+          "topic",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "character_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "initial_state": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "beat_id",
+                "before",
+                "after",
+                "source_beat_id",
+                "reason"
+              ],
+              "properties": {
+                "beat_id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "before": {
+                  "type": "string"
+                },
+                "after": {
+                  "type": "string"
+                },
+                "source_beat_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from_id",
+          "to_id",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "from_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "to_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "initial_state": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/state_change"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "statement",
+          "status",
+          "source_ref",
+          "character_ids",
+          "beat_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "sourced",
+              "proposed",
+              "interpretation"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "character_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "minItems": 0
+          },
+          "beat_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "open_threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "question",
+          "introduced_beat_id",
+          "resolved_beat_id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "question": {
+            "type": "string"
+          },
+          "introduced_beat_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "resolved_beat_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "resolved",
+              "deferred"
+            ]
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "status",
+          "reviewer",
+          "packet_revision",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "editorial",
+              "continuity",
+              "read_aloud",
+              "layout",
+              "art",
+              "translation"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "passed",
+              "changes_requested",
+              "stale"
+            ]
+          },
+          "reviewer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "packet_revision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "proofs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "path",
+          "status",
+          "packet_revision",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unverified",
+              "reviewed",
+              "stale"
+            ]
+          },
+          "packet_revision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "localization_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "language",
+          "notes"
+        ],
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "notes": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional author-owned JSON for maps, timelines, read-aloud observations and future tools. Preserved verbatim; no canon authority is inferred."
+    },
+    "purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Editorial intent; meaning is stored in premise.theme. These notes do not establish learning outcomes.",
+      "properties": {
+        "intent": {
+          "type": "string"
+        },
+        "teaching_goal": {
+          "type": "string"
+        },
+        "lesson": {
+          "type": "string"
+        },
+        "delivery": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "beat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "chronology",
+        "act",
+        "character_ids",
+        "location_id",
+        "action",
+        "consequence",
+        "emotion",
+        "visual_reveal",
+        "cause_from",
+        "text",
+        "dialogue"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "chronology": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "act": {
+          "type": "string",
+          "enum": [
+            "setup",
+            "development",
+            "resolution"
+          ]
+        },
+        "character_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 0
+        },
+        "location_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "action": {
+          "type": "string"
+        },
+        "consequence": {
+          "type": "string"
+        },
+        "emotion": {
+          "type": "string"
+        },
+        "visual_reveal": {
+          "type": "string"
+        },
+        "cause_from": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 0
+        },
+        "text": {
+          "type": "string"
+        },
+        "dialogue": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "speaker_id",
+              "kind",
+              "text"
+            ],
+            "properties": {
+              "speaker_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "speech",
+                  "nonverbal"
+                ]
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 0
+        }
+      },
+      "description": "Array position is reading order; chronology is immutable event order during a board edit/reorder. cause_from names strictly earlier chronological events."
+    },
+    "spread": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "left_page",
+        "right_page",
+        "beat_ids",
+        "page_turn",
+        "reveal"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "left_page": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "right_page": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "beat_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 1
+        },
+        "page_turn": {
+          "type": "string"
+        },
+        "reveal": {
+          "type": "string"
+        },
+        "composition": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional editable composition notes for this physical spread. Empty or absent fields are allowed; composition still requires visual/editorial review.",
+          "properties": {
+            "focus": {
+              "type": "string"
+            },
+            "framing": {
+              "type": "string"
+            },
+            "word_contribution": {
+              "type": "string"
+            },
+            "art_contribution": {
+              "type": "string"
+            },
+            "text_zone": {
+              "type": "string"
+            },
+            "gutter_notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "prop_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "location_id",
+        "holder_id",
+        "condition"
+      ],
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "holder_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "condition": {
+          "type": "string"
+        }
+      }
+    },
+    "state_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beat_id",
+        "before",
+        "after",
+        "reason"
+      ],
+      "properties": {
+        "beat_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

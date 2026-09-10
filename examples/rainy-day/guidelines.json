@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "profile": "Short illustrated read-aloud",
+  "voice": [
+    "Warm, concrete language with short spoken exchanges.",
+    "Let pictures show room geography and the quiet background joke."
+  ],
+  "teaching": [
+    "One usable idea: a map becomes easier to follow when it includes familiar landmarks.",
+    "Show the consequence of unclear directions, then let the protagonist revise and test them."
+  ],
+  "content_boundaries": [
+    "Keep the problem safe and small: a confusing indoor treasure hunt.",
+    "Give frustration space without blame or embarrassment.",
+    "Both friends may speak; neither fixes the problem through authority."
+  ],
+  "composition": [
+    "Six story spreads plus four interior matter pages; covers are separate.",
+    "Use one main action per spread; alternate room views with close views.",
+    "Reserve clear text zones and keep map clues outside the gutter.",
+    "Track the paper star from its hiding place to the final reveal."
+  ],
+  "word_budget": {
+    "min": 140,
+    "max": 260
+  },
+  "required_reviews": [
+    "editorial",
+    "continuity",
+    "read_aloud",
+    "layout",
+    "art",
+    "translation"
+  ],
+  "extensions": {
+    "targets_are_guidance": true,
+    "reader_participation": "Invite the reader to identify the final landmark before turning the page."
+  }
+}

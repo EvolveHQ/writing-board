@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Writing Board</title>
+<style>
+:root{color-scheme:light;--paper:#fffdf7;--canvas:#f5f2e9;--ink:#243b33;--muted:#5f665f;--line:#c9cec4;--sage:#dae4d7;--clay:#eddbcb;--accent:#31594a;--warn:#7a431d;--error:#8b2f24;--radius:5px;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink)}button,input,textarea,select{font:inherit;color:inherit}button,.file-button{border:1px solid #869185;border-radius:var(--radius);background:var(--paper);padding:8px 14px;cursor:pointer;line-height:1.25;font-size:.9rem;font-weight:600}button:hover,.file-button:hover{background:var(--sage)}button:disabled{opacity:.48;cursor:default}button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}button.primary:hover{background:#244536}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #b76b37;outline-offset:3px}input,select,textarea{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:7px 9px;width:100%;font-size:.92rem;line-height:1.45}textarea{resize:vertical;min-height:74px;overflow-wrap:anywhere}label{display:block;font-size:.83rem;font-weight:600;color:var(--muted)}label>input,label>textarea,label>select{display:block;margin-top:5px}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;font-weight:700;letter-spacing:-.02em}h1{font-size:2.3rem;margin:0}h2{font-size:1.9rem;margin:0 0 8px}h3{font-size:1.35rem;margin:0 0 8px}p{margin:0 0 12px}a{color:var(--accent)}small,.muted{color:var(--muted);font-size:.85rem}code{overflow-wrap:anywhere}header{padding:22px 30px 0}header>.top{display:flex;align-items:center;gap:18px;justify-content:space-between}.actions,.toolbar,.card-actions,.tabs,.inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tabs{border-bottom:1px solid var(--line);margin-top:20px;gap:16px}.tabs button{border:0;border-bottom:3px solid transparent;background:transparent;border-radius:0;padding:12px 8px;font-weight:500;font-size:1rem}.tabs button[aria-selected=true]{border-color:var(--accent);font-weight:700}.app-main{padding:24px 30px 40px;min-height:70vh;max-width:1900px;margin:auto}.section-heading{display:flex;justify-content:space-between;align-items:start;gap:20px;margin:0 0 18px}.toolbar{margin-bottom:18px}.toolbar label{display:flex;align-items:center;gap:8px}.toolbar select{width:auto;margin:0}.story-heading{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}.story-heading h2{font-size:1.45rem;margin:0 0 4px}.status{font-size:.85rem;color:var(--muted)}.status.dirty{color:var(--warn);font-weight:700}.notice{border-left:4px solid var(--accent);background:var(--paper);padding:12px 16px;margin:12px 0;font-size:.9rem;overflow-wrap:anywhere}.notice.error{border-color:var(--error);color:var(--error)}.notice.warning{border-color:#b87840;color:var(--warn)}.empty{max-width:760px;margin:8vh auto;padding:36px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius)}.empty h2{font-size:2rem}.empty ol{padding-left:24px}.sequence{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 22px}.sequence button{font-size:.78rem;padding:5px 8px;font-weight:500}.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}.act{border:1px solid var(--line);border-radius:var(--radius);min-width:0;background:rgba(255,253,247,.32)}.act-title{padding:15px 18px;background:var(--sage);border-radius:var(--radius) var(--radius) 0 0}.act.development .act-title{background:var(--clay)}.act-title h3{margin:0 0 3px}.act-title p{font-size:.85rem;margin:0}.cards{padding:14px;display:grid;gap:14px}.beat{border:1px solid var(--line);border-top:6px solid #7a917e;border-radius:4px;background:var(--paper);padding:14px;min-width:0;overflow-wrap:anywhere}.development .beat{border-top-color:#ba8066}.resolution .beat{border-top-color:#476d60}.beat h4{font:700 1.05rem/1.35 Georgia,serif;margin:0 0 3px;overflow-wrap:anywhere}.beat label{margin-top:12px}.beat textarea{min-height:90px}.beat .meta{display:flex;flex-wrap:wrap;gap:5px 15px;margin:10px 0}.beat .meta span{font-size:.78rem;color:var(--muted)}.card-actions{margin-top:12px;justify-content:space-between;gap:6px}.card-actions button{font-size:.78rem;padding:7px 10px;flex:1}.table-scroll{overflow:auto;border:1px solid var(--line);background:var(--paper);border-radius:var(--radius)}table{border-collapse:collapse;width:100%;font-size:.87rem;text-align:left}th{background:var(--sage);font-weight:600;position:sticky;top:0}td,th{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;min-width:105px;max-width:340px;overflow-wrap:anywhere}td:first-child,th:first-child{min-width:90px}td p{white-space:pre-wrap;margin:0}.page-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px 4px;align-items:stretch}.page-box{border:1px solid #adb6aa;border-radius:3px;background:var(--paper);padding:10px;min-height:175px;font-size:.78rem;overflow-wrap:anywhere}.page-box.recto{margin-right:10px}.page-box.verso{border-left:5px solid #d4dbd0}.page-box.reserved{background:var(--sage)}.page-box strong{display:block;font-size:.85rem}.page-box p{margin-top:10px;white-space:pre-wrap}.page-box button{font-size:.72rem;padding:5px 8px;max-width:100%}.page-ghost{min-height:0}.subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.subnav button[aria-pressed=true]{background:var(--accent);color:white}.records{display:grid;gap:16px;max-width:1100px}.record{padding:18px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}.record h3{font-size:1.2rem}.record dl{display:grid;grid-template-columns:minmax(100px,180px) minmax(0,1fr);gap:8px 16px;margin:8px 0}.record dt{font-weight:600;font-size:.85rem}.record dd{margin:0;font-size:.9rem;white-space:pre-wrap;overflow-wrap:anywhere}.record pre{font: .83rem/1.55 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--paper);padding:15px;border:1px solid var(--line)}.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.review-grid ul{padding-left:20px}.review-grid li{margin-bottom:9px;overflow-wrap:anywhere}.review-grid section{min-width:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.full{grid-column:1/-1}.readonly{padding:8px 0}.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}.form-error{color:var(--error);margin-top:10px}dialog{background:var(--canvas);color:var(--ink);border:1px solid #9ba99b;border-radius:8px;padding:26px;width:min(860px,calc(100vw - 32px));max-height:90vh;overflow:auto}dialog::backdrop{background:rgba(20,35,28,.5)}dialog h2{font-size:1.6rem}footer{padding:14px 30px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}#print-area{display:none}.print-card{width:5in;height:3in;border:1px solid #aab1a6;padding:.18in;background:white;color:#182a22;font:10pt/1.25 Georgia,serif;overflow:visible;white-space:pre-wrap;overflow-wrap:anywhere;break-after:page;page-break-after:always}.print-card h2{font:700 11pt/1.2 Georgia,serif;margin:0 0 .07in}.print-card p{margin:0;white-space:pre-wrap}.print-measure{position:absolute;left:-10000px;top:0;display:block!important;visibility:hidden}
+@media(min-width:1700px){.cards{padding:20px}.beat{padding:18px}}
+@media(max-width:1100px){header>.top{align-items:start}h1{font-size:1.9rem}.actions{justify-content:flex-end}.board{gap:10px}.cards{padding:10px}.beat{padding:10px}.page-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.card-actions button{padding:7px}.tabs{gap:5px}}
+@media(max-width:760px){header{padding:18px 16px 0}header>.top{display:block}.actions{justify-content:flex-start;margin-top:16px}.tabs{gap:0}.tabs button{padding:11px 9px;font-size:.88rem}.app-main{padding:20px 16px}.board{grid-template-columns:1fr}.section-heading{display:block}.section-heading .toolbar{margin-top:15px}.form-grid,.review-grid{grid-template-columns:1fr}.full{grid-column:auto}.page-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.page-box{min-height:190px}.empty{padding:24px;margin:3vh auto}.record dl{grid-template-columns:1fr}.record dd{margin-bottom:10px}.status{display:block}footer{padding:16px}.beat textarea{min-height:80px}h1{font-size:1.95rem}}
+@page{size:5in 3in;margin:0}
+@media print{body{background:white}body>*{display:none!important}#print-area{display:block!important}.print-card:last-child{break-after:auto;page-break-after:auto}.print-card{border:0}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>Writing Board</h1><div class="actions"><span id="context-status" class="status"></span><button id="export-project" disabled>Export project</button><span id="save-status" class="status">No packet open</span><button id="open">Import packet</button><button id="export" disabled>Export packet</button><button id="save" class="primary" disabled>Save packet</button></div></div><nav class="tabs" aria-label="Workspace views" role="tablist"><button role="tab" aria-selected="true" data-view="project" id="tab-project" aria-controls="workspace">Project</button><button role="tab" aria-selected="false" data-view="guidelines" id="tab-guidelines" aria-controls="workspace">Guidelines</button><button role="tab" aria-selected="false" data-view="bible" id="tab-bible" aria-controls="workspace">Character bible</button><button role="tab" aria-selected="false" data-view="corkboard" id="tab-corkboard" aria-controls="workspace">Corkboard</button><button role="tab" aria-selected="false" data-view="purpose" id="tab-purpose" aria-controls="workspace">Story purpose</button><button role="tab" aria-selected="false" data-view="scenes" id="tab-scenes" aria-controls="workspace">Scene grid</button><button role="tab" aria-selected="false" data-view="pages" id="tab-pages" aria-controls="workspace">Page plan</button><button role="tab" aria-selected="false" data-view="continuity" id="tab-continuity" aria-controls="workspace">Continuity</button><button role="tab" aria-selected="false" data-view="review" id="tab-review" aria-controls="workspace">Review</button></nav><div id="boards" class="toolbar" style="margin-top:16px" hidden></div></header>
+<input id="file" type="file" accept=".json,application/json" hidden>
+<main class="app-main"><div id="message" role="status" aria-live="polite"></div><div id="story-heading" class="story-heading" hidden></div><div id="workspace" role="tabpanel" aria-labelledby="tab-project"></div></main>
+<footer>Draft workspace · exporting does not approve canon. Files stay on this device. No autosave or network access. Open the repository README for workflow and command documentation.</footer>
+<dialog id="editor"><form id="editor-form"><div id="editor-content"></div><div id="editor-error" class="form-error" role="alert"></div><div class="form-actions"><button type="button" id="cancel-edit">Cancel</button><button type="submit" class="primary">Apply changes</button></div></form></dialog>
+<dialog id="print-dialog"><h2>Print 3 × 5 inch cards</h2><p id="print-summary"></p><p>Choose 5 × 3 inch landscape paper, 100% scale, no margins and no browser headers or footers. Long cards continue on numbered cards; text is never silently cut off.</p><div class="form-actions"><button id="cancel-print">Cancel</button><button id="confirm-print" class="primary">Open print dialog</button></div></dialog>
+<div id="print-area" aria-hidden="true"></div>
+<script id="embedded-project" type="application/json">{}</script>
+<script id="embedded-packets" type="application/json">[]</script>
+<script id="packet-schema" type="application/json">
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:writing-board:story-packet:1",
+  "title": "Writing Board story development packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "language",
+    "status",
+    "revision",
+    "source_story_id",
+    "source_refs",
+    "premise",
+    "cast",
+    "locations",
+    "beats",
+    "page_plan",
+    "props",
+    "knowledge",
+    "relationships",
+    "facts",
+    "open_threads",
+    "reviews",
+    "proofs",
+    "localization_notes",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "proposed",
+        "review"
+      ]
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_story_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "premise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protagonist_id",
+        "want",
+        "why_now",
+        "stakes",
+        "obstacle",
+        "turn",
+        "ending",
+        "theme"
+      ],
+      "properties": {
+        "protagonist_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "want": {
+          "type": "string"
+        },
+        "why_now": {
+          "type": "string"
+        },
+        "stakes": {
+          "type": "string"
+        },
+        "obstacle": {
+          "type": "string"
+        },
+        "turn": {
+          "type": "string"
+        },
+        "ending": {
+          "type": "string"
+        },
+        "theme": {
+          "type": "string"
+        }
+      }
+    },
+    "cast": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "character_id",
+          "role",
+          "want",
+          "need",
+          "starting_state",
+          "ending_state",
+          "age_years"
+        ],
+        "properties": {
+          "character_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "role": {
+            "type": "string"
+          },
+          "want": {
+            "type": "string"
+          },
+          "need": {
+            "type": "string"
+          },
+          "starting_state": {
+            "type": "string"
+          },
+          "ending_state": {
+            "type": "string"
+          },
+          "age_years": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "source_status",
+          "source_ref"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "source_status": {
+            "type": "string",
+            "enum": [
+              "canonical",
+              "proposed"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/beat"
+      },
+      "minItems": 1
+    },
+    "page_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "interior_pages",
+        "front_matter_pages",
+        "story_spreads",
+        "back_matter_pages"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "needs_review",
+            "reviewed"
+          ]
+        },
+        "interior_pages": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "front_matter_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 0
+        },
+        "story_spreads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spread"
+          },
+          "minItems": 1
+        },
+        "back_matter_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 0
+        }
+      },
+      "description": "Physical interior pages only. Covers are separate. Beats appear once, in reading order across spreads sorted by left_page."
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "initial_state": {
+            "$ref": "#/$defs/prop_state"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "beat_id",
+                "before",
+                "after",
+                "reason"
+              ],
+              "properties": {
+                "beat_id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "before": {
+                  "$ref": "#/$defs/prop_state"
+                },
+                "after": {
+                  "$ref": "#/$defs/prop_state"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "character_id",
+          "topic",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "character_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "initial_state": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "beat_id",
+                "before",
+                "after",
+                "source_beat_id",
+                "reason"
+              ],
+              "properties": {
+                "beat_id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "before": {
+                  "type": "string"
+                },
+                "after": {
+                  "type": "string"
+                },
+                "source_beat_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from_id",
+          "to_id",
+          "initial_state",
+          "changes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "from_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "to_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "initial_state": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/state_change"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "statement",
+          "status",
+          "source_ref",
+          "character_ids",
+          "beat_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "sourced",
+              "proposed",
+              "interpretation"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "character_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "minItems": 0
+          },
+          "beat_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "open_threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "question",
+          "introduced_beat_id",
+          "resolved_beat_id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "question": {
+            "type": "string"
+          },
+          "introduced_beat_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "resolved_beat_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "resolved",
+              "deferred"
+            ]
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "status",
+          "reviewer",
+          "packet_revision",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "editorial",
+              "continuity",
+              "read_aloud",
+              "layout",
+              "art",
+              "translation"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "passed",
+              "changes_requested",
+              "stale"
+            ]
+          },
+          "reviewer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "packet_revision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "proofs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "path",
+          "status",
+          "packet_revision",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unverified",
+              "reviewed",
+              "stale"
+            ]
+          },
+          "packet_revision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "localization_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "language",
+          "notes"
+        ],
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "notes": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional author-owned JSON for maps, timelines, read-aloud observations and future tools. Preserved verbatim; no canon authority is inferred."
+    },
+    "purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Editorial intent; meaning is stored in premise.theme. These notes do not establish learning outcomes.",
+      "properties": {
+        "intent": {
+          "type": "string"
+        },
+        "teaching_goal": {
+          "type": "string"
+        },
+        "lesson": {
+          "type": "string"
+        },
+        "delivery": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "beat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "chronology",
+        "act",
+        "character_ids",
+        "location_id",
+        "action",
+        "consequence",
+        "emotion",
+        "visual_reveal",
+        "cause_from",
+        "text",
+        "dialogue"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "chronology": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "act": {
+          "type": "string",
+          "enum": [
+            "setup",
+            "development",
+            "resolution"
+          ]
+        },
+        "character_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 0
+        },
+        "location_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "action": {
+          "type": "string"
+        },
+        "consequence": {
+          "type": "string"
+        },
+        "emotion": {
+          "type": "string"
+        },
+        "visual_reveal": {
+          "type": "string"
+        },
+        "cause_from": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 0
+        },
+        "text": {
+          "type": "string"
+        },
+        "dialogue": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "speaker_id",
+              "kind",
+              "text"
+            ],
+            "properties": {
+              "speaker_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "speech",
+                  "nonverbal"
+                ]
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          "minItems": 0
+        }
+      },
+      "description": "Array position is reading order; chronology is immutable event order during a board edit/reorder. cause_from names strictly earlier chronological events."
+    },
+    "spread": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "left_page",
+        "right_page",
+        "beat_ids",
+        "page_turn",
+        "reveal"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "left_page": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "right_page": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "beat_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 1
+        },
+        "page_turn": {
+          "type": "string"
+        },
+        "reveal": {
+          "type": "string"
+        },
+        "composition": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional editable composition notes for this physical spread. Empty or absent fields are allowed; composition still requires visual/editorial review.",
+          "properties": {
+            "focus": {
+              "type": "string"
+            },
+            "framing": {
+              "type": "string"
+            },
+            "word_contribution": {
+              "type": "string"
+            },
+            "art_contribution": {
+              "type": "string"
+            },
+            "text_zone": {
+              "type": "string"
+            },
+            "gutter_notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "prop_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "location_id",
+        "holder_id",
+        "condition"
+      ],
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "holder_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "condition": {
+          "type": "string"
+        }
+      }
+    },
+    "state_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beat_id",
+        "before",
+        "after",
+        "reason"
+      ],
+      "properties": {
+        "beat_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+</script>
+<script>
+'use strict';
+// Offline and storage-free. Explicit Save can write a user-selected packet file.
+const schema = JSON.parse(document.getElementById('packet-schema').textContent);
+const embeddedProject = JSON.parse(document.getElementById('embedded-project').textContent);
+const embeddedPackets = JSON.parse(document.getElementById('embedded-packets').textContent);
+const $ = id => document.getElementById(id);
+const clone = value => JSON.parse(JSON.stringify(value));
+const acts = ['setup','development','resolution'];
+const names = {setup:'Setup',development:'Development',resolution:'Resolution'};
+const descriptions = {setup:'Introduce a want and a concrete situation.',development:'Trace choices, attempts and consequences.',resolution:'Bring the change and its payoff into view.'};
+const purposeFields = {intent:'Purpose',teaching_goal:'Teaching goal',lesson:'Lesson to take away',theme:'Meaning / theme',delivery:'How the story delivers it'};
+const compositionFields = {focus:'Visual focus',framing:'Framing',word_contribution:'What the words contribute',art_contribution:'What the art contributes',text_zone:'Text zone',gutter_notes:'Gutter notes'};
+const boards = new Map();
+let activeBoard = null, boardSerial = 0, saveBusy = false, saveNote = 'No changes';
+let projectBundle = null, contextDirty = false, contextSaveNote = 'No context changes';
+let packet = null, baseline = null, dirty = false, modified = false, view = 'project', orderView = 'reading', continuityView = 'cast', editCommit = null, sourceName = '', printReady = false;
+const e = (tag, attrs = {}, ...children) => {
+  const node = document.createElement(tag);
+  for (const [key,value] of Object.entries(attrs)) {
+    if (key.startsWith('on')) node.addEventListener(key.slice(2),value);
+    else if (key === 'class') node.className=value;
+    else if (key === 'value') node.value=value;
+    else if (key === 'disabled') node.disabled=!!value;
+    else node.setAttribute(key,String(value));
+  }
+  for (const child of children.flat(Infinity)) if(child !== undefined && child !== null) node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  return node;
+};
+const button = (text, action, attrs={}) => e('button',{type:'button',onclick:action,...attrs},text);
+const note = (text, kind='') => e('div',{class:'notice '+kind},text);
+const human = s => String(s).replaceAll('_',' ').replaceAll('-',' ');
+const summary = value => typeof value === 'string' ? value : JSON.stringify(value,null,2);
+const field = (label,value,{type='text',rows=3,options=null}={}) => {
+  let control;
+  if(options) control=e('select',{},options.map(v=>e('option',{value:v},human(v))));
+  else control=e(type==='textarea'?'textarea':'input',type==='textarea'?{rows}:{type});
+  control.value=value??'';
+  return {label:e('label',{},label,control),control};
+};
+function message(text,kind=''){ $('message').replaceChildren(text?note(text,kind):e('span')); }
+const reviewKinds = ['editorial','continuity','read_aloud','layout','art','translation'];
+const stableId = value => typeof value==='string'&&/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/.test(value);
+const lines = value => value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+function requireStrings(value,label){if(!Array.isArray(value)||value.some(x=>typeof x!=='string'))throw new Error(label+' must be an array of strings.');}
+function validateFacts(items,label){
+  if(!Array.isArray(items))throw new Error(label+' must be an array.');
+  const ids=new Set();
+  for(const item of items){
+    if(!item||!stableId(item.id)||ids.has(item.id)||typeof item.statement!=='string'||!['proposed','sourced','established'].includes(item.status))throw new Error(label+': each fact needs a unique ID, statement and valid status.');
+    if(item.source_ref!==null&&typeof item.source_ref!=='string')throw new Error(label+': source_ref must be a string or null.');
+    if(item.status!=='proposed'&&!item.source_ref?.trim())throw new Error(label+': sourced and established facts need a source reference.');
+    ids.add(item.id);
+  }
+}
+function validateContext(bundle){
+  if(!bundle||bundle.bundle_version!==1||!Number.isSafeInteger(bundle.base_revision)||bundle.base_revision<1)throw new Error('Use a version 1 project bundle with a valid base revision.');
+  const {project:p,guidelines:g,bible:b}=bundle;
+  if(!p||p.schema_version!==1||!stableId(p.id)||typeof p.title!=='string'||!p.title.trim()||!Number.isSafeInteger(p.revision)||p.revision<bundle.base_revision||typeof p.audience!=='string'||p.format!=='illustrated-book'||!Number.isSafeInteger(p.default_spreads)||p.default_spreads<1||p.default_spreads>200)throw new Error('Project needs a stable ID, title, audience, valid revision and 1–200 default spreads.');
+  requireStrings(p.languages,'Project languages');if(!p.languages.length||p.languages.some(x=>!(/^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(x)))||new Set(p.languages).size!==p.languages.length)throw new Error('Use unique language tags, for example en, it or cs.');
+  if(!g||g.schema_version!==1||typeof g.profile!=='string')throw new Error('Guidelines need a version and profile.');
+  for(const key of ['voice','teaching','content_boundaries','composition','required_reviews'])requireStrings(g[key],'Guidelines '+key);
+  if(g.required_reviews.some(kind=>!reviewKinds.includes(kind)))throw new Error('Review kinds: '+reviewKinds.join(', ')+'.');
+  if(!g.word_budget||!Number.isSafeInteger(g.word_budget.min)||!Number.isSafeInteger(g.word_budget.max)||g.word_budget.min<0||g.word_budget.max<g.word_budget.min)throw new Error('Word budget needs nonnegative whole numbers with maximum at least minimum.');
+  if(!b||b.schema_version!==1)throw new Error('Bible needs schema_version 1.');
+  for(const key of ['characters','locations','world_rules','relationships','timeline','glossary'])if(!Array.isArray(b[key]))throw new Error('Bible '+key+' must be an array.');
+  const ids=new Set();
+  for(const c of b.characters){
+    if(!c||!stableId(c.id)||ids.has(c.id)||!['verbal','nonverbal','unspecified'].includes(c.speech_mode))throw new Error('Characters need unique stable IDs and a valid speech mode.');
+    for(const key of ['name','summary','appearance','backstory','want','need','voice'])if(typeof c[key]!=='string')throw new Error(c.id+': '+key+' must be text.');
+    if(!c.name.trim())throw new Error('Character name is required.');validateFacts(c.facts,c.id+' facts');ids.add(c.id);
+  }
+  const places=new Set();for(const place of b.locations){if(!place||!stableId(place.id)||places.has(place.id)||typeof place.name!=='string'||typeof place.description!=='string')throw new Error('Locations need unique IDs, name and description.');validateFacts(place.facts,place.id+' facts');places.add(place.id);}
+  validateFacts(b.world_rules,'World rules');
+  const relationships=new Set();for(const r of b.relationships){if(!r||!stableId(r.id)||relationships.has(r.id)||!ids.has(r.from_id)||!ids.has(r.to_id)||typeof r.description!=='string')throw new Error('Relationships need unique IDs, existing characters and a description.');validateFacts([{...r,statement:r.description}],'Relationship');relationships.add(r.id);}
+  const events=new Set();for(const t of b.timeline){if(!t||!stableId(t.id)||events.has(t.id)||typeof t.description!=='string'||!(t.when===null||typeof t.when==='string')||!(t.source_ref===null||typeof t.source_ref==='string'))throw new Error('Timeline events need unique IDs, description, when and source_ref.');requireStrings(t.character_ids,'Timeline characters');if(t.character_ids.some(id=>!ids.has(id)))throw new Error('Timeline references an unknown character.');events.add(t.id);}
+  for(const term of b.glossary)for(const key of ['term','language','preferred','notes'])if(!term||typeof term[key]!=='string')throw new Error('Glossary entries need term, language, preferred and notes strings.');
+  return bundle;
+}
+function invalidateStory(data){data.status='draft';data.reviews.forEach(r=>r.status='stale');data.proofs.forEach(p=>p.status='stale');data.page_plan.status='needs_review';}
+function touchContext(){
+  rememberBoard();
+  for(const [key,board] of boards){
+    if(key===activeBoard){touch();rememberBoard();continue;}
+    if(!board.state){const data=clone(board.data);board.state={packet:data,baseline:clone(data),dirty:false,modified:false,sourceName:board.name,saveNote:'No changes'};}
+    const state=board.state;if(!state.modified){state.packet.revision=nextRevision(state.baseline);state.modified=true;}invalidateStory(state.packet);state.dirty=true;state.saveNote='';
+  }
+  contextDirty=true;contextSaveNote='';updateHeading();
+}
+function applyContextPart(key,value){
+  if(!projectBundle)throw new Error('Build a project workspace with the CLI first.');
+  const candidate=clone(projectBundle);candidate[key]=clone(value);validateContext(candidate);
+  if(JSON.stringify(candidate[key])===JSON.stringify(projectBundle[key]))return;
+  rememberBoard();for(const board of boards.values())nextRevision(board.state?.baseline??board.data);
+  projectBundle[key]=candidate[key];touchContext();
+}
+function openView(next){view=next;render();message('');}
+function contextHeading(title,description,action,label){return e('div',{class:'section-heading'},e('div',{},e('h2',{},title),e('p',{class:'muted'},description)),action?button(label,action):null);}
+function renderProject(){
+  if(!projectBundle)return e('section',{class:'empty'},e('h2',{},'Create your writing workspace'),e('p',{},'Start a project with the CLI, then open its generated build/board.html. Project files hold the shared guidelines, character bible and stories.'),e('pre',{},'python scripts/writing_board.py init projects/my-book --interactive\npython scripts/writing_board.py build projects/my-book'),button('View story boards',()=>openView('corkboard')));
+  const p=projectBundle.project,b=projectBundle.bible;
+  const steps=[['project','1. Set the brief',p.audience+' · '+p.languages.join(', ')],['guidelines','2. Choose writing guidelines',projectBundle.guidelines.profile],['bible','3. Build the character bible',b.characters.length+' characters · '+b.locations.length+' locations'],['purpose','4. Define each story’s purpose',boards.size+' story boards'],['corkboard','5. Develop choices and consequences','Edit beats, then draft read-aloud text.'],['pages','6. Compose the page turns','Balance words, images and physical pages.'],['review','7. Review, localize and hand off','Record evidence; use the workflow skills for language and production checks.']];
+  return e('section',{},contextHeading(p.title,'Project revision '+p.revision+' · bundle base '+projectBundle.base_revision,editProject,'Edit project'),note('Changes stay in this page until exported. Export project includes shared context and every story; import it with the CLI into a new revision.'),e('div',{class:'records'},steps.map(([target,title,detail])=>e('article',{class:'record'},button(title,()=>openView(target)),e('p',{class:'muted',style:'margin-top:8px'},detail)))),e('h3',{style:'margin-top:24px'},'Add a story'),e('pre',{class:'notice'},'python scripts/writing_board.py story PROJECT --id first-story --title "First story" --protagonist CHARACTER_ID\npython scripts/writing_board.py build PROJECT'),e('h3',{},'Keep your edits'),e('pre',{class:'notice'},'python scripts/writing_board.py import PROJECT --bundle DOWNLOADED.json --output REVISED_PROJECT\npython scripts/writing_board.py build REVISED_PROJECT'),e('p',{class:'muted'},'Export before rebuilding or closing this page. Generated boards do not update source files automatically.'));
+}
+function editProject(){
+  const p=projectBundle.project,inputs={};const fields=[e('p',{class:'full muted'},'Stable project ID: '+p.id+'. The default spread count applies when creating new stories.')];
+  for(const [key,label,type] of [['title','Project title','text'],['audience','Audience','text'],['languages','Language tags (comma separated)','text'],['default_spreads','Default story spreads','number']]){const f=field(label,key==='languages'?p.languages.join(', '):p[key],{type});inputs[key]=f.control;fields.push(f.label);}
+  openEditor('Edit project',fields,()=>applyContextPart('project',{...p,title:inputs.title.value.trim(),audience:inputs.audience.value,languages:inputs.languages.value.split(',').map(x=>x.trim()).filter(Boolean),default_spreads:Number(inputs.default_spreads.value)}));
+}
+function renderGuidelines(){
+  if(!projectBundle)return renderProject();const g=projectBundle.guidelines;
+  return e('section',{},contextHeading('Writing guidelines','Project choices guide writing; they do not prove a draft works.',editGuidelines,'Edit guidelines'),e('article',{class:'record'},e('h3',{},g.profile),e('p',{},'Word budget: '+g.word_budget.min+'–'+g.word_budget.max+' words.'),...['voice','teaching','content_boundaries','composition','required_reviews'].map(key=>e('section',{},e('h3',{},human(key)),g[key].length?e('ul',{},g[key].map(x=>e('li',{},x))):e('p',{class:'muted'},'No guidance recorded.')))),button('Next: character bible',()=>openView('bible')));
+}
+function editGuidelines(){
+  const g=projectBundle.guidelines,inputs={},fields=[];
+  for(const [key,label] of [['profile','Profile name'],['voice','Voice · one guideline per line'],['teaching','Teaching · one guideline per line'],['content_boundaries','Content boundaries · one per line'],['composition','Composition · one guideline per line'],['required_reviews','Required review kinds · editorial, continuity, read_aloud, layout, art, translation']]){const f=field(label,Array.isArray(g[key])?g[key].join('\n'):g[key],{type:key==='profile'?'text':'textarea'});inputs[key]=f.control;f.label.classList.add('full');fields.push(f.label);}
+  const min=field('Minimum words',g.word_budget.min,{type:'number'}),max=field('Maximum words',g.word_budget.max,{type:'number'});fields.push(min.label,max.label);
+  openEditor('Edit guidelines',fields,()=>{const next={...g,profile:inputs.profile.value,word_budget:{...g.word_budget,min:Number(min.control.value),max:Number(max.control.value)}};for(const key of ['voice','teaching','content_boundaries','composition','required_reviews'])next[key]=lines(inputs[key].value);applyContextPart('guidelines',next);});
+}
+function renderBible(){
+  if(!projectBundle)return renderProject();const b=projectBundle.bible;
+  return e('section',{},contextHeading('Character bible','Dossiers describe the shared world. Each sourced or established fact needs a reference.',()=>editCharacter(),'Add character'),b.characters.length?e('div',{class:'records'},b.characters.map(c=>e('article',{class:'record'},e('div',{class:'section-heading'},e('h3',{},c.name+' · '+c.id),button('Edit character',()=>editCharacter(c.id),{'aria-label':'Edit '+c.name})),e('dl',{},['summary','appearance','backstory','want','need','voice','speech_mode'].map(key=>[e('dt',{},human(key)),e('dd',{},c[key]||'To develop')])),e('details',{},e('summary',{},c.facts.length+' facts and sources'),recordList(c.facts))))):note('Create your first character. Keep unknown facts open; drafts do not establish canon.'),e('h3',{style:'margin-top:28px'},'World and continuity records'),e('div',{class:'records'},['locations','world_rules','relationships','timeline','glossary'].map(key=>e('article',{class:'record'},e('div',{class:'section-heading'},e('h3',{},human(key)+' · '+b[key].length),button('Edit '+human(key),()=>editBibleCollection(key))),recordList(b[key])))));
+}
+function applyCharacterEdit(id,values){
+  const b=clone(projectBundle.bible),existing=b.characters.find(c=>c.id===id);
+  if(id&&!existing)throw new Error('Unknown character.');
+  if(existing&&values.id!==id)throw new Error('An existing character ID is stable.');
+  if(!existing&&b.characters.some(c=>c.id===values.id))throw new Error('This character ID already exists.');
+  if(existing)Object.assign(existing,clone(values));else b.characters.push(clone(values));applyContextPart('bible',b);
+}
+function editCharacter(id=null){
+  const c=projectBundle.bible.characters.find(c=>c.id===id)||{id:'',name:'',summary:'',appearance:'',backstory:'',want:'',need:'',voice:'',speech_mode:'unspecified',facts:[],extensions:{}},inputs={},fields=[];
+  for(const key of ['id','name','summary','appearance','backstory','want','need','voice','speech_mode','facts']){const f=field(key==='facts'?'Facts JSON · id, statement, status, source_ref':human(key),key==='facts'?JSON.stringify(c.facts,null,2):c[key],{type:['id','name','speech_mode'].includes(key)?'text':'textarea',options:key==='speech_mode'?['unspecified','verbal','nonverbal']:null});if(key==='id'&&id)f.control.disabled=true;if(!['id','name','speech_mode'].includes(key))f.label.classList.add('full');inputs[key]=f.control;fields.push(f.label);}
+  fields.push(e('p',{class:'full muted'},'Proposed facts may have source_ref: null. Sourced and established facts require a document, event or other verifiable reference.'));
+  openEditor(id?'Edit '+c.name:'Add character',fields,()=>{const next={...c};for(const key of Object.keys(inputs))next[key]=key==='facts'?parseJSON(inputs[key].value):inputs[key].value;next.id=next.id.trim();next.name=next.name.trim();applyCharacterEdit(id,next);});
+}
+function editBibleCollection(key){
+  const examples={locations:{id:'place',name:'Place',description:'',facts:[],extensions:{}},world_rules:{id:'rule',statement:'',status:'proposed',source_ref:null},relationships:{id:'connection',from_id:'character-a',to_id:'character-b',description:'',status:'proposed',source_ref:null},timeline:{id:'event',when:null,description:'',character_ids:[],source_ref:null},glossary:{term:'',language:'en',preferred:'',notes:''}};
+  const input=field(human(key)+' JSON array',JSON.stringify(projectBundle.bible[key],null,2),{type:'textarea',rows:14});input.label.classList.add('full');
+  openEditor('Edit '+human(key),[input.label,e('details',{class:'full'},e('summary',{},'Record shape'),e('pre',{},JSON.stringify(examples[key],null,2)))],()=>applyContextPart('bible',{...projectBundle.bible,[key]:parseJSON(input.control.value)}));
+}
+function bundleForExport(){
+  if(!projectBundle)throw new Error('No project context is loaded.');rememberBoard();
+  const output=clone(projectBundle),ids=new Set();output.stories=[];
+  for(const board of boards.values()){
+    const data=clone(board.state?.packet??board.data);if(ids.has(data.id))throw new Error('Two open boards share ID '+data.id+'. Remove an imported duplicate from this session before exporting the project. Export either packet separately first.');
+    ids.add(data.id);data.extensions??={};data.extensions.workbench_base_revision=workbenchBaseRevision(board.state?.baseline??data);output.stories.push(data);
+  }
+  validateContext(output);return output;
+}
+function exportProject(){
+  try{const output=bundleForExport();download(output,output.project.id+'-r'+output.base_revision+'-bundle.json');contextDirty=false;contextSaveNote='Project export requested';for(const board of boards.values())if(board.state){board.state.dirty=false;board.state.saveNote='Project export requested';}dirty=false;saveNote='Project export requested';updateHeading();message('Project download requested. Confirm the file was saved, then import it with the CLI. Source files are unchanged.');}catch(error){message(error.message,'error');}
+}
+function parseJSON(text){return JSON.parse(text.replace(/^\uFEFF/,''),(key,value)=>{if(typeof value==='number'&&(!Number.isFinite(value)||Number.isInteger(value)&&!Number.isSafeInteger(value)))throw new Error('Unsafe number found; refusing to lose numeric precision.');return value;});}
+function shapeCheck(value, rule=schema, path='packet', errors=[], unknown=[]) {
+  if(rule.$ref) rule=schema.$defs[rule.$ref.split('/').pop()];
+  const actual=value===null?'null':Array.isArray(value)?'array':typeof value;
+  const types=Array.isArray(rule.type)?rule.type:[rule.type];
+  if(rule.type && !types.some(t=>t===actual || t==='integer'&&Number.isSafeInteger(value))) {errors.push(path+': expected '+types.join(' or '));return {errors,unknown};}
+  if(rule.const!==undefined&&value!==rule.const) errors.push(path+': unsupported schema version');
+  if(rule.enum&&!rule.enum.includes(value)) errors.push(path+': unsupported value '+String(value));
+  if(typeof value==='number'&&rule.minimum!==undefined&&value<rule.minimum) errors.push(path+': below minimum '+rule.minimum);
+  if(typeof value==='string'&&rule.pattern&&!new RegExp(rule.pattern).test(value)) errors.push(path+': invalid identifier');
+  if(Array.isArray(value)) {if(rule.minItems&&value.length<rule.minItems) errors.push(path+': missing entries'); if(rule.items)value.forEach((v,i)=>shapeCheck(v,rule.items,path+'['+i+']',errors,unknown));}
+  else if(value&&typeof value==='object') {
+    for(const key of rule.required||[]) if(!Object.hasOwn(value,key)) errors.push(path+'.'+key+': required');
+    for(const [key,v] of Object.entries(value)) {
+      if(rule.properties&&Object.hasOwn(rule.properties,key)) shapeCheck(v,rule.properties[key],path+'.'+key,errors,unknown);
+      else if(rule.additionalProperties===false) unknown.push(path+'.'+key);
+    }
+  }
+  return {errors,unknown};
+}
+function structuralChecks(data=packet) {
+  const result=shapeCheck(data), issues=[...result.errors];
+  if(result.errors.length) return {issues,unknown:result.unknown};
+  const beatMap=new Map(data.beats.map(b=>[b.id,b]));
+  if(beatMap.size!==data.beats.length) issues.push('Beat IDs must be unique.');
+  if(new Set(data.beats.map(b=>b.chronology)).size!==data.beats.length) issues.push('Chronology values must be unique.');
+  const cast=new Set(data.cast.map(c=>c.character_id)), locations=new Set(data.locations.map(l=>l.id));
+  for(const b of data.beats){
+    if(!locations.has(b.location_id)) issues.push(b.id+': location is not in this packet.');
+    for(const c of b.character_ids)if(!cast.has(c))issues.push(b.id+': '+c+' is not in the cast.');
+    for(const c of b.cause_from){if(!beatMap.has(c))issues.push(b.id+': unknown cause '+c);else if(beatMap.get(c).chronology>=b.chronology)issues.push(b.id+': cause '+c+' must be earlier in chronology.');}
+  }
+  const plan=data.page_plan, assigned=[], pages=[];
+  pages.push(...plan.front_matter_pages,...plan.back_matter_pages);
+  for(const s of [...plan.story_spreads].sort((a,b)=>a.left_page-b.left_page)){
+    pages.push(s.left_page,s.right_page);assigned.push(...s.beat_ids);
+    if(s.left_page%2 || s.right_page!==s.left_page+1) issues.push(s.id+': a spread needs an even left page and the following right page.');
+  }
+  if(pages.length!==plan.interior_pages || new Set(pages).size!==plan.interior_pages || pages.some(p=>p<1||p>plan.interior_pages))issues.push('Page plan must assign each physical interior page exactly once.');
+  if(JSON.stringify(assigned)!==JSON.stringify(data.beats.map(b=>b.id)))issues.push('Spread beat IDs must include every beat exactly once, in reading order.');
+  for(const collection of ['props','knowledge','relationships'])for(const r of data[collection])for(const c of r.changes)if(!beatMap.has(c.beat_id))issues.push(collection+' / '+r.id+': unknown change beat '+c.beat_id);
+  return {issues,unknown:result.unknown};
+}
+function workbenchBaseRevision(data){
+  const origin=data.extensions?.workbench_base_revision ?? data.revision;
+  if(!Number.isSafeInteger(origin)||origin<1||origin>data.revision)throw new Error('Invalid workbench base revision. Reopen the repository packet or restore the original base marker.');
+  return origin;
+}
+function nextRevision(data){const revision=workbenchBaseRevision(data)+1;if(!Number.isSafeInteger(revision))throw new Error('Revision limit reached; this packet cannot be edited without losing precision.');return revision;}
+function touch(){
+  if(!modified){packet.revision=nextRevision(baseline);modified=true;}
+  invalidateStory(packet);
+  dirty=true;saveNote='';printReady=false;updateHeading();
+}
+function updateHeading(){
+  $('context-status').textContent=projectBundle?(contextDirty?'Project context not exported':contextSaveNote):'';
+  $('context-status').classList.toggle('dirty',contextDirty);$('export-project').disabled=!projectBundle;
+  $('save-status').textContent=packet?(dirty?'Unsaved changes':saveNote):'No board open';
+  $('save-status').classList.toggle('dirty',dirty);$('export').disabled=!packet;$('save').disabled=!packet||saveBusy;
+  $('story-heading').hidden=!packet;
+  if(packet)$('story-heading').replaceChildren(e('h2',{},packet.title),e('p',{class:'muted'},packet.id+' · '+packet.language+' · revision '+packet.revision+' · '+packet.status+' · '+packet.beats.length+' beats'));
+}
+function loadPacket(data,name){
+  const checked=shapeCheck(data);
+  if(checked.errors.length)throw new Error('Cannot open this packet: '+checked.errors.slice(0,8).join(' • '));
+  if(data.page_plan.interior_pages>2000||data.beats.length>5000)throw new Error('This browser view supports at most 2,000 interior pages and 5,000 beats. Use the CLI for larger packets.');
+  if(new Set(data.beats.map(b=>b.id)).size!==data.beats.length)throw new Error('Duplicate beat IDs make editing ambiguous. Resolve them in JSON before opening.');
+  if(new Set(data.beats.map(b=>b.chronology)).size!==data.beats.length)throw new Error('Duplicate chronology values. Resolve them in JSON before opening.');
+  workbenchBaseRevision(data);
+  baseline=clone(data);packet=clone(data);sourceName=name;dirty=false;modified=false;printReady=false;saveNote='No changes';
+  updateHeading();render();
+  const checks=structuralChecks();
+  message(checks.unknown.length?'Opened '+name+'. Unknown fields are preserved. CLI may reject unsupported fields; inspect Review before importing.':checks.issues.length?'Opened '+name+'. '+checks.issues.length+' structural issue(s) need attention in Review.':'Opened '+name+'. The original file is unchanged.',checks.unknown.length||checks.issues.length?'warning':'');
+}
+function moveBeat(id,direction){
+  const index=packet.beats.findIndex(b=>b.id===id), next=index+direction;
+  if(index<0||next<0||next>=packet.beats.length)return;
+  touch();[packet.beats[index],packet.beats[next]]=[packet.beats[next],packet.beats[index]];
+  let cursor=0;
+  for(const spread of [...packet.page_plan.story_spreads].sort((a,b)=>a.left_page-b.left_page)){
+    const count=spread.beat_ids.length;spread.beat_ids=packet.beats.slice(cursor,cursor+count).map(b=>b.id);cursor+=count;
+  }
+  render();message(id+' moved to reading position '+(next+1)+'. Chronology and act stayed fixed; spread assignments updated. Recheck page turns and review evidence.','warning');
+  const target=document.querySelector('[data-move-id="'+id+'"]');if(target)target.focus();
+}
+function openEditor(title,fields,commit){
+  $('editor-content').replaceChildren(e('h2',{},title),e('div',{class:'form-grid'},fields));$('editor-error').textContent='';editCommit=commit;$('editor').showModal();
+}
+function editBeat(id){
+  const b=packet.beats.find(x=>x.id===id);
+  const inputs={};const fields=[e('p',{class:'full muted'},'Stable ID '+b.id+' · chronology '+b.chronology+'. Use Earlier / Later to change reading order.')];
+  for(const [key,label,type] of [['act','Act','select'],['location_id','Location','location'],['character_ids','Character IDs (comma separated)','text'],['cause_from','Caused by beat IDs (comma separated)','text'],['action','Action / card summary','textarea'],['consequence','Consequence','textarea'],['emotion','Emotional change','textarea'],['visual_reveal','What the illustration reveals','textarea'],['text','Read-aloud manuscript text','textarea']]){
+    const f=field(label,Array.isArray(b[key])?b[key].join(', '):b[key],{type:type==='textarea'?'textarea':'text',options:type==='select'?acts:type==='location'?packet.locations.map(l=>l.id):null});inputs[key]=f.control;if(type==='textarea')f.label.classList.add('full');fields.push(f.label);
+  }
+  if(b.dialogue.length)fields.push(e('details',{class:'full'},e('summary',{},'Dialogue (preserved; edit structured dialogue in JSON)'),e('pre',{},JSON.stringify(b.dialogue,null,2))));
+  openEditor('Edit '+b.id,fields,()=>{
+    const values={};for(const [key,input]of Object.entries(inputs))values[key]=['character_ids','cause_from'].includes(key)?input.value.split(',').map(s=>s.trim()).filter(Boolean):input.value;
+    for(const c of values.character_ids)if(!packet.cast.some(x=>x.character_id===c))throw new Error('Unknown character ID: '+c);
+    for(const c of values.cause_from){const cause=packet.beats.find(x=>x.id===c);if(!cause||cause.chronology>=b.chronology)throw new Error('Cause must name an earlier chronological beat: '+c);}
+    if(Object.entries(values).some(([k,v])=>JSON.stringify(v)!==JSON.stringify(b[k]))){touch();for(const [k,v]of Object.entries(values))b[k]=v;}
+  });
+}
+function editSpread(id){
+  const s=packet.page_plan.story_spreads.find(x=>x.id===id), ids=field('Beat IDs (comma separated, in reading order)',s.beat_ids.join(', ')),turn=field('Page-turn invitation',s.page_turn,{type:'textarea'}), reveal=field('Reveal after turning',s.reveal,{type:'textarea'});
+  ids.label.className='full';turn.label.className='full';reveal.label.className='full';
+  const compositionInputs=Object.fromEntries(Object.entries(compositionFields).map(([key,label])=>[key,field(label,s.composition?.[key]??'',{type:'textarea'})]));
+  openEditor('Pages '+s.left_page+'–'+s.right_page,[e('p',{class:'full muted'},s.id+' · physical pages stay fixed. Review the complete assignment after moving beats between spreads.'),ids.label,turn.label,reveal.label,e('h3',{class:'full'},'Spread composition'),e('p',{class:'full muted'},'These optional notes describe the whole spread. Separate the job of the words from what the image adds.'),...Object.values(compositionInputs).map(f=>f.label)],()=>{
+    const next=ids.control.value.split(',').map(x=>x.trim()).filter(Boolean);
+    applySpreadEdit(s,{beat_ids:next,page_turn:turn.control.value,reveal:reveal.control.value,composition:Object.fromEntries(Object.entries(compositionInputs).map(([key,f])=>[key,f.control.value]))});
+  });
+}
+function applySpreadEdit(spread,values){
+  if(!values.beat_ids.length||values.beat_ids.some(id=>!packet.beats.some(b=>b.id===id)))throw new Error('Choose at least one existing beat ID.');
+  const compositionChanges=Object.keys(compositionFields).filter(key=>values.composition[key]!==undefined&&values.composition[key]!== (spread.composition?.[key]??''));
+  if(JSON.stringify(values.beat_ids)!==JSON.stringify(spread.beat_ids)||values.page_turn!==spread.page_turn||values.reveal!==spread.reveal||compositionChanges.length){
+    touch();spread.beat_ids=values.beat_ids;spread.page_turn=values.page_turn;spread.reveal=values.reveal;
+    if(compositionChanges.length){spread.composition??={};for(const key of compositionChanges)spread.composition[key]=values.composition[key];}
+  }
+}
+function renderEmpty(){
+  return e('section',{class:'empty'},e('h2',{},'Import a story board'),e('p',{},'Your managed boards appear in the Story board list. Import a JSON packet to add another board for this session.'),button('Import packet',()=>$('file').click(),{class:'primary'}),e('p',{class:'muted',style:'margin-top:18px'},'Edit freely. Save or export packets before closing the page.'));
+}
+function purposeValues(){
+  return Object.fromEntries(Object.keys(purposeFields).map(key=>[key,key==='theme'?packet.premise.theme:packet.purpose?.[key]??'']));
+}
+function applyPurposeEdit(values){
+  const current=purposeValues();
+  const changed=Object.keys(purposeFields).filter(key=>values[key]!==current[key]);
+  if(!changed.length)return;
+  touch();
+  for(const key of changed){
+    if(key==='theme')packet.premise.theme=values[key];
+    else {packet.purpose??={};packet.purpose[key]=values[key];}
+  }
+}
+function editPurpose(){
+  const values=purposeValues(),inputs={},fields=[];
+  for(const [key,label] of Object.entries(purposeFields)){
+    const f=field(label,values[key],{type:'textarea'});f.label.classList.add('full');inputs[key]=f.control;fields.push(f.label);
+  }
+  openEditor('Edit story purpose',fields,()=>applyPurposeEdit(Object.fromEntries(Object.entries(inputs).map(([key,input])=>[key,input.value]))));
+}
+function renderPurpose(){
+  const values=purposeValues();
+  return e('section',{},e('div',{class:'section-heading'},e('div',{},e('h2',{},'Story purpose'),e('p',{class:'muted'},'What the story is for, and how its choices and images carry that meaning.')),button('Edit story purpose',editPurpose)),e('article',{class:'record'},e('dl',{},Object.entries(purposeFields).map(([key,label])=>[e('dt',{},label),e('dd',{},values[key]||'To develop')]))),e('p',{class:'muted'},'Keep one clear throughline. Show it through choices, consequences, images and the ending; include beat references in the delivery notes.'));
+}
+function renderCorkboard(){
+  const controls=e('div',{class:'toolbar'},button('Reading order',()=>{orderView='reading';render();},{'aria-pressed':orderView==='reading'}),button('Chronology',()=>{orderView='chronology';render();},{'aria-pressed':orderView==='chronology'}),button('Print cards',preparePrint),button('Export order only',exportOrder));
+  const heading=e('div',{class:'section-heading'},e('div',{},e('h2',{},orderView==='reading'?'Reading order':'Event chronology'),e('p',{class:'muted'},'Chronology stays fixed when cards move.')),controls);
+  if(orderView==='chronology')return e('section',{},heading,note('This view follows event time. Reading positions show where a reader encounters each event.'),sceneTable(true));
+  const sequence=e('div',{class:'sequence','aria-label':'Complete reading sequence'},packet.beats.map((b,i)=>button((i+1)+' · '+b.id,()=>editBeat(b.id))));
+  const board=e('div',{class:'board'},acts.map(act=>e('section',{class:'act '+act},e('div',{class:'act-title'},e('h3',{},names[act]),e('p',{},descriptions[act])),e('div',{class:'cards'},packet.beats.filter(b=>b.act===act).map(b=>beatCard(b)),!packet.beats.some(b=>b.act===act)?e('p',{class:'muted'},'No beats in this act.'):null))));
+  return e('section',{},heading,e('p',{class:'muted'},'Cards are grouped by act. The numbered sequence is the complete reading order; moving a card keeps its act label.'),sequence,board);
+}
+function beatCard(b){
+  const index=packet.beats.indexOf(b),action=field('Action / summary',b.action,{type:'textarea'}), consequence=field('Consequence',b.consequence,{type:'textarea'});
+  for(const [key,f]of [['action',action],['consequence',consequence]])f.control.addEventListener('input',()=>{if(f.control.value!==b[key]){touch();b[key]=f.control.value;}});
+  return e('article',{class:'beat','data-beat-id':b.id},e('h4',{},String(index+1).padStart(2,'0')+' · '+b.id),e('small',{},'Event '+b.chronology+' in chronology'),action.label,consequence.label,e('div',{class:'meta'},e('span',{},'Characters: '+(b.character_ids.join(', ')||'None')),e('span',{},'Location: '+b.location_id)),e('div',{class:'card-actions'},button('Earlier',()=>moveBeat(b.id,-1),{disabled:index===0,'aria-label':'Move '+b.id+' earlier','data-move-id':b.id}),button('Edit',()=>editBeat(b.id),{'aria-label':'Edit '+b.id}),button('Later',()=>moveBeat(b.id,1),{disabled:index===packet.beats.length-1,'aria-label':'Move '+b.id+' later'})));
+}
+function sceneTable(chronological=false){
+  const beats=chronological?[...packet.beats].sort((a,b)=>a.chronology-b.chronology):packet.beats;
+  const columns=['Reading / event','Act · characters','Location','Action','Consequence','Emotion','Visual reveal','Caused by'];
+  return e('div',{class:'table-scroll',tabindex:0,'aria-label':'Scrollable scene grid'},e('table',{},e('thead',{},e('tr',{},columns.map(c=>e('th',{scope:'col'},c)))),e('tbody',{},beats.map(b=>e('tr',{},e('td',{},button(b.id,()=>editBeat(b.id)),e('p',{},'Read '+(packet.beats.indexOf(b)+1)+' / time '+b.chronology)),e('td',{},human(b.act),e('p',{},b.character_ids.join(', '))),...['location_id','action','consequence','emotion','visual_reveal'].map(k=>e('td',{},e('p',{},b[k]||'—'))),e('td',{},b.cause_from.join(', ')||'—'))))));
+}
+function renderPages(){
+  const plan=packet.page_plan,boxes=[e('div',{class:'page-ghost','aria-hidden':true})];
+  for(let p=1;p<=plan.interior_pages;p++){
+    const reserved=plan.front_matter_pages.includes(p)?'Front matter':plan.back_matter_pages.includes(p)?'Back matter':null;
+    const s=plan.story_spreads.find(s=>s.left_page===p||s.right_page===p);
+    boxes.push(e('article',{class:'page-box '+(p%2?'recto':'verso')+(reserved?' reserved':''),'data-page':p},e('strong',{},'Page '+p+' · '+(p%2?'right':'left')),reserved?e('p',{},reserved+' · reserved'):s?e('div',{},e('p',{},s.beat_ids.join(', ')),e('p',{},p===s.left_page?'Page turn: '+(s.page_turn||'To develop'):'Reveal: '+(s.reveal||'To develop')),button('Edit spread',()=>editSpread(s.id),{'aria-label':'Edit '+s.id+' pages '+s.left_page+' and '+s.right_page})):note('Unassigned','error')));
+  }
+  const compositions=e('section',{style:'margin-top:28px'},e('h3',{},'Spread composition'),e('p',{class:'muted'},'Notes below describe the whole spread. They stay with the physical pages when reading order changes.'),e('div',{class:'records'},[...plan.story_spreads].sort((a,b)=>a.left_page-b.left_page).map(s=>e('article',{class:'record','data-composition-spread':s.id},e('div',{class:'section-heading'},e('h3',{},'Pages '+s.left_page+'–'+s.right_page+' · '+s.id),button('Edit composition',()=>editSpread(s.id),{'aria-label':'Edit composition for '+s.id})),Object.keys(compositionFields).some(key=>(s.composition?.[key]??'').trim())?e('dl',{},Object.entries(compositionFields).map(([key,label])=>[e('dt',{},label),e('dd',{},s.composition?.[key]||'To develop')])):e('p',{class:'muted'},'No composition notes yet.')))));
+  return e('section',{},e('h2',{},'Physical page plan'),e('p',{class:'muted'},plan.interior_pages+' interior pages · '+plan.story_spreads.length+' story spreads · '+human(plan.status)+'. Covers are separate. Page count follows this project’s chosen plan.'),note('Reading order changes reassign beats through existing spread slots. Page-turn, reveal and composition notes stay attached to their physical spread and need human review.'),e('div',{class:'page-grid'},boxes),compositions);
+}
+function recordList(items){
+  if(!items.length)return e('p',{class:'muted'},'No records in this packet. Add structured records in the JSON packet; they will be shown here.');
+  return e('div',{class:'records'},items.map((item,i)=>e('article',{class:'record'},e('h3',{},item.name||item.id||item.character_id||item.language||'Record '+(i+1)),e('dl',{},Object.entries(item).filter(([k])=>!['id','name'].includes(k)).map(([key,value])=>[e('dt',{},human(key)),e('dd',{},summary(value))])))));
+}
+function renderContinuity(){
+  const sections={cast:'Characters',locations:'Locations',props:'Props',knowledge:'Knowledge',relationships:'Relationships',facts:'Facts',open_threads:'Open threads',localization_notes:'Languages',extensions:'Extensions'};
+  const nav=e('div',{class:'subnav'},Object.entries(sections).map(([key,label])=>button(label,()=>{continuityView=key;render();},{'aria-pressed':continuityView===key})));
+  const values=packet[continuityView];
+  return e('section',{},e('h2',{},'Continuity'),e('p',{class:'muted'},'Inspect recorded states and evidence. Event chronology governs changes; source status stays explicit.'),nav,continuityView==='extensions'?e('article',{class:'record'},e('h3',{},'Author-owned extensions'),e('pre',{},JSON.stringify(values||{},null,2))):recordList(values||[]));
+}
+function addReview(){
+  const reviewer=field('Reviewer name',''),kind=field('Review kind','editorial',{options:reviewKinds}),notes=field('Observation and evidence (include page / beat and actual reading context)','',{type:'textarea'});notes.label.className='full';
+  openEditor('Record a review observation',[e('p',{class:'full muted'},'This adds pending human evidence. It does not mark a story passed or approve a proposed fact.'),reviewer.label,kind.label,notes.label],()=>{
+    if(!reviewer.control.value.trim()||!notes.control.value.trim())throw new Error('A reviewer name and concrete evidence are required.');
+    touch();let i=1;while(packet.reviews.some(r=>r.id==='board-review-'+i))i++;
+    packet.reviews.push({id:'board-review-'+i,kind:kind.control.value,status:'pending',reviewer:reviewer.control.value.trim(),packet_revision:packet.revision,notes:notes.control.value.trim()});
+  });
+}
+function renderReview(){
+  const {issues,unknown}=structuralChecks(), prompts=[];
+  if(packet.beats.some(b=>!b.action.trim()||!b.consequence.trim()))prompts.push('Some beats have no action or consequence. What changes because of the character’s choice?');
+  if(packet.beats.some((b,i)=>i>0&&!b.cause_from.length))prompts.push('Some later beats have no recorded causal link. Is the gap deliberate?');
+  if(packet.page_plan.story_spreads.some(s=>!s.page_turn.trim()||!s.reveal.trim()))prompts.push('Some spreads have no page-turn or reveal note. What will the next image add?');
+  if(projectBundle){const g=projectBundle.guidelines,words=packet.beats.map(b=>b.text).join(' ').trim().split(/\s+/u).filter(Boolean).length;if(words<g.word_budget.min||words>g.word_budget.max)prompts.push('Manuscript count is outside the project target of '+g.word_budget.min+'–'+g.word_budget.max+' words. Review the choice; this is guidance, not a failure.');for(const kind of g.required_reviews)if(!packet.reviews.some(r=>r.kind===kind&&r.status==='passed'&&r.packet_revision===packet.revision))prompts.push('Review evidence to arrange or revisit: '+human(kind)+'.');}
+  prompts.push('Read aloud with a human. Look for a concrete want, consequential attempts and a satisfying payoff. A populated field does not prove these work.');
+  const wordCount=packet.beats.map(b=>b.text).join(' ').trim().split(/\s+/u).filter(Boolean).length;
+  return e('section',{},e('h2',{},'Review and evidence'),e('div',{class:'review-grid'},e('section',{},e('h3',{},'Structural checks'),e('p',{class:'muted'},'Browser checks IDs, local references and page assignment. CLI checks the full schema, source-backed cast and continuity invariants.'),issues.length?e('ul',{},issues.map(x=>e('li',{},x))):note('No issues found by the browser’s limited structural checks.'),unknown.length?note('Preserved unsupported fields: '+unknown.join(', ')+'. The CLI rejects unsupported fields explicitly. Move author metadata into extensions if appropriate; the board will not discard it.','warning'):null),e('section',{},e('h3',{},'Editorial prompts · heuristics'),e('p',{class:'muted'},wordCount+' manuscript words · a count, not a quality score.'),e('ul',{},prompts.map(x=>e('li',{},x))))),e('h3',{style:'margin-top:28px'},'Review observations'),e('p',{class:'muted'},'Edits stale existing reviews and proofs. Previous reviewer, revision and notes remain as history. New observations start pending.'),button('Record observation',addReview),recordList(packet.reviews),e('h3',{style:'margin-top:28px'},'Proof evidence'),recordList(packet.proofs),e('h3',{style:'margin-top:28px'},'Export and review workflow'),e('p',{},'Export a complete packet. Inspect its diff and run the CLI import/check commands in the usage guide before replacing the repository original. Exporting never writes into the repository or promotes proposed facts.'),e('pre',{class:'notice'},'python scripts/story_workbench.py import BASE.json --edited DOWNLOADED.json --output NEW.json\npython scripts/story_workbench.py check NEW.json'));
+}
+function render(){
+  $('workspace').setAttribute('aria-labelledby','tab-'+view);
+  document.querySelectorAll('[data-view]').forEach(b=>{b.setAttribute('aria-selected',b.dataset.view===view);b.tabIndex=b.dataset.view===view?0:-1;});
+  if(['project','guidelines','bible'].includes(view)){$('workspace').replaceChildren(view==='project'?renderProject():view==='guidelines'?renderGuidelines():renderBible());return;}
+  if(!packet){$('workspace').replaceChildren(renderEmpty());return;}
+  const contents=view==='corkboard'?renderCorkboard():view==='purpose'?renderPurpose():view==='scenes'?e('section',{},e('h2',{},'Scene grid'),e('p',{class:'muted'},'Compare action, consequence and visual storytelling across the reading sequence.'),sceneTable()):view==='pages'?renderPages():view==='continuity'?renderContinuity():renderReview();
+  $('workspace').replaceChildren(contents);
+}
+function download(data,name){
+  const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=e('a',{href:url,download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+}
+function packetForExport(){
+  const data=clone(packet);data.extensions ??= {};
+  data.extensions.workbench_base_revision=workbenchBaseRevision(baseline);
+  return data;
+}
+function packetFilename(data){return data.id+'-r'+data.revision+'-edited.json';}
+function markSaved(target,snapshot,label){
+  if(JSON.stringify(target)!==snapshot)return;
+  if(packet===target){dirty=false;saveNote=label;}
+  else for(const board of boards.values())if(board.state?.packet===target){board.state.dirty=false;board.state.saveNote=label;}
+  updateHeading();
+}
+function exportPacket(){
+  if(!packet)return;
+  const data=packetForExport(),target=packet,snapshot=JSON.stringify(packet);
+  download(data,packetFilename(data));markSaved(target,snapshot,'Export requested');
+  message('Export requested. Confirm the JSON was saved in Downloads. Repository files are unchanged.');
+}
+async function savePacket(){
+  if(!packet||saveBusy)return;
+  const data=packetForExport(),target=packet,snapshot=JSON.stringify(packet);
+  if(typeof window.showSaveFilePicker!=='function'){
+    download(data,packetFilename(data));markSaved(target,snapshot,'Download requested');
+    message('Save requested as a JSON download. Confirm it in Downloads; this browser has no save-file picker.');return;
+  }
+  saveBusy=true;updateHeading();
+  try{
+    const handle=await window.showSaveFilePicker({suggestedName:packetFilename(data),types:[{description:'Story packet',accept:{'application/json':['.json']}}]});
+    const writable=await handle.createWritable();
+    try{await writable.write(JSON.stringify(data,null,2)+'\n');await writable.close();}
+    catch(error){try{await writable.abort();}catch{}throw error;}
+    markSaved(target,snapshot,'Packet saved');
+    message('Saved '+(handle.name||packetFilename(data))+'. Repository integration and reviews remain separate.');
+  }catch(error){message(error.name==='AbortError'?'Save cancelled. Your edits are still available.':'Could not save: '+error.message+'. Your edits are still available.',error.name==='AbortError'?'':'error');}
+  finally{saveBusy=false;updateHeading();}
+}
+function exportOrder(){
+  if(!packet)return;
+  download({schema_version:1,packet_id:baseline.id,base_revision:workbenchBaseRevision(baseline),reading_order:packet.beats.map(b=>b.id)},packet.id+'-reading-order.json');
+  message('Order-only request exported. It contains no text, page notes or review edits. Use Export packet to keep all changes.');
+}
+function printText(b){
+  return [['Act',human(b.act)],['Chronology',String(b.chronology)],['Characters',b.character_ids.join(', ')],['Location',b.location_id],['Action / summary',b.action],['Consequence',b.consequence],['Emotion',b.emotion],['Visual reveal',b.visual_reveal],['Caused by',b.cause_from.join(', ')],['Manuscript',b.text],['Dialogue',b.dialogue.map(d=>d.speaker_id+' ('+d.kind+'): '+d.text).join('\n')]].filter(([,v])=>v).map(([k,v])=>k+': '+v).join('\n\n');
+}
+function paginateCards(){
+  const area=$('print-area');area.replaceChildren();area.classList.add('print-measure');
+  const list=orderView==='chronology'?[...packet.beats].sort((a,b)=>a.chronology-b.chronology):packet.beats;
+  let continued=0;
+  for(const b of list){
+    let remaining=Array.from(printText(b)),part=1;
+    do{
+      const heading=e('h2',{},packet.title+' · '+b.id+' · reading '+(packet.beats.indexOf(b)+1)+(part>1?' · continued '+part:'')),body=e('p'),card=e('article',{class:'print-card'},heading,body);area.append(card);
+      const fits=()=>card.scrollHeight<=card.clientHeight+1&&card.scrollWidth<=card.clientWidth+1;
+      if(!fits()){area.classList.remove('print-measure');throw new Error('The card heading is too long for 3 × 5 inches. Shorten the packet title before printing.');}
+      let low=0,high=remaining.length;
+      while(low<high){const mid=Math.ceil((low+high)/2);body.textContent=remaining.slice(0,mid).join('');if(fits())low=mid;else high=mid-1;}
+      if(!low&&remaining.length){area.classList.remove('print-measure');throw new Error('Print pagination could not fit text safely. Use the scene grid or CLI render output.');}
+      // Break at whitespace when practical, preserving every Unicode code point.
+      let cut=low;if(low<remaining.length){for(let j=low-1;j>Math.max(0,low-70);j--)if(/\s/u.test(remaining[j])){cut=j+1;break;}}
+      body.textContent=remaining.slice(0,cut).join('');remaining=remaining.slice(cut);if(part>1)continued++;part++;
+    }while(remaining.length);
+  }
+  area.classList.remove('print-measure');printReady=true;return {count:area.children.length,continued};
+}
+function preparePrint(){
+  if(!packet)return;
+  try{const result=paginateCards();$('print-summary').textContent=result.count+' cards prepared for '+packet.beats.length+' beats. '+result.continued+' continuation cards preserve long content.';$('print-dialog').showModal();}catch(error){message(error.message,'error');}
+}
+function rememberBoard(){
+  if(activeBoard!==null)boards.get(activeBoard).state={packet,baseline,dirty,modified,sourceName,saveNote};
+}
+function refreshBoardPicker(){
+  if(!boards.size){$('boards').hidden=true;return;}
+  const choices=field('Story board',activeBoard??'',{options:[]});choices.control.id='board-select';
+  for(const [key,board] of boards)choices.control.append(e('option',{value:key},board.title));
+  choices.control.value=activeBoard??'';
+  choices.control.addEventListener('change',()=>{try{selectBoard(choices.control.value);}catch(error){choices.control.value=activeBoard??'';message(error.message,'error');}});
+  $('boards').replaceChildren(...[choices.label,e('span',{class:'muted'},boards.size+' story board'+(boards.size===1?'':'s')),boards.get(activeBoard)?.imported?button('Remove imported board',removeImportedBoard):null].filter(Boolean));$('boards').hidden=false;
+}
+function selectBoard(key){
+  if(key===activeBoard)return;
+  const board=boards.get(key);if(!board)throw new Error('Unknown board.');
+  rememberBoard();
+  if(board.state){({packet,baseline,dirty,modified,sourceName,saveNote}=board.state);printReady=false;message('Viewing '+packet.title+'.');}
+  else loadPacket(board.data,board.name);
+  activeBoard=key;refreshBoardPicker();updateHeading();render();
+}
+function importPacket(data,name){
+  rememberBoard();loadPacket(data,name);
+  const key='board-'+(++boardSerial);
+  boards.set(key,{title:packet.title+' · imported '+name,name,imported:true});activeBoard=key;
+  if(projectBundle){contextDirty=true;touch();}
+  rememberBoard();refreshBoardPicker();
+}
+function removeImportedBoard(){
+  const board=boards.get(activeBoard);if(!board?.imported)return;
+  if(dirty&&!window.confirm('Remove this imported board from the session? Export its packet first to keep unsaved edits.'))return;
+  boards.delete(activeBoard);activeBoard=null;packet=null;baseline=null;dirty=false;modified=false;contextDirty=!!projectBundle;
+  if(boards.size)selectBoard(boards.keys().next().value);else{refreshBoardPicker();updateHeading();render();}
+  message('Imported board removed from this session. Source files are unchanged.');
+}
+function hasUnsavedBoards(){
+  return contextDirty||dirty||[...boards].some(([key,board])=>key!==activeBoard&&board.state?.dirty);
+}
+function setupBoards(){
+  let source=embeddedPackets;
+  if(embeddedProject&&Object.keys(embeddedProject).length){try{projectBundle=clone(validateContext(embeddedProject));if(!Array.isArray(projectBundle.stories))throw new Error('Project stories must be an array.');source=projectBundle.stories;}catch(error){projectBundle=null;message(error.message,'error');}}
+  if(!Array.isArray(source))return;
+  for(const data of source)boards.set('board-'+(++boardSerial),{data,title:data.title||data.id,name:data.title||data.id});
+  refreshBoardPicker();
+  if(boards.size){try{selectBoard(boards.keys().next().value);}catch(error){message(error.message,'error');}}
+  updateHeading();
+}
+$('open').addEventListener('click',()=>$('file').click());
+$('file').addEventListener('change',async event=>{
+  const file=event.target.files[0];if(!file)return;
+  try{
+    if(file.size>10*1024*1024)throw new Error('This board accepts packets up to 10 MB. Choose the structured story JSON.');
+    const data=parseJSON(await file.text());
+    importPacket(data,file.name);
+  }catch(error){message(error.message,'error');}finally{event.target.value='';}
+});
+$('export').addEventListener('click',exportPacket);
+$('export-project').addEventListener('click',exportProject);
+$('save').addEventListener('click',savePacket);
+document.querySelectorAll('[data-view]').forEach(b=>{
+  b.addEventListener('click',()=>{view=b.dataset.view;render();message('');});
+  b.addEventListener('keydown',event=>{const tabs=[...document.querySelectorAll('[data-view]')],i=tabs.indexOf(b);let next;if(event.key==='ArrowRight')next=(i+1)%tabs.length;if(event.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;if(event.key==='Home')next=0;if(event.key==='End')next=tabs.length-1;if(next!==undefined){event.preventDefault();tabs[next].click();tabs[next].focus();}});
+});
+$('cancel-edit').addEventListener('click',()=>$('editor').close());
+$('editor-form').addEventListener('submit',event=>{event.preventDefault();try{editCommit();$('editor').close();render();updateHeading();if(contextDirty)message('Shared context changed. Export project to keep guidelines, bible and story edits together. Previous review evidence is stale.','warning');else if(dirty)message('Changes are in memory. Save or export the packet to keep them.','warning');}catch(error){$('editor-error').textContent=error.message;}});
+$('cancel-print').addEventListener('click',()=>$('print-dialog').close());
+$('confirm-print').addEventListener('click',()=>{$('print-dialog').close();window.print();});
+window.addEventListener('beforeprint',()=>{if(packet){try{paginateCards();}catch(error){$('print-area').replaceChildren(e('article',{class:'print-card'},e('h2',{},'Print preparation failed'),e('p',{},error.message)));}}else $('print-area').replaceChildren(e('article',{class:'print-card'},e('h2',{},'No story packet open'),e('p',{},'Open a story JSON packet before printing cards.')));});
+window.addEventListener('beforeunload',event=>{if(hasUnsavedBoards()){event.preventDefault();event.returnValue='';}});
+setupBoards();render();
+</script>
+</body>
+</html>

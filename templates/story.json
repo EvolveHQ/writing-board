@@ -1,0 +1,573 @@
+{
+  "schema_version": 1,
+  "id": "new-story",
+  "title": "Untitled story",
+  "language": "en",
+  "status": "draft",
+  "revision": 1,
+  "source_story_id": null,
+  "source_refs": [],
+  "premise": {
+    "protagonist_id": "hero",
+    "want": "",
+    "why_now": "",
+    "stakes": "",
+    "obstacle": "",
+    "turn": "",
+    "ending": "",
+    "theme": ""
+  },
+  "cast": [
+    {
+      "character_id": "hero",
+      "role": "protagonist",
+      "want": "",
+      "need": "",
+      "starting_state": "",
+      "ending_state": "",
+      "age_years": null
+    }
+  ],
+  "locations": [
+    {
+      "id": "home",
+      "name": "Home",
+      "source_status": "proposed",
+      "source_ref": null
+    }
+  ],
+  "beats": [
+    {
+      "id": "beat-01",
+      "chronology": 1,
+      "act": "setup",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-02",
+      "chronology": 2,
+      "act": "setup",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-01"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-03",
+      "chronology": 3,
+      "act": "setup",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-02"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-04",
+      "chronology": 4,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-03"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-05",
+      "chronology": 5,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-04"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-06",
+      "chronology": 6,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-05"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-07",
+      "chronology": 7,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-06"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-08",
+      "chronology": 8,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-07"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-09",
+      "chronology": 9,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-08"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-10",
+      "chronology": 10,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-09"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-11",
+      "chronology": 11,
+      "act": "development",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-10"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-12",
+      "chronology": 12,
+      "act": "resolution",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-11"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-13",
+      "chronology": 13,
+      "act": "resolution",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-12"
+      ],
+      "text": "",
+      "dialogue": []
+    },
+    {
+      "id": "beat-14",
+      "chronology": 14,
+      "act": "resolution",
+      "character_ids": [
+        "hero"
+      ],
+      "location_id": "home",
+      "action": "",
+      "consequence": "",
+      "emotion": "",
+      "visual_reveal": "",
+      "cause_from": [
+        "beat-13"
+      ],
+      "text": "",
+      "dialogue": []
+    }
+  ],
+  "page_plan": {
+    "status": "draft",
+    "interior_pages": 32,
+    "front_matter_pages": [
+      1,
+      2,
+      3
+    ],
+    "story_spreads": [
+      {
+        "id": "spread-01",
+        "left_page": 4,
+        "right_page": 5,
+        "beat_ids": [
+          "beat-01"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-02",
+        "left_page": 6,
+        "right_page": 7,
+        "beat_ids": [
+          "beat-02"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-03",
+        "left_page": 8,
+        "right_page": 9,
+        "beat_ids": [
+          "beat-03"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-04",
+        "left_page": 10,
+        "right_page": 11,
+        "beat_ids": [
+          "beat-04"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-05",
+        "left_page": 12,
+        "right_page": 13,
+        "beat_ids": [
+          "beat-05"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-06",
+        "left_page": 14,
+        "right_page": 15,
+        "beat_ids": [
+          "beat-06"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-07",
+        "left_page": 16,
+        "right_page": 17,
+        "beat_ids": [
+          "beat-07"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-08",
+        "left_page": 18,
+        "right_page": 19,
+        "beat_ids": [
+          "beat-08"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-09",
+        "left_page": 20,
+        "right_page": 21,
+        "beat_ids": [
+          "beat-09"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-10",
+        "left_page": 22,
+        "right_page": 23,
+        "beat_ids": [
+          "beat-10"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-11",
+        "left_page": 24,
+        "right_page": 25,
+        "beat_ids": [
+          "beat-11"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-12",
+        "left_page": 26,
+        "right_page": 27,
+        "beat_ids": [
+          "beat-12"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-13",
+        "left_page": 28,
+        "right_page": 29,
+        "beat_ids": [
+          "beat-13"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      },
+      {
+        "id": "spread-14",
+        "left_page": 30,
+        "right_page": 31,
+        "beat_ids": [
+          "beat-14"
+        ],
+        "page_turn": "",
+        "reveal": "",
+        "composition": {
+          "focus": "",
+          "framing": "",
+          "word_contribution": "",
+          "art_contribution": "",
+          "text_zone": "",
+          "gutter_notes": ""
+        }
+      }
+    ],
+    "back_matter_pages": [
+      32
+    ]
+  },
+  "props": [],
+  "knowledge": [],
+  "relationships": [],
+  "facts": [],
+  "open_threads": [],
+  "reviews": [],
+  "proofs": [],
+  "localization_notes": [],
+  "notes": "Editable scaffold, not a finished or editorially approved story. New lore remains proposed. Each beat occupies one planned spread; adjust deliberately.",
+  "extensions": {},
+  "purpose": {
+    "intent": "",
+    "teaching_goal": "",
+    "lesson": "",
+    "delivery": ""
+  }
+}

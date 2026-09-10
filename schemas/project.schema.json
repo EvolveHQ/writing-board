@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:writing-board:project:1",
+  "title": "Writing Board project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "revision",
+    "audience",
+    "languages",
+    "format",
+    "default_spreads",
+    "extensions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "audience": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "format": {
+      "type": "string",
+      "const": "illustrated-book"
+    },
+    "default_spreads": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

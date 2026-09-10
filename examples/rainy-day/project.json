@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "rainy-day",
+  "title": "Rainy-Day Friends",
+  "revision": 1,
+  "audience": "Ages 4–6, shared read-aloud",
+  "languages": [
+    "en"
+  ],
+  "format": "illustrated-book",
+  "default_spreads": 6,
+  "extensions": {
+    "sample_notice": "Wholly original demonstration material. Draft prose and proposed world details; no completed editorial, art, language or print review."
+  }
+}

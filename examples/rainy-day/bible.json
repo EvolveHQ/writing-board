@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "characters": [
+    {
+      "id": "pip",
+      "name": "Pip",
+      "summary": "A young mouse who likes inventing indoor games.",
+      "appearance": "Small grey mouse; round ears; blue waistcoat; long plain tail.",
+      "backstory": "Pip keeps scraps of paper for making games with Bea. He often imagines the whole game before he explains its first step.",
+      "want": "To make a game his friend will enjoy.",
+      "need": "To check what another player can understand, and revise when a plan is unclear.",
+      "voice": "Brief, enthusiastic ideas; repeats a phrase when excited.",
+      "speech_mode": "verbal",
+      "facts": [
+        {
+          "id": "pip-makes-games",
+          "statement": "Pip collects paper scraps for games.",
+          "status": "proposed",
+          "source_ref": null
+        }
+      ],
+      "extensions": {
+        "age_years": null
+      }
+    },
+    {
+      "id": "bea",
+      "name": "Bea",
+      "summary": "A young beetle who enjoys puzzles and asks clear questions.",
+      "appearance": "Small chestnut beetle; smooth oval shell; yellow boots on the two lowest feet. Keep six limbs consistent in any artwork.",
+      "backstory": "Bea and Pip meet in the Window Room to swap games. Bea enjoys taking a turn as both player and inventor.",
+      "want": "To join the treasure hunt and understand its clues.",
+      "need": "Room to say when she is puzzled without being hurried.",
+      "voice": "Calm, direct questions and short, playful replies.",
+      "speech_mode": "verbal",
+      "facts": [
+        {
+          "id": "bea-asks-clearly",
+          "statement": "Bea says when a clue is unclear.",
+          "status": "proposed",
+          "source_ref": null
+        }
+      ],
+      "extensions": {
+        "age_years": null
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "home",
+      "name": "Window Room",
+      "description": "A shared indoor play room with a low round table, a tall umbrella stand, a window seat and two spare blue boots by the door. Keep their relative positions consistent across views.",
+      "facts": [],
+      "extensions": {}
+    }
+  ],
+  "world_rules": [
+    {
+      "id": "small-talking-friends",
+      "statement": "These small animal friends speak and use household objects at a consistent storybook scale.",
+      "status": "proposed",
+      "source_ref": null
+    }
+  ],
+  "relationships": [
+    {
+      "id": "pip-bea-friends",
+      "from_id": "pip",
+      "to_id": "bea",
+      "description": "Friends who take turns inventing and trying each other’s games.",
+      "status": "proposed",
+      "source_ref": null
+    }
+  ],
+  "timeline": [
+    {
+      "id": "rain-map-afternoon",
+      "when": null,
+      "description": "One rainy afternoon, Pip revises an indoor treasure map after Bea cannot follow it. The event belongs to a draft story.",
+      "character_ids": [
+        "pip",
+        "bea"
+      ],
+      "source_ref": "stories/pip-and-the-rain-map.json"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "landmark",
+      "language": "en",
+      "preferred": "landmark",
+      "notes": "A familiar thing that helps you know where you are. Show the table, umbrella stand and boots in the art."
+    }
+  ],
+  "extensions": {
+    "series_threads": [
+      "A later game may let Bea invent and Pip try the clues; this is a possibility, not an established event."
+    ]
+  }
+}

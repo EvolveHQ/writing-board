@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Writing Board · Documentation</title><style>
+:root{color-scheme:light;--ink:#223d3a;--paper:#fcf9f2;--line:#d5ded7;--green:#275951}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:52px 24px 80px}header{margin-bottom:40px}h1{font-size:clamp(32px,5vw,54px);line-height:1.1;margin:12px 0}h2{margin-top:36px}a{color:#176958;text-underline-offset:3px}label{display:block;font-weight:650;margin-top:25px}input{width:100%;border:1px solid var(--line);border-radius:9px;padding:13px;font:inherit;background:white}details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:white}summary{cursor:pointer;padding:17px 20px;font-weight:650}summary span{display:block;font-size:12px;font-weight:400;color:#556963;margin-left:17px;overflow-wrap:anywhere}article{padding:10px 25px 30px;max-width:100%;border-top:1px solid var(--line)}article p{margin:7px 0}article h2{font-size:26px}article h3{font-size:21px}pre{overflow:auto;background:#f1f4f0;padding:18px;border-radius:7px;font-size:13px}code{background:#f1f4f0;font-size:.9em;padding:2px 3px}table{border-collapse:collapse;display:block;overflow:auto;width:100%;font-size:14px;margin:16px 0}td{border:1px solid var(--line);padding:9px;vertical-align:top}.source{font-size:13px}input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #dcad47;outline-offset:4px}footer{margin-top:40px;font-size:14px}[hidden]{display:none}
+</style></head><body><main><header><small>WRITING BOARD / FIELD GUIDE</small><h1>From a first idea to a book plan.</h1><p>Start with the README or follow the writing workflow. Open any guide below to read it here. Authors and agents use the same documented files.</p><p><a href="../README.md">README</a> · <a href="workflow.md">Writing workflow</a> · <a href="index.md">Markdown index</a></p><label for="search">Find a guide, skill or worksheet</label><input id="search" type="search" placeholder="Try character, review, localization…"></header><section><h2>Start and contribute</h2><details data-search="agent instructions ../agent.md"><summary>Agent instructions <span>AGENT.md</span></summary><article><a class="source" href="../AGENT.md">Open Markdown source</a><h2>Agent instructions</h2>
+<p>Writing Board is a portable planning workspace for illustrated books and series.</p>
+<p>Read <code>README.md</code>, <code>docs/workflow.md</code>, then the skill matching the writing task in</p>
+<p><code>skills/</code>. A project&#x27;s JSON documents are its source of truth; generated boards</p>
+<p>and exports are views. Never infer canon from an illustration or a draft.</p>
+<h3>Working on the tool</h3>
+<p>Read <code>.docflow/CONVENTIONS.md</code>, <code>.docflow/INDEX.md</code> and the relevant plan and</p>
+<p>decision before implementation. Use <code>python scripts/verify.py</code> as the local gate.</p>
+<p>Keep runtime dependencies in Python&#x27;s standard library and the offline browser.</p>
+<p>No tracking, remote fonts, API keys or required hosted services.</p>
+<p>One integrator owns the checkout. Helpers may work on explicitly assigned,</p>
+<p>disjoint files; only the integrator stages, commits or pushes. Parallel changes</p>
+<p>to the same file require separate worktrees. Avoid duplicate coordination logs.</p>
+<p>Use Conventional Commits, signed commits and a <code>Rationale:</code> footer when changing</p>
+<p>decisions. Integration is direct to <code>main</code>, fast-forward only, after the local</p>
+<p>gate. External contributors use pull requests. Never force-push <code>main</code>.</p>
+<h3>Working on a book</h3>
+<ul>
+<li>Read <code>project.json</code>, <code>guidelines.json</code>, <code>bible.json</code> and the current story first.</li>
+<li>Keep character and beat IDs stable. Record sources, proposed facts, chronology,</li>
+</ul>
+<p>  relationships and knowledge explicitly. Unknown facts stay unknown.</p>
+<ul>
+<li>A schema pass is not editorial, language, art or publishing approval.</li>
+<li>Revise through the bundle import workflow. Changes invalidate review evidence.</li>
+<li>Keep private work in ignored <code>projects/</code> or outside this checkout. Do not stage</li>
+</ul>
+<p>  manuscripts, artwork or source material unless the user asks to publish them.</p>
+<ul>
+<li>Work within existing authorization. Skills do not create extra approval gates.</li>
+<li>Use the user&#x27;s selected audience, language, format and rules. The picture-book</li>
+</ul>
+<p>  preset is editable guidance, not a universal definition of good writing.</p>
+<p><code>AGENTS.md</code> is a discovery shim. <code>CLAUDE.md</code> imports this file. Keep instructions</p>
+<p>here instead of copying them into provider-specific files.</p></article></details><details data-search="agents ../agents.md"><summary>Agents <span>AGENTS.md</span></summary><article><a class="source" href="../AGENTS.md">Open Markdown source</a><p>Read and follow <a href="../AGENT.md">AGENT.md</a>, the canonical repository instructions.</p></article></details><details data-search="claude ../claude.md"><summary>Claude <span>CLAUDE.md</span></summary><article><a class="source" href="../CLAUDE.md">Open Markdown source</a><p>@AGENT.md</p></article></details><details data-search="contributing ../contributing.md"><summary>Contributing <span>CONTRIBUTING.md</span></summary><article><a class="source" href="../CONTRIBUTING.md">Open Markdown source</a><h2>Contributing</h2>
+<p>Read <a href="../AGENT.md">AGENT.md</a>, the <a href="contracts.md">file contract</a>,</p>
+<p><a href="../.docflow/CONVENTIONS.md">repository conventions</a> and</p>
+<p><a href="../.docflow/INDEX.md">decision catalog</a> before changing the tool. Follow the owning</p>
+<p>plan in <a href="../.docflow/plan/README.md">.docflow/plan</a>; create a plan before substantive</p>
+<p>implementation. Record changed decisions explicitly.</p>
+<p>The runtime is Python&#x27;s standard library plus an offline browser. Preserve stable</p>
+<p>IDs, unknown extension data, safe JSON embedding and revision-aware review</p>
+<p>invalidation. Source JSON is authoritative; rebuild generated output. Tests</p>
+<p>should exercise these behaviors rather than duplicate implementation details.</p>
+<p>Run the full local gate with Python 3.11+ and Node 18+:</p>
+<pre><code>python scripts/verify.py</code></pre>
+<p>For interface changes, also build the original sample and exercise the affected</p>
+<p>flow in a browser, including an export/import round trip when saving changes.</p>
+<p>Inspect small and wide screens and keyboard operation where relevant. Report</p>
+<p>what was checked and any remaining limits in the change description.</p>
+<p>External contributors submit pull requests. The integrator uses signed</p>
+<p>Conventional Commits and fast-forward integration after validation. Include a</p>
+<p><code>Rationale:</code> footer when changing decisions. Do not force-push <code>main</code> or add</p>
+<p>co-author trailers unless requested.</p>
+<p>Keep examples original and small. Do not contribute private manuscripts,</p>
+<p>character assets, source-library copies, credentials or machine-specific paths.</p>
+<p>Changes to skills should keep task routing specific and link shared guidance.</p>
+<p>Update both documentation entrypoints through the repository&#x27;s index generator.</p>
+<p>See the <a href="verification.md">bootstrap verification record</a> for checks performed</p>
+<p>and the limits of the initial interface verification.</p></article></details><details data-search="writing board ../readme.md"><summary>Writing Board <span>README.md</span></summary><article><a class="source" href="../README.md">Open Markdown source</a><h2>Writing Board</h2>
+<p>Writing Board is a portable workspace for planning illustrated books and keeping</p>
+<p>a series consistent. It combines an editable corkboard, writing guidelines,</p>
+<p>character and world bibles, page plans, continuity records and reusable agent</p>
+<p>skills. Authors and agents work from the same JSON documents.</p>
+<p>The generated board works offline in a browser. Python 3.11+ builds and validates</p>
+<p>projects; no Python packages, account or hosted service are required. Node 18+ is</p>
+<p>needed only to run the contributor checks.</p>
+<h3>Try the board</h3>
+<p>Clone the repository, then run commands from its root:</p>
+<pre><code>git clone https://github.com/EvolveHQ/writing-board.git
+cd writing-board
+python scripts/writing_board.py build examples/rainy-day</code></pre>
+<p>Open <code>examples/rainy-day/build/board.html</code> in a browser. Select a story, review its</p>
+<p>purpose, move or edit beats, inspect continuity and plan its pages. Project,</p>
+<p>guidelines and bible editors provide the shared context for every story.</p>
+<h3>Start your book</h3>
+<pre><code>python scripts/writing_board.py init projects/my-book --interactive
+python scripts/writing_board.py character projects/my-book --id hero --name &quot;Hero&quot;
+python scripts/writing_board.py story projects/my-book --id first-story --title &quot;First story&quot; --protagonist hero
+python scripts/writing_board.py build projects/my-book</code></pre>
+<p>Open <code>projects/my-book/build/board.html</code>. Browser edits remain in memory until</p>
+<p>exported. Use <strong>Export project</strong>, then import that bundle into a new workspace;</p>
+<p>see the <a href="board.md">save workflow</a>. Private work belongs in ignored</p>
+<p><code>projects/</code> or outside this repository.</p>
+<h3>Documentation</h3>
+<table><tbody>
+<tr><td>Need</td><td>Read</td></tr>
+<tr><td>Find every guide and worksheet</td><td><a href="index.md">Documentation index</a> · <a href="index.html">HTML index</a></td></tr>
+<tr><td>Follow the whole process</td><td><a href="workflow.md">Writing workflow</a></td></tr>
+<tr><td>Edit, save and exchange boards</td><td><a href="board.md">Using the board</a></td></tr>
+<tr><td>Set audience, voice and craft rules</td><td><a href="guidelines.md">Writing guidelines</a></td></tr>
+<tr><td>Create characters and maintain canon</td><td><a href="bible.md">Character and world bible</a></td></tr>
+<tr><td>Plan images, text and page turns</td><td><a href="composition.md">Composition</a></td></tr>
+<tr><td>Check story quality and continuity</td><td><a href="review.md">Review</a></td></tr>
+<tr><td>Prepare language editions</td><td><a href="localization.md">Localization</a></td></tr>
+<tr><td>Prepare artwork and publishing work</td><td><a href="production.md">Production handoff</a></td></tr>
+<tr><td>Direct an agent</td><td><a href="skills.md">Agent skills</a> · <a href="../AGENT.md">Agent instructions</a></td></tr>
+<tr><td>Integrate or extend the tool</td><td><a href="contracts.md">File and command contracts</a> · <a href="../CONTRIBUTING.md">Contributing</a></td></tr>
+</tbody></table>
+<p>The initial format is illustrated books. Word counts and picture-book pacing are</p>
+<p>editable preferences. The tool prepares manuscripts, art briefs and a production</p>
+<p>inventory; it does not generate artwork, PDF files or EPUB files. Validation</p>
+<p>checks structure and consistency, while editorial and production reviews remain</p>
+<p>separate recorded work.</p>
+<p>Code, guides and the original sample are available under the <a href="../LICENSE">MIT license</a>.</p></article></details></section><section><h2>Writing guides</h2><details data-search="character and world bible bible.md"><summary>Character and world bible <span>docs/bible.md</span></summary><article><a class="source" href="bible.md">Open Markdown source</a><h2>Character and world bible</h2>
+<p><code>bible.json</code> is the shared reference for every story. Create a character with the</p>
+<p>CLI, then complete its fields in source JSON or the board&#x27;s bible editor:</p>
+<pre><code>python scripts/writing_board.py character projects/my-book --id hero --name &quot;Hero&quot;</code></pre>
+<p>A useful profile records appearance, backstory, current want, underlying need,</p>
+<p>voice and speech mode. Add distinctive habits, limitations, family or age details</p>
+<p>only when established or useful. Use <code>extensions</code> for additional structured</p>
+<p>fields. Unknown details stay unknown; do not fill gaps from guesswork or a</p>
+<p>generated image. The <a href="../templates/character-dossier.md">dossier worksheet</a></p>
+<p>supports deeper exploration.</p>
+<h3>Evidence and canon</h3>
+<table><tbody>
+<tr><td>Bible status</td><td>Meaning</td><td>Reference</td></tr>
+<tr><td><code>proposed</code></td><td>An idea being considered; it may change.</td><td>Optional; retain one when it explains the proposal.</td></tr>
+<tr><td><code>sourced</code></td><td>An assertion found in an identified source.</td><td>Required; identify the source and passage or record.</td></tr>
+<tr><td><code>established</code></td><td>A fact adopted for continuity in this project.</td><td>Required; point to the accepted source, story or decision record.</td></tr>
+</tbody></table>
+<p>A source citation does not settle conflicting authority. Define source precedence</p>
+<p>in project notes, compare contradictory accounts and retain the decision&#x27;s</p>
+<p>reason. Change status only when the project&#x27;s authority supports it. A new draft,</p>
+<p>artwork or successful validation does not establish canon.</p>
+<p>Story packets also permit <code>interpretation</code> for inferred facts. Keep such inferences</p>
+<p>explicit; when carrying one into the bible, use <code>proposed</code> until supported.</p>
+<p>A story relying on an established bible fact can record it as <code>sourced</code> with a</p>
+<p>reference to that bible record. Do not invent a packet status that its schema</p>
+<p>does not support.</p>
+<h3>Connect the world</h3>
+<ul>
+<li>Use stable IDs for characters, locations, facts and relationships. Names may</li>
+</ul>
+<p>  change without breaking references.</p>
+<ul>
+<li>Describe relationships as directed when needed: one character&#x27;s trust does not</li>
+</ul>
+<p>  imply equal trust in return. Record the event behind each lasting change.</p>
+<ul>
+<li>Track what a character knows separately from what is true. Story knowledge</li>
+</ul>
+<p>  records identify the beat where a belief or understanding changes.</p>
+<ul>
+<li>Keep chronology separate from presentation order. Use <code>timeline</code> for dated or</li>
+</ul>
+<p>  ordered events; unknown dates remain null. Record ages, travel time or seasons</p>
+<p>  when readers could infer a contradiction.</p>
+<ul>
+<li>Give locations consistent geography and objects consistent ownership and</li>
+</ul>
+<p>  condition. The <a href="../templates/location-map.md">location worksheet</a> helps record</p>
+<p>  routes and distances without pretending an illustrative map is measured.</p>
+<ul>
+<li>Maintain <code>glossary</code> entries per language for names, invented terms and recurring</li>
+</ul>
+<p>  phrases. Shared word choices belong in the <a href="../templates/style-sheet.csv">style sheet</a>.</p>
+<p>After a story is accepted, re-read it and log every new fact, changed relationship,</p>
+<p>learned fact and unresolved promise. Promote only supported facts; include story</p>
+<p>ID, revision and beat reference. Use the <a href="../templates/series-arc.csv">series grid</a></p>
+<p>to track growth across books or episodes without changing a character&#x27;s core</p>
+<p>traits accidentally. A new series outline remains a proposal until adopted.</p></article></details><details data-search="using the board board.md"><summary>Using the board <span>docs/board.md</span></summary><article><a class="source" href="board.md">Open Markdown source</a><h2>Using the board</h2>
+<p>Run <code>build</code> for a workspace, then open its <code>build/board.html</code>. The selector lists</p>
+<p>the actual story packets packaged with that workspace. A generated board is a</p>
+<p>snapshot: rebuild and reopen it to see later source changes.</p>
+<table><tbody>
+<tr><td>View</td><td>Use it to</td></tr>
+<tr><td>Corkboard</td><td>Read, edit and reorder beats; inspect causes, consequences and character choices.</td></tr>
+<tr><td>Story purpose</td><td>State the teaching goal, lesson, meaning and the actions that deliver them.</td></tr>
+<tr><td>Scene grid</td><td>Check reading order, chronology, cast, location, causes and consequences.</td></tr>
+<tr><td>Page plan</td><td>Assign spreads, choose framing and separate the contribution of words and images.</td></tr>
+<tr><td>Continuity</td><td>Inspect props, knowledge, relationships, facts and open threads.</td></tr>
+<tr><td>Review</td><td>Inspect structural findings and the revision-specific review record.</td></tr>
+</tbody></table>
+<p>Use the shared project, guidelines and bible editors to change the context for</p>
+<p>all stories. Keep stable IDs when editing characters, places and beats. Moving a</p>
+<p>card changes reading order; check chronological order and causal references too.</p>
+<p>Print cards when a physical board helps planning.</p>
+<h3>Save work from the browser</h3>
+<p>The browser does not write into workspace source files. Export before closing or</p>
+<p>refreshing the tab. <strong>Export project</strong> includes project settings, guidelines, the</p>
+<p>bible and every current story. A packet export contains one story only; it is not</p>
+<p>a backup of the shared project context. Keep one active editing copy at a time.</p>
+<p>After exporting a project bundle to <code>projects/edited.json</code>:</p>
+<pre><code>python scripts/writing_board.py import projects/my-book --bundle projects/edited.json --output projects/revised
+python scripts/writing_board.py validate projects/revised
+python scripts/writing_board.py build projects/revised</code></pre>
+<p>Continue from <code>projects/revised/build/board.html</code>. Import requires the matching</p>
+<p>project ID and base revision and creates a new directory. It advances the project</p>
+<p>revision and invalidates review evidence for imported stories. The original</p>
+<p>workspace is retained. If the base differs, reconcile the changes against the</p>
+<p>current workspace; do not edit revision numbers to bypass the conflict.</p>
+<p>To export the source workspace directly:</p>
+<pre><code>python scripts/writing_board.py export projects/my-book --output projects/snapshot.json</code></pre>
+<p>You may also edit source JSON directly. Rebuilding compares source documents with</p>
+<p>the baseline from the last managed write and invalidates review evidence when authored content</p>
+<p>changes. Recording reviews alone keeps the current revision. Run <code>build</code> after</p>
+<p>source edits; other commands reject unbuilt content changes so an older bundle</p>
+<p>cannot silently replace them. Do not edit</p>
+<p>generated HTML as a substitute for updating the source. Referenced artwork and</p>
+<p>supplemental worksheets need their own backup; the bundle contains structured</p>
+<p>documents, not the referenced files.</p></article></details><details data-search="compose words and pictures composition.md"><summary>Compose words and pictures <span>docs/composition.md</span></summary><article><a class="source" href="composition.md">Open Markdown source</a><h2>Compose words and pictures</h2>
+<p>Plan the page count before final prose. Allocate cover, title, copyright, end</p>
+<p>matter and story pages explicitly; a spread is two facing pages, not a synonym</p>
+<p>for a beat. Several beats may fit a spread, and one beat may need more space.</p>
+<p>Confirm the printer&#x27;s eventual requirements during production.</p>
+<p>For every spread, record its dominant action, emotional change and page-turn</p>
+<p>reveal. Separate what the words convey from what the image conveys. The words</p>
+<p>often carry motive, sound or thought; the image can carry setting, gesture,</p>
+<p>movement and a second layer of humor. Use the</p>
+<p><a href="../templates/scene-art-brief.md">scene and art brief</a>.</p>
+<h3>Short text over full illustrations</h3>
+<ul>
+<li>Keep the causal chain and the protagonist&#x27;s choice when shortening. Remove</li>
+</ul>
+<p>  redundant description before removing the reason an action happens.</p>
+<ul>
+<li>Reserve the text area in the brief before generating or commissioning art.</li>
+</ul>
+<p>  Keep essential text and faces out of the gutter and trim area.</p>
+<ul>
+<li>Use a clear typeface, generous spacing and stable contrast. A quiet patch of</li>
+</ul>
+<p>  sky or a restrained text panel can help; inspect it at the intended reading</p>
+<p>  size. Never shrink text simply to preserve a crowded layout.</p>
+<ul>
+<li>Fit translated text in the same planned zones, or adapt the layout. Keep</li>
+</ul>
+<p>  lettering editable rather than baking a source language into the artwork.</p>
+<ul>
+<li>Check where the reader&#x27;s eye enters and exits. Support the reading direction</li>
+</ul>
+<p>  of the selected language; the current board does not promise automatic</p>
+<p>  right-to-left book layout.</p>
+<h3>Visual rhythm</h3>
+<p>Vary scale, framing and viewpoint to serve the action. A close-up can reveal</p>
+<p>hesitation; a wider frame can show its consequence. Review two adjacent spreads</p>
+<p>for accidental repetition, but do not change location or time merely to meet a</p>
+<p>quota. Use quiet vignettes and larger images where their contrast helps.</p>
+<p>Palette, light and weather may signal mood or time when consistent with the</p>
+<p>scene. A background mini-story can reward rereading if it does not compete with</p>
+<p>the central action. Frame-breaking effects must respect print safety zones.</p>
+<p>Choose a final image that lets the ending settle; it need not always be the</p>
+<p>widest image.</p>
+<p>Inspect object support and contact: held objects need visible hands or another</p>
+<p>clear support, feet need believable ground contact, and props must retain their</p>
+<p>count and condition. Check each spread against the previous and next one for</p>
+<p>costume, anatomy, direction, geography and light. An art brief is an instruction,</p>
+<p>not evidence that the produced image follows it.</p></article></details><details data-search="implementation contracts contracts.md"><summary>Implementation contracts <span>docs/contracts.md</span></summary><article><a class="source" href="contracts.md">Open Markdown source</a><h2>Implementation contracts</h2>
+<p>This page specifies the stable workspace format. See the JSON schemas for field</p>
+<p>types; extensions objects preserve author metadata.</p>
+<p>Workspace files are <code>project.json</code>, <code>guidelines.json</code>, <code>bible.json</code>, and</p>
+<p><code>stories/&lt;stable-id&gt;.json</code>. <code>build/</code> is generated. No directory is inferred from</p>
+<p>user-controlled JSON paths. A bundle is a single JSON object with</p>
+<p><code>bundle_version: 1</code>, <code>base_revision</code> (project revision at export), <code>project</code>,</p>
+<p><code>guidelines</code>, <code>bible</code>, and <code>stories</code> (array of complete story packets).</p>
+<p>Project fields: <code>schema_version: 1</code>, <code>id</code>, <code>title</code>, <code>revision</code> (positive integer),</p>
+<p><code>audience</code>, <code>languages</code> (array of language tags), <code>format: &quot;illustrated-book&quot;</code>,</p>
+<p><code>default_spreads</code>, <code>extensions</code>.</p>
+<p>Guidelines fields: <code>schema_version: 1</code>, <code>profile</code>, <code>voice</code>, <code>teaching</code>,</p>
+<p><code>content_boundaries</code> (string arrays), <code>composition</code> (string array), <code>word_budget</code></p>
+<p>(<code>min</code>, <code>max</code>, nonnegative integers), <code>required_reviews</code> (review kind strings),</p>
+<p><code>extensions</code>. All craft targets are project choices; counts yield reminders.</p>
+<p>Bible fields: <code>schema_version: 1</code>, <code>characters</code>, <code>locations</code>, <code>world_rules</code>,</p>
+<p><code>relationships</code>, <code>timeline</code>, <code>glossary</code>, <code>extensions</code>.</p>
+<p>Character: <code>id</code>, <code>name</code>, <code>summary</code>, <code>appearance</code>, <code>backstory</code>, <code>want</code>, <code>need</code>,</p>
+<p><code>voice</code>, <code>speech_mode</code> (<code>verbal</code>, <code>nonverbal</code>, <code>unspecified</code>), <code>facts</code> array,</p>
+<p><code>extensions</code>. Location: <code>id</code>, <code>name</code>, <code>description</code>, <code>facts</code>, <code>extensions</code>.</p>
+<p>Fact/world rule: <code>id</code>, <code>statement</code>, <code>status</code> (<code>proposed</code>, <code>sourced</code>, <code>established</code>),</p>
+<p><code>source_ref</code> (string or null). Sourced or established facts require a reference.</p>
+<p>Relationship: <code>id</code>, <code>from_id</code>, <code>to_id</code>, <code>description</code>, <code>status</code>, <code>source_ref</code>.</p>
+<p>Timeline: <code>id</code>, <code>when</code> (string or null), <code>description</code>, <code>character_ids</code>,</p>
+<p><code>source_ref</code> (string or null). Glossary: <code>term</code>, <code>language</code>, <code>preferred</code>, <code>notes</code>.</p>
+<p>Story packets retain schema version 1 and the existing generic beat, purpose,</p>
+<p>page plan and continuity structure. The story engine takes optional <code>known_ids</code></p>
+<p>for cast validation; project validation adds bible locations and speech modes.</p>
+<p>No implicit story-specific world rules belong in the generic engine.</p>
+<h3>Commands</h3>
+<p>Run from the tool repository; project arguments may be absolute paths.</p>
+<pre><code>python scripts/writing_board.py init projects/my-book --title &quot;My book&quot; --languages en it es cs sk
+python scripts/writing_board.py character projects/my-book --id hero --name &quot;Hero&quot;
+python scripts/writing_board.py story projects/my-book --id first-story --title &quot;First story&quot; --protagonist hero
+python scripts/writing_board.py validate projects/my-book
+python scripts/writing_board.py build projects/my-book
+python scripts/writing_board.py export projects/my-book --output projects/snapshot.json
+python scripts/writing_board.py import projects/my-book --bundle projects/edited.json --output projects/revised
+python scripts/writing_board.py handoff projects/my-book --output projects/handoff
+python scripts/writing_board.py status projects/my-book</code></pre>
+<p><code>init --interactive</code> guides initial choices. Edit structured source files directly,</p>
+<p>or use the board&#x27;s project/guidelines/bible editors and export a project bundle.</p>
+<p><code>build</code> generates <code>build/board.html</code> and readable story views. The bundle import</p>
+<p>requires a matching project ID and base revision, creates a new directory,</p>
+<p>advances the project revision and invalidates evidence on all imported stories.</p>
+<p>It never overwrites the base project. Root edits followed by <code>build</code> are detected</p>
+<p>against <code>build/source-state.json</code>, a baseline updated by every managed write;</p>
+<p><code>build/snapshot.json</code> records the last HTML build. Rebuild invalidates story</p>
+<p>evidence for authored changes. Evidence-only</p>
+<p>updates preserve the current revision. Other commands reject unbuilt source</p>
+<p>changes: rebuild before exchanging bundles or reporting current review status.</p>
+<p>The board template is <code>web/board.html</code>, with inert JSON script markers</p>
+<p><code>embedded-project</code> (bundle, default <code>{}</code>), <code>embedded-packets</code> (story array, <code>[]</code>),</p>
+<p>and <code>packet-schema</code> (full schema). The builder injects them with <code>&lt;</code> escaped.</p>
+<p>Board context edits remain in memory until exported; “Export project” includes</p>
+<p>all boards and retains the original base revision. Packet export remains available.</p>
+<p>The browser doesn&#x27;t write into repository source paths.</p>
+<p>Production handoff exports manuscript, art briefs and an inventory of requested</p>
+<p>PDF/EPUB deliverables. It does not generate artwork or claim print-ready output.</p></article></details><details data-search="set writing guidelines guidelines.md"><summary>Set writing guidelines <span>docs/guidelines.md</span></summary><article><a class="source" href="guidelines.md">Open Markdown source</a><h2>Set writing guidelines</h2>
+<p>Write the project&#x27;s actual choices in <code>guidelines.json</code>. Use <code>voice</code>, <code>teaching</code>,</p>
+<p><code>content_boundaries</code>, <code>composition</code>, <code>word_budget</code> and <code>required_reviews</code>;</p>
+<p><code>extensions</code> can hold further project-specific rules. Prefix prose rules with</p>
+<p><code>Required:</code> or <code>Preference:</code> when their force could be unclear. The tool does not</p>
+<p>automatically judge compliance with a prose rule.</p>
+<p>Decide audience and reading situation first: shared read-aloud, independent</p>
+<p>reading, screen viewing or a combination. Name the emotional promise, topics to</p>
+<p>handle gently, language level and intended reader participation. Define review</p>
+<p>needs before drafting, and adjust them when the format changes.</p>
+<h3>Picture-book starting point: ages 3–6</h3>
+<p>These are editable craft targets, not a publishing specification. A 32-page book</p>
+<p>often leaves about 12–14 story spreads after front and back matter; confirm the</p>
+<p>actual page allocation. A 300–600-word read-aloud draft is a useful starting</p>
+<p>range. Fully illustrated overlay editions can use substantially fewer words</p>
+<p>provided the causes, feelings and resolution still make sense.</p>
+<ul>
+<li>Begin with a concrete want and a situation the child recognizes: sharing,</li>
+</ul>
+<p>  waiting, a lost possession, getting ready or trying something new.</p>
+<ul>
+<li>Keep the central cast small. The protagonist makes the decisive choice;</li>
+</ul>
+<p>  companions may support it. A character need not literally share the reader&#x27;s</p>
+<p>  age to have understandable wants and limited power.</p>
+<ul>
+<li>Build a causal arc: want, obstacle, attempts, discovery, changed action and</li>
+</ul>
+<p>  satisfying result. Three attempts can create rhythm, but each must change</p>
+<p>  knowledge, cost or strategy; add or remove attempts when the story needs it.</p>
+<ul>
+<li>Give mistakes visible consequences without humiliation. Let a feeling register</li>
+</ul>
+<p>  before solving it. Show the body as well as naming the feeling simply.</p>
+<ul>
+<li>Let the ending demonstrate the theme. An implicit lesson is enough; a narrator</li>
+</ul>
+<p>  does not need to explain the correct behavior. Warmth, effort and care matter</p>
+<p>  more than obedience or prizes.</p>
+<ul>
+<li>Use concrete actions, mild surprise, playful sounds and child-scale humor.</li>
+</ul>
+<p>  Avoid relying on sarcasm or adult irony. Obstacles may be misunderstandings,</p>
+<p>  competing wants, weather or big feelings; a villain is seldom necessary.</p>
+<ul>
+<li>If teaching is part of the brief, choose one central concept or skill and let</li>
+</ul>
+<p>  the hero use it. Repeat it meaningfully in varied situations. Three encounters</p>
+<p>  are a useful target, not evidence that a child has learned it.</p>
+<ul>
+<li>Offer something to predict, count, spot, name or repeat when it fits. A reader</li>
+</ul>
+<p>  question and a picture-supported stretch word can help without becoming</p>
+<p>  compulsory interruptions.</p>
+<ul>
+<li>Let danger suit the agreed audience and resolve within the story. Keep the</li>
+</ul>
+<p>  emotional stakes credible even when the physical stakes are small.</p>
+<ul>
+<li>Test every sentence aloud. Repetition needs a changing situation; short text</li>
+</ul>
+<p>  still needs specific motives, actions and consequences.</p>
+<ul>
+<li>Give each spread one dominant action and a reason to turn the page. Let art</li>
+</ul>
+<p>  add information rather than illustrate an already exhaustive description.</p>
+<ul>
+<li>End with a visible payoff, often a changed version of an opening action or</li>
+</ul>
+<p>  refrain. Add visual details that reward rereading without confusing the plot.</p>
+<p>Use <a href="../templates/premise-alternatives.md">premise alternatives</a> to compare story</p>
+<p>engines before prose, <a href="composition.md">composition</a> for visual decisions and</p>
+<p><a href="review.md">review</a> to assess the result. Record purposeful exceptions in story</p>
+<p>notes so the next writer understands them.</p></article></details><details data-search="prepare language editions localization.md"><summary>Prepare language editions <span>docs/localization.md</span></summary><article><a class="source" href="localization.md">Open Markdown source</a><h2>Prepare language editions</h2>
+<p>Set intended language tags in <code>project.json</code>. Common tags include <code>en</code>, <code>it</code>,</p>
+<p><code>es</code>, <code>cs</code> and <code>sk</code>; use a regional tag such as <code>en-GB</code> when that distinction</p>
+<p>matters. Czech uses <code>cs</code>; <code>CZ</code> is a country code. The selected languages are</p>
+<p>project choices, not a fixed set built into the writing workflow.</p>
+<p>Give each language edition a unique story ID and set <code>language</code> and</p>
+<p><code>source_story_id</code>. Record the source packet revision in <code>source_refs</code> or an</p>
+<p>explicit extension field. Keep stable beat IDs across aligned editions so a</p>
+<p>review can compare the same event. Record intentional structural changes in</p>
+<p><code>localization_notes</code> rather than silently dropping a beat.</p>
+<ul>
+<li>Agree on the source revision and identify names, refrains, sounds, countable</li>
+</ul>
+<p>   objects, teaching words, reader questions and text visible in art.</p>
+<ul>
+<li>Add preferred terms to the shared glossary and note pronunciation or wording</li>
+</ul>
+<p>   choices in the style sheet.</p>
+<ul>
+<li>Adapt for natural speech. Preserve cause, emotional intent, agency and</li>
+</ul>
+<p>   difficulty; translate a joke or sound by its function when literal wording</p>
+<p>   fails. Do not add world facts to repair awkward phrasing.</p>
+<ul>
+<li>Read the edition aloud with a competent reader of that language. A literal</li>
+</ul>
+<p>   back-translation can reveal differences but does not prove naturalness.</p>
+<ul>
+<li>Inspect the actual layout for accents, font coverage, line breaks, text length</li>
+</ul>
+<p>   and image-text meaning. Avoid shrinking type to accommodate expansion.</p>
+<ul>
+<li>Record translation and layout reviews for the edition&#x27;s current revision.</li>
+</ul>
+<p>   Reconcile every edition after a source story change.</p>
+<p>There is no automatic translation service in the tool. Use the</p>
+<p><a href="../templates/localization.md">localization worksheet</a> to document decisions and</p>
+<p>remaining review needs. Language-sensitive font, hyphenation and final reading</p>
+<p>direction are production responsibilities.</p></article></details><details data-search="production handoff production.md"><summary>Production handoff <span>docs/production.md</span></summary><article><a class="source" href="production.md">Open Markdown source</a><h2>Production handoff</h2>
+<p>Writing Board exports the materials needed by an illustrator, designer or a</p>
+<p>separate publishing pipeline. It does not generate images, PDFs or EPUBs, purchase</p>
+<p>assets or upload books to a publisher.</p>
+<pre><code>python scripts/writing_board.py build projects/my-book
+python scripts/writing_board.py validate projects/my-book
+python scripts/writing_board.py handoff projects/my-book --output projects/handoff</code></pre>
+<p>The handoff contains manuscript, art briefs and an inventory of requested</p>
+<p>deliverables. Use a new output directory so different handoffs remain identifiable.</p>
+<p>Record project revision, story revisions, language, edition and references to</p>
+<p>the approved visual sources. Send referenced assets separately: JSON references</p>
+<p>do not embed the files or convey a license to use them.</p>
+<h3>Specify the actual deliverables</h3>
+<table><tbody>
+<tr><td>Deliverable</td><td>Decisions and checks</td></tr>
+<tr><td>Reading PDF</td><td>Page or spread presentation, screen readability, file size, selectable text and navigation where useful.</td></tr>
+<tr><td>Publishing PDF</td><td>Chosen printer, trim size, bleed, safe areas, binding, paper, color profile, image resolution, embedded fonts and required cover template.</td></tr>
+<tr><td>EPUB</td><td>Fixed or reflowable layout, supported devices, editable text, reading order, navigation, accessibility descriptions and package validation.</td></tr>
+<tr><td>Artwork</td><td>Cover, interior scenes, branding supplied by the project, editable source files and text-free versions for localization.</td></tr>
+</tbody></table>
+<p>Exact production settings depend on the chosen vendor and format; a universal</p>
+<p>&quot;publishing PDF&quot; preset cannot establish compliance. Keep those specifications</p>
+<p>with the handoff. The <a href="../templates/production-handoff.md">production checklist</a></p>
+<p>records assignments and acceptance evidence.</p>
+<p>Review exported files in their intended form. Inspect every page, compare each</p>
+<p>language with its manuscript and verify illustrations against the bible. Check</p>
+<p>physical object support, count and continuity as well as visual style. Record</p>
+<p>the actual file and packet revision in proof records, then update the series</p>
+<p>bible with supported story facts. Unfinished reviews remain visible; generating</p>
+<p>a handoff does not mark the story approved.</p></article></details><details data-search="review a story review.md"><summary>Review a story <span>docs/review.md</span></summary><article><a class="source" href="review.md">Open Markdown source</a><h2>Review a story</h2>
+<p>Review the actual packet revision and its rendered pages. A schema pass checks</p>
+<p>structure; it cannot certify a story&#x27;s emotional effect, translation quality or</p>
+<p>illustration accuracy. Use the project&#x27;s required review kinds and record who</p>
+<p>reviewed what, the revision and the findings.</p>
+<table><tbody>
+<tr><td>Pass</td><td>Questions</td></tr>
+<tr><td>Editorial</td><td>Is the want clear? Does each attempt cause the next? Does the hero make the decisive choice? Is the ending earned?</td></tr>
+<tr><td>Purpose</td><td>Do the named teaching goal and theme appear through action? Does the reader see the feeling before the fix? Is there an unnecessary lecture?</td></tr>
+<tr><td>Continuity</td><td>Do cast, place, time, props, knowledge and relationships agree with the bible and earlier beats? Are new facts classified and referenced?</td></tr>
+<tr><td>Read-aloud</td><td>Where does the reader stumble or run out of breath? Does repetition invite participation? Can a listener follow an action without explaining it?</td></tr>
+<tr><td>Layout</td><td>Can the text be read at target size? Does the image add meaning? Are count, physical contact, framing, safe zones and page turns correct?</td></tr>
+<tr><td>Art</td><td>Do the actual images match character references, scene actions, object support, prop counts and continuity across pages?</td></tr>
+<tr><td>Translation</td><td>Does each edition preserve cause, tone, names and participation while sounding natural in its language? Has its layout been inspected?</td></tr>
+</tbody></table>
+<p>Use the <a href="../templates/review.md">review worksheet</a> and</p>
+<p><a href="../templates/read-aloud.md">read-aloud log</a>. Record specific beat or page</p>
+<p>references, the observed problem, the repair and its recheck. Distinguish blockers</p>
+<p>from preferences; resolve the former and explain deliberate exceptions to the</p>
+<p>latter.</p>
+<p>Review statuses are <code>pending</code>, <code>passed</code>, <code>changes_requested</code> or <code>stale</code>. Record a</p>
+<p>pass only for work actually reviewed at that revision. Proof records identify an</p>
+<p>artifact path and whether that artifact has been reviewed. A file existing is</p>
+<p>not a review, and a reviewed reading PDF does not establish print readiness.</p>
+<p>The corresponding review kinds are <code>editorial</code>, <code>continuity</code>, <code>read_aloud</code>,</p>
+<p><code>layout</code>, <code>art</code> and <code>translation</code>. Purpose is part of the editorial review.</p>
+<p>Changes invalidate evidence. Rebuild after source edits, or import a browser</p>
+<p>bundle through the normal workflow, then recheck the affected work. Keep the</p>
+<p>observations needed to understand a previous decision, but do not present stale</p>
+<p>records as current approval. End the pass with an explicit result and any</p>
+<p>remaining work; do not invent a reviewer&#x27;s identity or claim a read-aloud test</p>
+<p>that was only a silent text inspection.</p></article></details><details data-search="agent skills skills.md"><summary>Agent skills <span>docs/skills.md</span></summary><article><a class="source" href="skills.md">Open Markdown source</a><h2>Agent skills</h2>
+<p>These repository-scoped skills give agents a focused workflow for each writing</p>
+<p>stage. They are Markdown instructions, so humans can use the same steps. Start</p>
+<p>with <a href="../AGENT.md">AGENT.md</a>, then read the relevant skill; no global installation</p>
+<p>is required. Discovery varies by agent client, so provide the file path explicitly</p>
+<p>when the client does not automatically discover this repository&#x27;s <code>skills/</code>.</p>
+<table><tbody>
+<tr><td>Task</td><td>Skill</td></tr>
+<tr><td>Start or inspect a workspace</td><td><a href="../skills/writing-setup/SKILL.md">writing-setup</a></td></tr>
+<tr><td>Set audience-specific rules</td><td><a href="../skills/writing-guidelines/SKILL.md">writing-guidelines</a></td></tr>
+<tr><td>Create or maintain characters and canon</td><td><a href="../skills/writing-bible/SKILL.md">writing-bible</a></td></tr>
+<tr><td>Develop alternatives, beats and a draft</td><td><a href="../skills/writing-story/SKILL.md">writing-story</a></td></tr>
+<tr><td>Plan pages and artwork</td><td><a href="../skills/writing-composition/SKILL.md">writing-composition</a></td></tr>
+<tr><td>Review and repair a story</td><td><a href="../skills/writing-review/SKILL.md">writing-review</a></td></tr>
+<tr><td>Adapt language editions</td><td><a href="../skills/writing-localization/SKILL.md">writing-localization</a></td></tr>
+<tr><td>Prepare production materials</td><td><a href="../skills/writing-production/SKILL.md">writing-production</a></td></tr>
+</tbody></table>
+<p>Example request: &quot;Use <code>skills/writing-story/SKILL.md</code> to develop two premise</p>
+<p>alternatives for <code>projects/my-book</code>, then update the selected story&#x27;s beats.&quot;</p>
+<p>Provide the workspace path and the intended output; include an existing story ID</p>
+<p>when applicable. Existing user choices and authorization take precedence over a</p>
+<p>skill&#x27;s defaults. Skills do not claim that unavailable generation, translation or</p>
+<p>publishing services are installed.</p></article></details><details data-search="bootstrap verification verification.md"><summary>Bootstrap verification <span>docs/verification.md</span></summary><article><a class="source" href="verification.md">Open Markdown source</a><h2>Bootstrap verification</h2>
+<p>Checked on 2026-09-10. Run <code>python scripts/verify.py</code> to repeat the maintained gate.</p>
+<ul>
+<li>Python regression checks cover story structure, causal and chronological</li>
+</ul>
+<p>  references, page coverage, bible rules, revisions, source edits, malformed JSON,</p>
+<p>  safe output paths and export/import preservation.</p>
+<ul>
+<li>Node checks execute the actual board script for editing, board selection,</li>
+</ul>
+<p>  context changes, empty projects, complete bundle export, metadata preservation,</p>
+<p>  stale evidence and save failures. These are DOM-stubbed state checks.</p>
+<ul>
+<li>The documented new-project journey was run through setup, character and story</li>
+</ul>
+<p>  creation, validation, build, export, import, status and production handoff.</p>
+<ul>
+<li>The original sample validates without warnings. Skills validate, documentation</li>
+</ul>
+<p>  links resolve, and the Markdown/HTML indexes match their generator.</p>
+<ul>
+<li>The decision catalog and work queue were audited against repository conventions.</li>
+</ul>
+<p>  Intended public files were checked for private source material and credentials.</p>
+<p>The in-app browser security policy blocked opening the local HTML during this</p>
+<p>run. Rendered visual, responsive, keyboard and physical print checks therefore</p>
+<p>remain unverified; the automated gate does not claim to replace them.</p>
+<p>The sample remains a draft. No artwork, PDF, EPUB, language certification or</p>
+<p>publication-ready book is claimed by this infrastructure verification.</p></article></details><details data-search="writing workflow workflow.md"><summary>Writing workflow <span>docs/workflow.md</span></summary><article><a class="source" href="workflow.md">Open Markdown source</a><h2>Writing workflow</h2>
+<p>Start with a project, then move through the stages below. Revisit an earlier</p>
+<p>stage when a later review exposes a problem; a completed checklist does not</p>
+<p>guarantee a successful story.</p>
+<table><tbody>
+<tr><td>Stage</td><td>Work</td><td>Durable result</td></tr>
+<tr><td>1. Set up</td><td>Choose audience, languages, format and page allowance.</td><td><code>project.json</code></td></tr>
+<tr><td>2. Set guidelines</td><td>Separate required constraints from craft preferences; choose voice, boundaries and review needs.</td><td><code>guidelines.json</code></td></tr>
+<tr><td>3. Build the bible</td><td>Identify characters, world rules, relationships and sources; mark unknowns.</td><td><code>bible.json</code></td></tr>
+<tr><td>4. Find the story</td><td>Compare premises with different causes and solutions; select a protagonist, want and obstacle.</td><td>Story premise and purpose</td></tr>
+<tr><td>5. Build beats</td><td>Give each action a consequence that motivates the next choice. Track chronology separately from reading order.</td><td>Beat sheet and corkboard</td></tr>
+<tr><td>6. Draft</td><td>Write the spoken story; use pictures for information the reader can see.</td><td>Beat manuscript text</td></tr>
+<tr><td>7. Compose</td><td>Assign beats to pages, reserve text zones and specify what each image adds.</td><td>Page plan and art briefs</td></tr>
+<tr><td>8. Review</td><td>Check craft, continuity, read-aloud rhythm and layout against this revision.</td><td>Reviews, fixes and proof references</td></tr>
+<tr><td>9. Localize</td><td>Adapt each language edition from an identified source revision; review it aloud and in layout.</td><td>Linked story packets and glossary</td></tr>
+<tr><td>10. Hand off</td><td>Export manuscript, briefs and requested deliverables; inspect actual production files when supplied.</td><td>Production handoff and proof records</td></tr>
+<tr><td>11. Maintain the series</td><td>Re-read the accepted story and record new facts, knowledge, relationships and unresolved promises.</td><td>Updated bible, timeline and arc grid</td></tr>
+</tbody></table>
+<p>Create a project non-interactively when the choices are already known:</p>
+<pre><code>python scripts/writing_board.py init projects/my-book --title &quot;My book&quot; --languages en it es cs sk
+python scripts/writing_board.py character projects/my-book --id hero --name &quot;Hero&quot;
+python scripts/writing_board.py story projects/my-book --id first-story --title &quot;First story&quot; --protagonist hero</code></pre>
+<p>Use <code>init --interactive</code> for guided initial choices. Complete the new character&#x27;s</p>
+<p>profile and shared rules before relying on them in a story. Keep the ID stable</p>
+<p>even if the display name changes.</p>
+<p>During writing:</p>
+<pre><code>python scripts/writing_board.py build projects/my-book
+python scripts/writing_board.py validate projects/my-book
+python scripts/writing_board.py status projects/my-book</code></pre>
+<p><code>validate</code> checks data; <code>status</code> reports progress; <code>build</code> creates the offline</p>
+<p>board and readable views. Resolve errors, assess reminders and record actual</p>
+<p>reviews. The <a href="board.md">board guide</a> explains how browser changes return to source</p>
+<p>files. <a href="skills.md">Skills</a> route agents to the same stages.</p>
+<p>Use <a href="../templates/README.md">worksheets</a> for exploration that does not fit the</p>
+<p>structured fields. Put decisions back into the JSON source. Supplemental files</p>
+<p>and external assets are not embedded in project bundles; transfer them separately</p>
+<p>when another writer needs them.</p></article></details></section><section><h2>Agent skills</h2><details data-search="maintain the bible ../skills/writing-bible/skill.md"><summary>Maintain the bible <span>skills/writing-bible/SKILL.md</span></summary><article><a class="source" href="../skills/writing-bible/SKILL.md">Open Markdown source</a><h2>Maintain the bible</h2>
+<p>Read <a href="bible.md">the bible guide</a>, the current bible, relevant source</p>
+<p>records and affected stories. Use the <a href="../templates/character-dossier.md">dossier</a></p>
+<p>when developing a character. Add a skeleton with the <code>character</code> command if needed;</p>
+<p>retain stable IDs when revising an existing character.</p>
+<p>Separate sourced facts, established continuity, proposals and unknowns. Cite the</p>
+<p>passage or story revision behind each supported assertion. Do not derive canon</p>
+<p>from a generated illustration, a draft or a plausible inference. For conflicting</p>
+<p>sources, inspect the project&#x27;s precedence rules and record the resolution or</p>
+<p>the unresolved conflict.</p>
+<p>Update affected relationships, locations, glossary entries and chronology as</p>
+<p>well as the character profile. Keep knowledge changes tied to story beats; a</p>
+<p>character cannot act on information learned later. After an accepted story,</p>
+<p>re-read for new facts and open promises rather than copying its premise into a</p>
+<p>backstory. Validate references, rebuild, and identify stories whose reviews now</p>
+<p>need attention. Return a concise change list with evidence and unresolved items.</p></article></details><details data-search="compose the book ../skills/writing-composition/skill.md"><summary>Compose the book <span>skills/writing-composition/SKILL.md</span></summary><article><a class="source" href="../skills/writing-composition/SKILL.md">Open Markdown source</a><h2>Compose the book</h2>
+<p>Read the packet, project page allowance and guidelines, then</p>
+<p><a href="composition.md">composition guidance</a>. Allocate non-story pages before</p>
+<p>assigning story spreads. Do not treat every beat as a mandatory separate spread.</p>
+<p>For each spread identify the dominant action, emotional change, page-turn reveal,</p>
+<p>word contribution, art contribution, framing and text zone. Use</p>
+<p><a href="../templates/scene-art-brief.md">the scene brief</a> for production detail.</p>
+<p>Preserve causes and choices when shortening text; reduce redundant description</p>
+<p>first. Vary scale and viewpoint for meaning, not to satisfy a mechanical quota.</p>
+<p>Reserve safe text areas before artwork. Specify character references, exact prop</p>
+<p>counts and support/contact, geography and continuity with adjacent scenes. Leave</p>
+<p>room for language expansion and editable lettering. Check the plan against the</p>
+<p>packet and bible, rebuild and validate. Distinguish a completed plan from a</p>
+<p>reviewed rendered page; record proof evidence only for actual inspected files.</p></article></details><details data-search="set project guidelines ../skills/writing-guidelines/skill.md"><summary>Set project guidelines <span>skills/writing-guidelines/SKILL.md</span></summary><article><a class="source" href="../skills/writing-guidelines/SKILL.md">Open Markdown source</a><h2>Set project guidelines</h2>
+<p>Read project settings, existing guidelines and the user&#x27;s brief, then</p>
+<p><a href="guidelines.md">the craft guide</a>. Separate binding requirements from</p>
+<p>preferences; preserve intentional existing choices. Do not turn the picture-book</p>
+<p>preset into a universal rule or silently change the requested format.</p>
+<p>Write concrete rules in the existing guideline fields: what language sounds like,</p>
+<p>what situations fit the audience, what teaching should achieve through action,</p>
+<p>which boundaries apply, and how text and art share information. Choose a word</p>
+<p>budget and review kinds suitable for the project. Record further distinctions in</p>
+<p><code>extensions</code> without replacing schema fields.</p>
+<p>For every new rule, check whether a writer could make a decision from it. Remove</p>
+<p>duplicate or conflicting instructions. Explain purposeful exceptions in project</p>
+<p>notes. Rebuild and validate the workspace so changed context invalidates affected</p>
+<p>evidence. Report the choices that changed and which existing stories need review;</p>
+<p>do not claim that changing a rule has revised their manuscripts.</p></article></details><details data-search="localize a story ../skills/writing-localization/skill.md"><summary>Localize a story <span>skills/writing-localization/SKILL.md</span></summary><article><a class="source" href="../skills/writing-localization/SKILL.md">Open Markdown source</a><h2>Localize a story</h2>
+<p>Read <a href="localization.md">localization guidance</a>, the source packet,</p>
+<p>selected language tags and glossary. Establish the source story ID and revision</p>
+<p>before translating. Use <code>cs</code> for Czech; preserve regional tags when specified.</p>
+<p>Create a unique packet ID per edition and retain aligned beat IDs. Set <code>language</code></p>
+<p>and <code>source_story_id</code>, and record source revision and adaptation decisions.</p>
+<p>Preserve motive, causal links, emotional intent, reader participation and factual</p>
+<p>meaning while writing naturally in the target language. Rebuild refrains and</p>
+<p>sound words by function when literal wording fails; update glossary choices.</p>
+<p>Use <a href="../templates/localization.md">the localization worksheet</a> to track</p>
+<p>reader and layout findings. Inspect accented characters, line breaks and text</p>
+<p>zones in actual production files when available. Distinguish an agent-produced</p>
+<p>draft from a competent speaker&#x27;s review. Validate all linked editions, identify</p>
+<p>any source drift and leave unperformed translation or layout reviews pending.</p>
+<p>No translation service is assumed to be installed.</p></article></details><details data-search="prepare production handoff ../skills/writing-production/skill.md"><summary>Prepare production handoff <span>skills/writing-production/SKILL.md</span></summary><article><a class="source" href="../skills/writing-production/SKILL.md">Open Markdown source</a><h2>Prepare production handoff</h2>
+<p>Read <a href="production.md">production guidance</a>, current packets, page plans,</p>
+<p>review records and the user&#x27;s requested deliverables. Use</p>
+<p><a href="../templates/production-handoff.md">the handoff checklist</a> to record missing</p>
+<p>vendor specifications, assets and proof work.</p>
+<p>Run <code>validate</code>, then `python scripts/writing_board.py handoff PROJECT --output</p>
+<p>NEW_DIRECTORY`. Inspect the exported manuscript, briefs and inventory for the</p>
+<p>intended story revisions and languages. Include references to visual sources</p>
+<p>and required licenses; transfer referenced assets separately when authorized.</p>
+<p>Describe reading, print and EPUB acceptance criteria separately. Do not invent</p>
+<p>printer requirements or imply that the handoff command renders finished books.</p>
+<p>If actual assets or publishing files are supplied, inspect them and record</p>
+<p>artifact-specific proof evidence; otherwise list that production work as pending.</p>
+<p>Record supported continuity changes from an accepted story in the bible and</p>
+<p>series notes. Return the handoff location, contents and remaining production work.</p></article></details><details data-search="review and repair ../skills/writing-review/skill.md"><summary>Review and repair <span>skills/writing-review/SKILL.md</span></summary><article><a class="source" href="../skills/writing-review/SKILL.md">Open Markdown source</a><h2>Review and repair</h2>
+<p>Read the project&#x27;s required review kinds, current packet and bible. Follow</p>
+<p><a href="review.md">the review guide</a> and use</p>
+<p><a href="../templates/review.md">the review worksheet</a> for precise findings. Run</p>
+<p>structural validation first, but assess craft independently of its result.</p>
+<p>Identify the revision and available artifacts. Trace want, attempts, consequences,</p>
+<p>changed choice and payoff. Inspect character knowledge, prop states, relationships</p>
+<p>and factual sources against chronology. Check purpose delivery through actions.</p>
+<p>For a requested repair, revise within scope and recheck affected beats and pages.</p>
+<p>Read-aloud and layout passes must describe what was actually performed. A silent</p>
+<p>text pass is not a spoken read-aloud test; an art brief is not a reviewed image.</p>
+<p>Record specific findings, reviewer, packet revision and status. Never mark missing</p>
+<p>artifacts or unresolved blockers passed. Rebuild after edits, preserve historical</p>
+<p>observations and update only review evidence supported by a new inspection.</p>
+<p>Return the result, material repairs and remaining work.</p></article></details><details data-search="set up a writing project ../skills/writing-setup/skill.md"><summary>Set up a writing project <span>skills/writing-setup/SKILL.md</span></summary><article><a class="source" href="../skills/writing-setup/SKILL.md">Open Markdown source</a><h2>Set up a writing project</h2>
+<p>Read <a href="workflow.md">the workflow</a> and</p>
+<p><a href="contracts.md">the command contract</a>. Identify the requested workspace</p>
+<p>before writing. Inspect an existing project instead of initializing over it.</p>
+<p>Use the user&#x27;s audience, languages and format. Resolve ordinary defaults from</p>
+<p>the brief; ask only for missing choices that materially affect the work. For a</p>
+<p>new workspace use `python scripts/writing_board.py init PROJECT --title &quot;TITLE&quot;</p>
+<p>--languages en` with the actual title and language tags. Keep private projects</p>
+<p>under ignored <code>projects/</code> or outside the tool checkout. <code>--interactive</code> supports</p>
+<p>human-led setup; an agent with the needed choices should use explicit arguments.</p>
+<p>Read the resulting project, guidelines and bible. Explain any assumptions in</p>
+<p>project notes, then route to the relevant writing skill. Do not create filler</p>
+<p>characters or prose merely to make progress indicators look complete. Run</p>
+<p><code>validate</code>, <code>status</code> and <code>build</code> for the workspace as appropriate. Return the</p>
+<p>source path, generated board path and the next concrete writing step.</p></article></details><details data-search="develop the story ../skills/writing-story/skill.md"><summary>Develop the story <span>skills/writing-story/SKILL.md</span></summary><article><a class="source" href="../skills/writing-story/SKILL.md">Open Markdown source</a><h2>Develop the story</h2>
+<p>Read project settings, guidelines, bible and the current packet. Use</p>
+<p><a href="../templates/premise-alternatives.md">the premise worksheet</a> for alternatives</p>
+<p>and <a href="guidelines.md">the craft guide</a> for the chosen audience.</p>
+<p>When alternatives are requested, make their obstacles, attempts or decisive</p>
+<p>choices differ; changing the setting alone is insufficient. Compare emotional</p>
+<p>stakes, hero agency, causal strength and visual possibilities. Follow an existing</p>
+<p>selection, or choose within the user&#x27;s delegated scope and state the reason.</p>
+<p>Write the purpose separately from the manuscript: intent, teaching goal if any,</p>
+<p>lesson, theme and the beats that convey them. Build the beat sheet before final</p>
+<p>dialogue. Each failed attempt should change what the hero knows or does. Check</p>
+<p>that the resolution follows from the hero&#x27;s action and an established possibility.</p>
+<p>Draft to the selected word budget without losing motives, feelings or consequences.</p>
+<p>Keep stable beat IDs, cast and location references; distinguish reading order</p>
+<p>from chronology. Record proposed facts and open threads in the packet. Validate</p>
+<p>and build the workspace, then report the selected premise, changed story and</p>
+<p>remaining editorial questions. Route composition or review work only as needed.</p></article></details></section><section><h2>Worksheets</h2><details data-search="character dossier ../templates/character-dossier.md"><summary>Character dossier <span>templates/character-dossier.md</span></summary><article><a class="source" href="../templates/character-dossier.md">Open Markdown source</a><h2>Character dossier</h2>
+<p>Stable ID / display name / current bible revision:</p>
+<table><tbody>
+<tr><td>Field</td><td>Working description</td><td>Status and evidence</td></tr>
+<tr><td>Role and observable personality</td><td></td><td></td></tr>
+<tr><td>Appearance and identifying details</td><td></td><td></td></tr>
+<tr><td>Backstory that affects present choices</td><td></td><td></td></tr>
+<tr><td>Current want</td><td></td><td></td></tr>
+<tr><td>Underlying need or learning edge</td><td></td><td></td></tr>
+<tr><td>Strength, limitation and recurring mistake</td><td></td><td></td></tr>
+<tr><td>Voice, speech mode and characteristic phrasing</td><td></td><td></td></tr>
+<tr><td>Emotional and physical expression</td><td></td><td></td></tr>
+<tr><td>Family or age information, if relevant</td><td></td><td></td></tr>
+</tbody></table>
+<table><tbody>
+<tr><td>Other character ID</td><td>This character&#x27;s relationship to them</td><td>Event or source</td><td>What remains unresolved</td></tr>
+</tbody></table>
+<p>What the character knows now, and when they learned it:</p>
+<p>Core traits that should persist across stories:</p>
+<p>Possible growth across future books or episodes:</p>
+<p>Unknowns and proposals to keep separate from established facts:</p>
+<p>Store adopted facts, relationships and references in <code>bible.json</code>; put beat-level</p>
+<p>knowledge changes in the story packet. Leave irrelevant personal details blank.</p></article></details><details data-search="localization record ../templates/localization.md"><summary>Localization record <span>templates/localization.md</span></summary><article><a class="source" href="../templates/localization.md">Open Markdown source</a><h2>Localization record</h2>
+<p>Source story ID / revision / language:</p>
+<p>Target story ID / revision / language tag:</p>
+<table><tbody>
+<tr><td>Source beat or term</td><td>Adapted wording or choice</td><td>Reason</td><td>Glossary update</td></tr>
+</tbody></table>
+<p>Check: names, causal links, emotional tone, teaching words, refrains, sound words,</p>
+<p>counted objects, reader questions and text visible inside images.</p>
+<table><tbody>
+<tr><td>Review</td><td>Reviewer and method</td><td>Artifact or revision</td><td>Findings and result</td></tr>
+<tr><td>Language and naturalness</td><td></td><td></td><td></td></tr>
+<tr><td>Spoken read-aloud</td><td></td><td></td><td></td></tr>
+<tr><td>Font coverage and page layout</td><td></td><td></td><td></td></tr>
+</tbody></table>
+<p>Intentional departures from the source structure:</p>
+<p>Changes required after the latest source revision:</p></article></details><details data-search="location and map notes ../templates/location-map.md"><summary>Location and map notes <span>templates/location-map.md</span></summary><article><a class="source" href="../templates/location-map.md">Open Markdown source</a><h2>Location and map notes</h2>
+<p>Stable location ID / name / source reference:</p>
+<p>Purpose in the story and fixed features:</p>
+<table><tbody>
+<tr><td>Connected location</td><td>Route and landmarks</td><td>Travel time or uncertainty</td><td>Source</td></tr>
+</tbody></table>
+<p>Sketch or map file reference:</p>
+<p>Map orientation and scale, or explicit note that scale is illustrative:</p>
+<p>Entrances, exits, sight lines and places a character can hide:</p>
+<p>Weather, light and seasonal constraints:</p>
+<p>Geography the current story establishes, with beat references:</p>
+<p>Unknowns that should remain flexible:</p></article></details><details data-search="premise alternatives ../templates/premise-alternatives.md"><summary>Premise alternatives <span>templates/premise-alternatives.md</span></summary><article><a class="source" href="../templates/premise-alternatives.md">Open Markdown source</a><h2>Premise alternatives</h2>
+<p>Project / protagonist / audience:</p>
+<p>Current desire and why it matters today:</p>
+<p>Shared character and world constraints:</p>
+<table><tbody>
+<tr><td>Question</td><td>Alternative A</td><td>Alternative B</td></tr>
+<tr><td>Concrete want and stakes</td><td></td><td></td></tr>
+<tr><td>Obstacle</td><td></td><td></td></tr>
+<tr><td>First choice and consequence</td><td></td><td></td></tr>
+<tr><td>Changed attempt and consequence</td><td></td><td></td></tr>
+<tr><td>Feeling before the discovery</td><td></td><td></td></tr>
+<tr><td>What the hero notices or learns</td><td></td><td></td></tr>
+<tr><td>Decisive action</td><td></td><td></td></tr>
+<tr><td>Visible payoff and opening callback</td><td></td><td></td></tr>
+<tr><td>Strongest page-turn or visual opportunity</td><td></td><td></td></tr>
+<tr><td>Theme and how actions deliver it</td><td></td><td></td></tr>
+<tr><td>New facts requiring adoption</td><td></td><td></td></tr>
+</tbody></table>
+<p>Choose by causal strength, character specificity and emotional payoff. Explain</p>
+<p>the selection or the unresolved difference; do not score a premise solely by</p>
+<p>how closely it follows a fixed formula.</p>
+<p>Selected alternative and reason:</p>
+<p>Next revision needed before beats:</p></article></details><details data-search="production handoff record ../templates/production-handoff.md"><summary>Production handoff record <span>templates/production-handoff.md</span></summary><article><a class="source" href="../templates/production-handoff.md">Open Markdown source</a><h2>Production handoff record</h2>
+<p>Project ID / project revision / story IDs and revisions / languages:</p>
+<p>Handoff directory / date / production owner:</p>
+<table><tbody>
+<tr><td>Requested deliverable</td><td>Specification or vendor reference</td><td>Owner</td><td>File and revision</td><td>Acceptance evidence</td></tr>
+<tr><td>Reading PDF</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Publishing PDF and cover</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>EPUB</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Cover and interior artwork sources</td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+<p>Page allocation, trim, bleed, binding and cover template:</p>
+<p>Fonts, art references, branding and rights records:</p>
+<p>Language editions, glossary and source revision:</p>
+<p>Actual proof checks: manuscript match, page count, sequence, text readability,</p>
+<p>font coverage, illustration continuity, image quality, metadata and navigation:</p>
+<p>Print-specific preflight and physical proof, if required by the project:</p>
+<p>EPUB validation and devices inspected, if required by the project:</p>
+<p>Pending reviews, missing specifications or assets:</p>
+<p>Final artifact references and supported continuity updates:</p></article></details><details data-search="read-aloud log ../templates/read-aloud.md"><summary>Read-aloud log <span>templates/read-aloud.md</span></summary><article><a class="source" href="../templates/read-aloud.md">Open Markdown source</a><h2>Read-aloud log</h2>
+<p>Story ID / revision / language / reader / date:</p>
+<p>Method: spoken read-aloud, observed session or text-only preparation:</p>
+<p>Intended audience and reading situation:</p>
+<table><tbody>
+<tr><td>Beat or page</td><td>Spoken stumble or unclear action</td><td>Breath, rhythm or response observed</td><td>Proposed change</td></tr>
+</tbody></table>
+<p>Refrain or repeated idea: where its meaning changes:</p>
+<p>Participation: prediction, pointing, counting or sounds that fit naturally:</p>
+<p>Opening clarity / emotional pause / ending satisfaction:</p>
+<p>Revised lines and result of speaking them again:</p>
+<p>Do not infer learning outcomes from one response. Record only observations that</p>
+<p>occurred; text-only preparation leaves the spoken review outstanding.</p></article></details><details data-search="writing worksheets ../templates/readme.md"><summary>Writing worksheets <span>templates/README.md</span></summary><article><a class="source" href="../templates/README.md">Open Markdown source</a><h2>Writing worksheets</h2>
+<p>Copy only the worksheets useful for the current task into your private workspace.</p>
+<p>They support exploration and review; project JSON remains the structured source.</p>
+<p>Summarize adopted decisions there. Supplemental worksheets are not automatically</p>
+<p>included in a project bundle or handoff.</p>
+<table><tbody>
+<tr><td>Worksheet</td><td>Purpose</td></tr>
+<tr><td><a href="../templates/premise-alternatives.md">Premise alternatives</a></td><td>Compare different story engines before drafting.</td></tr>
+<tr><td><a href="../templates/character-dossier.md">Character dossier</a></td><td>Develop a character with sourced facts and explicit unknowns.</td></tr>
+<tr><td><a href="../templates/location-map.md">Location and map notes</a></td><td>Keep geography, routes and travel assumptions consistent.</td></tr>
+<tr><td><a href="../templates/scene-art-brief.md">Scene and art brief</a></td><td>Plan a spread&#x27;s action, text, image and physical continuity.</td></tr>
+<tr><td><a href="../templates/review.md">Review</a></td><td>Record findings and repairs against a specific revision.</td></tr>
+<tr><td><a href="../templates/read-aloud.md">Read-aloud log</a></td><td>Capture spoken rhythm, comprehension and participation observations.</td></tr>
+<tr><td><a href="../templates/localization.md">Localization</a></td><td>Track adaptation choices and per-language review.</td></tr>
+<tr><td><a href="../templates/production-handoff.md">Production handoff</a></td><td>Specify actual deliverables and proof evidence.</td></tr>
+<tr><td><a href="../templates/timeline.csv">Timeline CSV</a></td><td>Compare chronological events with presentation order.</td></tr>
+<tr><td><a href="../templates/series-arc.csv">Series arc CSV</a></td><td>Follow character or subplot changes across books or episodes.</td></tr>
+<tr><td><a href="../templates/style-sheet.csv">Style sheet CSV</a></td><td>Record preferred terms and spellings per language.</td></tr>
+<tr><td><a href="../templates/continuity-log.csv">Continuity log CSV</a></td><td>Track a fact, prop or relationship and the event changing it.</td></tr>
+</tbody></table>
+<p>CSV files provide columns rather than invented sample facts. Add one row per</p>
+<p>observation or event. Keep source references specific enough for another writer</p>
+<p>to locate the evidence.</p></article></details><details data-search="story review ../templates/review.md"><summary>Story review <span>templates/review.md</span></summary><article><a class="source" href="../templates/review.md">Open Markdown source</a><h2>Story review</h2>
+<p>Story ID / packet revision / language / reviewer / date:</p>
+<p>Review kinds performed and artifacts actually inspected:</p>
+<p>Project-specific criteria and deliberate exceptions:</p>
+<table><tbody>
+<tr><td>Beat or page</td><td>Observed issue</td><td>Blocker or preference</td><td>Repair</td><td>Recheck evidence</td></tr>
+</tbody></table>
+<p>Trace the causal chain: want → choice → consequence → changed choice → payoff.</p>
+<p>Check hero agency, emotional pause, purpose through action, prop and knowledge</p>
+<p>continuity, source classification and page-turn logic.</p>
+<p>Result for this revision: pending / passed / changes requested.</p>
+<p>Remaining work and unavailable artifacts:</p>
+<p>New supported facts or open threads to record in the bible:</p>
+<p>Record the actual pass in packet reviews. A later revision requires a new check;</p>
+<p>do not reuse this result by changing its revision number.</p></article></details><details data-search="scene and art brief ../templates/scene-art-brief.md"><summary>Scene and art brief <span>templates/scene-art-brief.md</span></summary><article><a class="source" href="../templates/scene-art-brief.md">Open Markdown source</a><h2>Scene and art brief</h2>
+<p>Story ID / revision / language / beat IDs / page or spread:</p>
+<table><tbody>
+<tr><td>Decision</td><td>Brief</td></tr>
+<tr><td>Dominant action and emotion</td><td></td></tr>
+<tr><td>What changed since the previous spread</td><td></td></tr>
+<tr><td>What the reader should anticipate before turning</td><td></td></tr>
+<tr><td>Exact manuscript text</td><td></td></tr>
+<tr><td>Information conveyed only by the words</td><td></td></tr>
+<tr><td>Information conveyed only by the picture</td><td></td></tr>
+<tr><td>Cast, source references and expressions</td><td></td></tr>
+<tr><td>Location, time, light and geography</td><td></td></tr>
+<tr><td>Framing, viewpoint and reading direction</td><td></td></tr>
+<tr><td>Text zone, gutter and trim safety</td><td></td></tr>
+<tr><td>Props: count, ownership, condition and physical support</td><td></td></tr>
+<tr><td>Continuity with adjacent scenes</td><td></td></tr>
+<tr><td>Optional rereading detail</td><td></td></tr>
+<tr><td>Language-specific text or image changes</td><td></td></tr>
+</tbody></table>
+<p>Artwork file / version / creator / rights reference:</p>
+<p>Rendered-page review: actual size, text readability, object contact, count,</p>
+<p>anatomy, safe zones and agreement with the intended action:</p>
+<p>Reviewer / date / result / required repairs:</p></article></details></section><section><h2>Contributor decisions and plans</h2><details data-search="run an authorized queue item ../.docflow/_agent/prompts/autonomous.md"><summary>Run an authorized queue item <span>.docflow/_agent/prompts/autonomous.md</span></summary><article><a class="source" href="../.docflow/_agent/prompts/autonomous.md">Open Markdown source</a><h2>Run an authorized queue item</h2>
+<p>Read root <code>AGENT.md</code>, <code>.docflow/CONVENTIONS.md</code>, the catalog, and the lowest</p>
+<p>numbered pending plan covered by the current assignment. Follow the relevant</p>
+<p>decision&#x27;s acceptance criteria. Unrelated queued work is not implicitly authorized.</p>
+<p>Implement and run <code>python scripts/verify.py</code>. Resolve failures before committing.</p>
+<p>Use signed Conventional Commits and the required decision rationale footer.</p>
+<p>The sole integrator stages and commits; helpers keep to their assigned paths.</p>
+<p>After the implementation commit, record its SHA in the plan completion footer,</p>
+<p>move the plan into <code>done/</code>, update decision status and revision/approval rows,</p>
+<p>and regenerate the catalog. Commit those completion changes separately. Push</p>
+<p>only within the task&#x27;s publication authorization. Successful push completes the</p>
+<p>item. Do not amend the completion commit to make its footer name itself.</p>
+<p>Stop when authorized scope is complete, the queue is empty, or a missing</p>
+<p>dependency prevents progress. Report unresolved failures precisely. Never bypass</p>
+<p>the verification gate, silently change the chosen integration policy or continue</p>
+<p>unrelated work because it happens to be next in the queue.</p></article></details><details data-search="adr nnnn — &lt;title&gt; ../.docflow/adr/0000-template-technology.md"><summary>ADR NNNN — &lt;Title&gt; <span>.docflow/adr/0000-template-technology.md</span></summary><article><a class="source" href="../.docflow/adr/0000-template-technology.md">Open Markdown source</a><h2>ADR NNNN — &lt;Title&gt;</h2>
+<h3>Context</h3>
+<p>&lt;Why this decision exists. Constraints, forces, and the surface area of</p>
+<p>the choice.&gt;</p>
+<h3>Decision</h3>
+<p>&lt;One paragraph stating the choice in plain terms. What is being adopted</p>
+<p>and at what scope.&gt;</p>
+<h3>Rationale</h3>
+<p>&lt;Why this choice over the alternatives. List alternatives considered</p>
+<p>with specific rejection reasons. Generic rationale (&quot;simpler&quot;, &quot;more</p>
+<p>idiomatic&quot;) is not sufficient.&gt;</p>
+<ul>
+<li>Alternative A — rejected because &lt;specific reason&gt;.</li>
+<li>Alternative B — rejected because &lt;specific reason&gt;.</li>
+</ul>
+<h3>Consequences</h3>
+<ul>
+<li>Positive: &lt;what this enables.&gt;</li>
+<li>Negative: &lt;what this costs or constrains.&gt;</li>
+<li>Follow-up work implied by this decision: &lt;list.&gt;</li>
+</ul>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>&lt;Testable criterion that confirms the decision is in effect.&gt;</li>
+<li>...</li>
+</ul>
+<h3>Out of scope</h3>
+<ul>
+<li>&lt;What this ADR deliberately does not decide.&gt;</li>
+</ul>
+<h3>Open questions</h3>
+<ul>
+<li>&lt;Unresolved items. Empty when ADR transitions to Accepted.&gt;</li>
+</ul>
+<h3>References</h3>
+<ul>
+<li>adr/NNNN-&lt;other&gt;.md</li>
+<li>&lt;External specs, RFCs, vendor docs.&gt;</li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>YYYY-MM-DD</td><td>r1</td><td>&lt;id&gt;</td><td>Initial draft.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+</tbody></table></article></details><details data-search="adr nnnn — &lt;title&gt; ../.docflow/adr/0000-template.md"><summary>ADR NNNN — &lt;Title&gt; <span>.docflow/adr/0000-template.md</span></summary><article><a class="source" href="../.docflow/adr/0000-template.md">Open Markdown source</a><h2>ADR NNNN — &lt;Title&gt;</h2>
+<h3>Context</h3>
+<p>&lt;Why this decision exists. Forces at play. What problem are we solving</p>
+<p>and what constraints shape the answer.&gt;</p>
+<h3>Capability statement</h3>
+<p>&lt;One paragraph. What the system must do. Stated as capability, not</p>
+<p>implementation.&gt;</p>
+<h3>User stories / scenarios</h3>
+<ul>
+<li>As a &lt;role&gt;, I want &lt;capability&gt;, so that &lt;outcome&gt;.</li>
+<li>As a &lt;role&gt;, I want &lt;capability&gt;, so that &lt;outcome&gt;.</li>
+</ul>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>&lt;Testable, observable criterion.&gt;</li>
+<li>&lt;Testable, observable criterion.&gt;</li>
+<li>...</li>
+</ul>
+<h3>Out of scope</h3>
+<ul>
+<li>&lt;Explicit non-goals — what this ADR does not cover.&gt;</li>
+</ul>
+<h3>Open questions</h3>
+<ul>
+<li>&lt;Unresolved items. Empty when ADR transitions to Accepted.&gt;</li>
+</ul>
+<h3>References</h3>
+<ul>
+<li>adr/NNNN-&lt;other&gt;.md</li>
+<li>&lt;External links, specs, prior art.&gt;</li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>YYYY-MM-DD</td><td>r1</td><td>&lt;id&gt;</td><td>Initial draft.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+</tbody></table></article></details><details data-search="adr 0001 — documentation-led development ../.docflow/adr/0001-documentation-led-development.md"><summary>ADR 0001 — Documentation-led development <span>.docflow/adr/0001-documentation-led-development.md</span></summary><article><a class="source" href="../.docflow/adr/0001-documentation-led-development.md">Open Markdown source</a><h2>ADR 0001 — Documentation-led development</h2>
+<h3>Context</h3>
+<p>The owner requested a standalone public tool whose decisions, implementation queue and agent entrypoints can be understood without conversation history.</p>
+<h3>Decision</h3>
+<p>Use a standalone .docflow catalog with two declared shapes, one numbering sequence, a work queue, a local verification gate and a single integrator. Keep canonical agent instructions in AGENT.md with discovery shims.</p>
+<h3>Rationale</h3>
+<p>A root-only ad hoc README was rejected because decisions and unfinished implementation would be mixed with user instructions. A federation was rejected because this tool has no runtime dependency on its source product. Mandatory PRs for the sole bootstrap integrator were rejected because the owner explicitly authorized direct publication; external changes remain reviewed pull requests.</p>
+<h3>Consequences</h3>
+<p>The tool remains portable and inspectable. The team must maintain explicit schemas and local checks; browser exports require a deliberate import into a new workspace.</p>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>Core instructions, conventions, two templates and a generated catalog are present.</li>
+<li>The plan exists before implementation and records its implementation SHA at completion.</li>
+<li>The local gate checks numbering, sections, documentation links and tests.</li>
+</ul>
+<h3>Out of scope</h3>
+<p>Changing other repositories or installing global agent configuration.</p>
+<h3>Open questions</h3>
+<p>None for this implementation.</p>
+<h3>References</h3>
+<ul>
+<li><a href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Implementation plan</a></li>
+<li><a href="../.docflow/CONVENTIONS.md">Conventions</a></li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>2026-09-10</td><td>r1</td><td>Codex</td><td>Initial decision under delegated owner authority.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+<tr><td>Delegated implementer</td><td>Codex</td><td>2026-09-10</td><td>Owner explicitly delegated design decisions and publication in the task request.</td></tr>
+</tbody></table></article></details><details data-search="adr 0002 — portable offline workspaces ../.docflow/adr/0002-portable-offline-workspaces.md"><summary>ADR 0002 — Portable offline workspaces <span>.docflow/adr/0002-portable-offline-workspaces.md</span></summary><article><a class="source" href="../.docflow/adr/0002-portable-offline-workspaces.md">Open Markdown source</a><h2>ADR 0002 — Portable offline workspaces</h2>
+<h3>Context</h3>
+<p>Writers and agents need the same editable files, including on a disconnected computer, without exposing private manuscripts.</p>
+<h3>Decision</h3>
+<p>Store project configuration, guidelines, character bible and story packets as versioned JSON. Use Python standard-library tools to validate and package a self-contained HTML board. Keep private projects ignored; provide an original demonstration separately.</p>
+<h3>Rationale</h3>
+<p>A hosted database was rejected because it requires account, network and service administration for a local workflow. A mandatory Electron application was rejected because installation and platform releases would be required to read a project. Markdown-only storage was rejected because reference and revision checks need explicit fields.</p>
+<h3>Consequences</h3>
+<p>The tool remains portable and inspectable. The team must maintain explicit schemas and local checks; browser exports require a deliberate import into a new workspace.</p>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>A fresh project builds an offline HTML board without installing runtime dependencies.</li>
+<li>Bundle export/import round-trips all authored fields and rejects unrelated or stale bases.</li>
+<li>Import uses a new destination and rejects unsafe IDs and malformed JSON without overwriting sources.</li>
+</ul>
+<h3>Out of scope</h3>
+<p>Cloud synchronization, collaboration servers, executable plugins and external image-generation integrations.</p>
+<h3>Open questions</h3>
+<p>None for this implementation.</p>
+<h3>References</h3>
+<ul>
+<li><a href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Implementation plan</a></li>
+<li><a href="../.docflow/CONVENTIONS.md">Conventions</a></li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>2026-09-10</td><td>r1</td><td>Codex</td><td>Initial decision under delegated owner authority.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+<tr><td>Delegated implementer</td><td>Codex</td><td>2026-09-10</td><td>Owner explicitly delegated design decisions and publication in the task request.</td></tr>
+</tbody></table></article></details><details data-search="adr 0003 — guidelines and character bible ../.docflow/adr/0003-guidelines-and-character-bible.md"><summary>ADR 0003 — Guidelines and character bible <span>.docflow/adr/0003-guidelines-and-character-bible.md</span></summary><article><a class="source" href="../.docflow/adr/0003-guidelines-and-character-bible.md">Open Markdown source</a><h2>ADR 0003 — Guidelines and character bible</h2>
+<h3>Context</h3>
+<p>Book rules and character knowledge must belong to the selected project rather than being embedded in a tool written for one fictional world.</p>
+<h3>Capability statement</h3>
+<p>Authors can configure audience, languages, craft guidelines and budgets, and maintain stable character dossiers, sourced facts, places, relationships, world rules, a timeline and glossary. Story validation checks these references and communication rules.</p>
+<h3>User stories / scenarios</h3>
+<p>As an author, I can change my writing profile without editing application code. As a continuity editor, I can distinguish a draft invention from an established fact and find its source.</p>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>Project, guidelines and bible editors and source files are available for an empty workspace.</li>
+<li>Characters have stable identifiers and editable profile, backstory, motivation and speech settings.</li>
+<li>Invalid character/location references, missing established sources and contradictory structured speech modes fail validation.</li>
+</ul>
+<h3>Out of scope</h3>
+<p>Automatic truth verification, inferred character facts and automatic promotion of draft facts to established canon.</p>
+<h3>Open questions</h3>
+<p>None for this implementation.</p>
+<h3>References</h3>
+<ul>
+<li><a href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Implementation plan</a></li>
+<li><a href="../.docflow/CONVENTIONS.md">Conventions</a></li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>2026-09-10</td><td>r1</td><td>Codex</td><td>Initial decision under delegated owner authority.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+<tr><td>Delegated implementer</td><td>Codex</td><td>2026-09-10</td><td>Owner explicitly delegated design decisions and publication in the task request.</td></tr>
+</tbody></table></article></details><details data-search="adr 0004 — story board and evidence ../.docflow/adr/0004-story-board-and-evidence.md"><summary>ADR 0004 — Story board and evidence <span>.docflow/adr/0004-story-board-and-evidence.md</span></summary><article><a class="source" href="../.docflow/adr/0004-story-board-and-evidence.md">Open Markdown source</a><h2>ADR 0004 — Story board and evidence</h2>
+<h3>Context</h3>
+<p>Editing a story changes its pacing, physical composition and the validity of previous review evidence.</p>
+<h3>Capability statement</h3>
+<p>Provide managed story selection, editable beat cards, story purpose, scene grid, page plan, chronology, continuity, review records and complete packet import/export. Preserve stable event IDs and chronological order independently from reading order. Invalidate evidence when content or project context changes.</p>
+<h3>User stories / scenarios</h3>
+<p>As a writer, I can reorder scenes while preserving causality. As a reviewer, I can see which packet revision an observation or proof actually inspected.</p>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>Board selection and packet export preserve edits, extensions and independent chronology.</li>
+<li>Page plans cover every interior page exactly once with physical even-left spreads.</li>
+<li>Edits invalidate review/proof status; stale bundle imports are rejected.</li>
+<li>Browser output escapes author content and works without fetching remote resources.</li>
+</ul>
+<h3>Out of scope</h3>
+<p>A browser file editor with silent autosave, automated editorial approval and a full word processor.</p>
+<h3>Open questions</h3>
+<p>None for this implementation.</p>
+<h3>References</h3>
+<ul>
+<li><a href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Implementation plan</a></li>
+<li><a href="../.docflow/CONVENTIONS.md">Conventions</a></li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>2026-09-10</td><td>r1</td><td>Codex</td><td>Initial decision under delegated owner authority.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+<tr><td>Delegated implementer</td><td>Codex</td><td>2026-09-10</td><td>Owner explicitly delegated design decisions and publication in the task request.</td></tr>
+</tbody></table></article></details><details data-search="adr 0005 — guided writing workflow ../.docflow/adr/0005-guided-writing-workflow.md"><summary>ADR 0005 — Guided writing workflow <span>.docflow/adr/0005-guided-writing-workflow.md</span></summary><article><a class="source" href="../.docflow/adr/0005-guided-writing-workflow.md">Open Markdown source</a><h2>ADR 0005 — Guided writing workflow</h2>
+<h3>Context</h3>
+<p>A reusable infrastructure needs operating instructions for both a person and an agent, beyond a collection of editable files.</p>
+<h3>Capability statement</h3>
+<p>Provide a guided project workflow, repository-scoped skills and linked documentation for setup, guidelines, bible maintenance, story development, composition, review, localization and production handoff. Produce readable plans and production briefs without claiming to create finished books.</p>
+<h3>User stories / scenarios</h3>
+<p>As a new author, I can follow the start guide to a reviewable story packet. As an agent, I can choose a bounded skill and record continuity changes with evidence.</p>
+<h3>Acceptance criteria</h3>
+<ul>
+<li>README links a complete Markdown and HTML documentation index and a working quickstart.</li>
+<li>Each writing stage has a specific skill with valid frontmatter and linked procedures.</li>
+<li>A handoff contains manuscripts, spread art briefs, language coverage and required deliverables.</li>
+<li>A fresh-project walkthrough and automated regression tests exercise the documented commands.</li>
+</ul>
+<h3>Out of scope</h3>
+<p>Artwork generation, finished PDF/EPUB rendering, printer-specific preflight and professional translation certification.</p>
+<h3>Open questions</h3>
+<p>None for this implementation.</p>
+<h3>References</h3>
+<ul>
+<li><a href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Implementation plan</a></li>
+<li><a href="../.docflow/CONVENTIONS.md">Conventions</a></li>
+</ul>
+<h3>Revision History</h3>
+<table><tbody>
+<tr><td>Date</td><td>Revision</td><td>Author</td><td>Change</td></tr>
+<tr><td>2026-09-10</td><td>r1</td><td>Codex</td><td>Initial decision under delegated owner authority.</td></tr>
+</tbody></table>
+<h3>Approvals</h3>
+<table><tbody>
+<tr><td>Role</td><td>Name</td><td>Date</td><td>Signature</td></tr>
+<tr><td>Delegated implementer</td><td>Codex</td><td>2026-09-10</td><td>Owner explicitly delegated design decisions and publication in the task request.</td></tr>
+</tbody></table></article></details><details data-search="repository conventions ../.docflow/conventions.md"><summary>Repository conventions <span>.docflow/CONVENTIONS.md</span></summary><article><a class="source" href="../.docflow/CONVENTIONS.md">Open Markdown source</a><h2>Repository conventions</h2>
+<h3>Layout and decisions</h3>
+<p>The artifact root is <code>.docflow/</code>. Root <code>AGENT.md</code> is the instruction source;</p>
+<p><code>AGENTS.md</code> discovers it and <code>CLAUDE.md</code> contains only <code>@AGENT.md</code>.</p>
+<p>One decision per ADR. Numbers are contiguous across both declared <code>shape</code> values:</p>
+<p><code>capability</code> and <code>technology</code>. Both templates use number <code>0000</code>. Never encode</p>
+<p>shape in number ranges. Use relative links between decision documents.</p>
+<p>Capability sections: Context, Capability statement, User stories / scenarios,</p>
+<p>Acceptance criteria, Out of scope, Open questions, References, Revision History,</p>
+<p>Approvals. Technology sections: Context, Decision, Rationale, Consequences,</p>
+<p>Acceptance criteria, Out of scope, Open questions, References, Revision History,</p>
+<p>Approvals. Rationale names alternatives and specific rejection reasons.</p>
+<p>Acceptance criteria are numbered and testable.</p>
+<h3>Lifecycle and audit</h3>
+<p><code>Proposed -&gt; Accepted -&gt; Implemented -&gt; Superseded/Deprecated</code>.</p>
+<p>Terminal states may be reached from an earlier state. Accepted means implementation</p>
+<p>is authorized; Implemented means the completion push succeeded. Substantive</p>
+<p>changes append revision and approval rows. Editorial-only changes are marked</p>
+<p><code>editorial</code> in the commit message. Regenerate the catalog using</p>
+<p><code>python scripts/docflow.py</code> after changing any decision.</p>
+<p>Decisions and their identifiers belong in contributor documentation, never the</p>
+<p>writing interface or generated book content.</p>
+<h3>Work queue and integration</h3>
+<p>Create a numbered <code>plan/todo/</code> item before substantive implementation. Reserve</p>
+<p>numbers across todo and done; never restart the sequence. The queue number is</p>
+<p>recorded in the first heading. Name owning decisions, scope, dependencies and</p>
+<p>observable exit criteria. The sole integrator commits on <code>main</code> or fast-forwards</p>
+<p>a work branch. No duplicate roles, lock, worklog or dashboard files are required.</p>
+<p>Helpers edit only assigned disjoint paths; overlapping work uses worktrees.</p>
+<p>Gate: <code>python scripts/verify.py</code> (Python 3.11+ and Node 18+ for tests).</p>
+<p>After validation, commit implementation. Then move the plan to</p>
+<p><code>plan/done/YYYY-MM-DD-slug.md</code>, name the implementation tip SHA in its completion</p>
+<p>footer, advance the owning decisions and regenerate the catalog in a separate</p>
+<p>completion commit. Push both commits; successful push to <code>main</code> is completion.</p>
+<p>CI repeats the gate, but does not replace local validation. Contributor pull</p>
+<p>requests require review and the same gate before fast-forward integration.</p>
+<p>Use signed Conventional Commits. ADR changes require a <code>Rationale:</code> footer.</p>
+<p>Do not add co-author trailers unless asked. No force pushes or revision tags.</p>
+<h3>Bootstrap authorization</h3>
+<p>The repository owner explicitly delegated design decisions, plan authorship and</p>
+<p>public repository creation on 2026-09-10. Initial decisions record that delegated</p>
+<p>authority; they do not claim a separate manual review. MIT applies to the generic</p>
+<p>tool and original sample. Private project material is excluded by default.</p></article></details><details data-search="decision catalog ../.docflow/index.md"><summary>Decision catalog <span>.docflow/INDEX.md</span></summary><article><a class="source" href="../.docflow/INDEX.md">Open Markdown source</a><h2>Decision catalog</h2>
+<p>Generated by <code>python scripts/docflow.py</code>.</p>
+<table><tbody>
+<tr><td>Number</td><td>Decision</td><td>Shape</td><td>Status</td><td>Date</td></tr>
+<tr><td>0001</td><td><a href="../.docflow/adr/0001-documentation-led-development.md">Documentation-led development</a></td><td>technology</td><td>Accepted</td><td>2026-09-10</td></tr>
+<tr><td>0002</td><td><a href="../.docflow/adr/0002-portable-offline-workspaces.md">Portable offline workspaces</a></td><td>technology</td><td>Accepted</td><td>2026-09-10</td></tr>
+<tr><td>0003</td><td><a href="../.docflow/adr/0003-guidelines-and-character-bible.md">Guidelines and character bible</a></td><td>capability</td><td>Accepted</td><td>2026-09-10</td></tr>
+<tr><td>0004</td><td><a href="../.docflow/adr/0004-story-board-and-evidence.md">Story board and evidence</a></td><td>capability</td><td>Accepted</td><td>2026-09-10</td></tr>
+<tr><td>0005</td><td><a href="../.docflow/adr/0005-guided-writing-workflow.md">Guided writing workflow</a></td><td>capability</td><td>Accepted</td><td>2026-09-10</td></tr>
+</tbody></table></article></details><details data-search="work queue ../.docflow/plan/readme.md"><summary>Work queue <span>.docflow/plan/README.md</span></summary><article><a class="source" href="../.docflow/plan/README.md">Open Markdown source</a><h2>Work queue</h2>
+<p>Use <code>todo/NNNN-slug.md</code> for authorized implementation, lowest number first.</p>
+<p>Each item records its number, owning decisions, scope, dependencies and exit</p>
+<p>criteria. Use <code>done/YYYY-MM-DD-slug.md</code> after implementation and validation.</p>
+<p>The completion footer names the implementation tip before the completion commit;</p>
+<p>the successful push is the completion event. See <a href="../.docflow/CONVENTIONS.md">conventions</a>.</p></article></details><details data-search="plan 0001 — portable writing workspace ../.docflow/plan/todo/0001-portable-writing-workspace.md"><summary>Plan 0001 — Portable writing workspace <span>.docflow/plan/todo/0001-portable-writing-workspace.md</span></summary><article><a class="source" href="../.docflow/plan/todo/0001-portable-writing-workspace.md">Open Markdown source</a><h2>Plan 0001 — Portable writing workspace</h2>
+<p>Owning decisions: <a href="../.docflow/adr/0001-documentation-led-development.md">0001</a>,</p>
+<p><a href="../.docflow/adr/0002-portable-offline-workspaces.md">0002</a>,</p>
+<p><a href="../.docflow/adr/0003-guidelines-and-character-bible.md">0003</a>,</p>
+<p><a href="../.docflow/adr/0004-story-board-and-evidence.md">0004</a>,</p>
+<p><a href="../.docflow/adr/0005-guided-writing-workflow.md">0005</a>.</p>
+<h3>Scope</h3>
+<p>Create the generic project tools, schemas, offline board, original sample,</p>
+<p>guided documentation and repository skills. Exclude private source-project data.</p>
+<h3>Dependencies</h3>
+<p>None. Owner delegated architecture and publication decisions.</p>
+<h3>Exit criteria</h3>
+<ul>
+<li>A new project can be initialized, edited, validated, built, exported and imported.</li>
+<li>Guidelines and bible are editable and checked against stories.</li>
+<li>Board and CLI preserve story content and reject stale or malformed imports.</li>
+<li>Docs and skills guide planning through localization and production handoff.</li>
+<li>Local verification passes; public repository contains only intended files.</li>
+</ul></article></details></section><footer>Generated by scripts/build_docs.py. Fully offline; no tracking or network requests. Schemas and command reference: <a href="contracts.md">Workspace contracts</a>.</footer></main><script>
+document.getElementById('search').addEventListener('input',event=>{const query=event.target.value.toLowerCase().trim();document.querySelectorAll('details').forEach(item=>{item.hidden=!item.dataset.search.includes(query)});document.querySelectorAll('section').forEach(section=>{section.hidden=![...section.querySelectorAll('details')].some(item=>!item.hidden)})});
+</script></body></html>
