@@ -53,8 +53,8 @@ Start with the [README](../README.md), follow the [writing workflow](workflow.md
 - [ADR 0005 — Guided writing workflow](../.docflow/adr/0005-guided-writing-workflow.md)
 - [Repository conventions](../.docflow/CONVENTIONS.md)
 - [Decision catalog](../.docflow/INDEX.md)
+- [Plan 0001 — Portable writing workspace](../.docflow/plan/done/2026-09-10-portable-writing-workspace.md)
 - [Work queue](../.docflow/plan/README.md)
-- [Plan 0001 — Portable writing workspace](../.docflow/plan/todo/0001-portable-writing-workspace.md)
 
 ## Data and commands
 - [Workspace contracts](contracts.md) and `python scripts/writing_board.py --help`.

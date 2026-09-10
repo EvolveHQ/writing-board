@@ -1,7 +1,7 @@
 ---
 adr: 0002
 title: Portable offline workspaces
-status: Accepted
+status: Implemented
 date: 2026-09-10
 owner: writing-board-maintainers
 shape: technology
@@ -45,7 +45,7 @@ None for this implementation.
 
 ## References
 
-- [Implementation plan](../plan/todo/0001-portable-writing-workspace.md)
+- [Implementation plan](../plan/done/2026-09-10-portable-writing-workspace.md)
 - [Conventions](../CONVENTIONS.md)
 
 ## Revision History
@@ -53,9 +53,11 @@ None for this implementation.
 | Date | Revision | Author | Change |
 |---|---|---|---|
 | 2026-09-10 | r1 | Codex | Initial decision under delegated owner authority. |
+| 2026-09-10 | r2 | Codex | Implemented and validated; completion accompanies the authorized public push. |
 
 ## Approvals
 
 | Role | Name | Date | Signature |
 |---|---|---|---|
 | Delegated implementer | Codex | 2026-09-10 | Owner explicitly delegated design decisions and publication in the task request. |
+| Delegated implementer | Codex | 2026-09-10 | Implementation verified under the same owner authorization; visual-test limitation recorded. |

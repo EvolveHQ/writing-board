@@ -22,3 +22,19 @@ None. Owner delegated architecture and publication decisions.
 3. Board and CLI preserve story content and reject stale or malformed imports.
 4. Docs and skills guide planning through localization and production handoff.
 5. Local verification passes; public repository contains only intended files.
+
+## Completion record
+
+Implementation tip: `1153d57b91f940e8a56888df05a5a065dc73e65a`.
+Repository: https://github.com/EvolveHQ/writing-board
+
+The implementation passed the local gate: 70 Python tests passed, one directory
+symlink test was skipped on this Windows host, and the Node board-state suite
+passed. The documented CLI journey, skill validation, documentation links,
+sample validation, Docflow audit and intended-public-content scan also passed.
+The local-file browser policy prevented rendered visual testing; see
+[verification limits](../../../docs/verification.md).
+
+This completion commit moves the plan and advances its owning decisions.
+Successful push of both implementation and completion commits is the recorded
+completion event. No finished book or visual proof is claimed.
