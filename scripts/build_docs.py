@@ -12,7 +12,10 @@ SKIP = {'.git','tmp','projects','build','__pycache__'}
 
 
 def documents():
-    return sorted(p for p in ROOT.rglob('*.md') if not (set(p.relative_to(ROOT).parts) & SKIP) and p != DOCS/'index.md')
+    # Path ordering is case-insensitive on Windows and case-sensitive on POSIX.
+    # Sort portable relative strings so checked-in indexes reproduce everywhere.
+    paths = (p for p in ROOT.rglob('*.md') if not (set(p.relative_to(ROOT).parts) & SKIP) and p != DOCS/'index.md')
+    return sorted(paths, key=lambda p: p.relative_to(ROOT).as_posix())
 
 
 def label(path):

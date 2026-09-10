@@ -32,17 +32,19 @@ Start with the [README](../README.md), follow the [writing workflow](workflow.md
 - [Develop the story](../skills/writing-story/SKILL.md)
 
 ## Worksheets
+- [Writing worksheets](../templates/README.md)
 - [Character dossier](../templates/character-dossier.md)
 - [Localization record](../templates/localization.md)
 - [Location and map notes](../templates/location-map.md)
 - [Premise alternatives](../templates/premise-alternatives.md)
 - [Production handoff record](../templates/production-handoff.md)
 - [Read-aloud log](../templates/read-aloud.md)
-- [Writing worksheets](../templates/README.md)
 - [Story review](../templates/review.md)
 - [Scene and art brief](../templates/scene-art-brief.md)
 
 ## Contributor decisions and plans
+- [Repository conventions](../.docflow/CONVENTIONS.md)
+- [Decision catalog](../.docflow/INDEX.md)
 - [Run an authorized queue item](../.docflow/_agent/prompts/autonomous.md)
 - [ADR NNNN — <Title>](../.docflow/adr/0000-template-technology.md)
 - [ADR NNNN — <Title>](../.docflow/adr/0000-template.md)
@@ -51,10 +53,8 @@ Start with the [README](../README.md), follow the [writing workflow](workflow.md
 - [ADR 0003 — Guidelines and character bible](../.docflow/adr/0003-guidelines-and-character-bible.md)
 - [ADR 0004 — Story board and evidence](../.docflow/adr/0004-story-board-and-evidence.md)
 - [ADR 0005 — Guided writing workflow](../.docflow/adr/0005-guided-writing-workflow.md)
-- [Repository conventions](../.docflow/CONVENTIONS.md)
-- [Decision catalog](../.docflow/INDEX.md)
-- [Plan 0001 — Portable writing workspace](../.docflow/plan/done/2026-09-10-portable-writing-workspace.md)
 - [Work queue](../.docflow/plan/README.md)
+- [Plan 0001 — Portable writing workspace](../.docflow/plan/done/2026-09-10-portable-writing-workspace.md)
 
 ## Data and commands
 - [Workspace contracts](contracts.md) and `python scripts/writing_board.py --help`.
